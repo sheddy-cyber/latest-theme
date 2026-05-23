@@ -1,0 +1,117 @@
+<section class="bestsellers">
+  <div class="section-head">
+    <span class="section-label">{{ section.settings.eyebrow }}</span>
+    <h2 class="section-title">{{ section.settings.heading }}</h2>
+  </div>
+
+  <!-- Filter tabs -->
+  <div class="filter-tabs" role="tablist" aria-label="Filter by texture">
+    <div class="ftab active" data-filter="all" role="tab" tabindex="0">All</div>
+    <div class="ftab" data-filter="straight" role="tab" tabindex="0">Straight</div>
+    <div class="ftab" data-filter="wavy" role="tab" tabindex="0">Wavy</div>
+    <div class="ftab" data-filter="curly" role="tab" tabindex="0">Curly</div>
+  </div>
+
+  <!-- Products Grid -->
+  <div class="products-grid">
+    {%- if section.settings.collection != blank -%}
+      {%- assign featured_collection = collections[section.settings.collection] -%}
+      {%- if featured_collection != blank and featured_collection.products.size > 0 -%}
+        {%- for product in featured_collection.products limit: section.settings.products_to_show -%}
+          {% render 'product-card', product: product %}
+        {%- endfor -%}
+      {%- else -%}
+        {%- comment -%} Fallback placeholder cards when no collection is set {%- endcomment -%}
+        {%- for i in (1..4) -%}
+          <div class="product-card" data-texture="straight">
+            <div class="prod-img pi-{{ i }}">
+              <div class="prod-img-inner" style="background: linear-gradient(145deg,#2f2921,#3d3318,#19171b);"></div>
+              {%- if i == 1 -%}<div class="prod-badge">Bestseller</div>{%- endif -%}
+              <div class="quick-view">Quick View</div>
+            </div>
+            <div class="prod-info">
+              <div class="prod-origin">India</div>
+              <div class="prod-name">Product {{ i }}</div>
+              <div class="prod-stars">★★★★★</div>
+              <div class="prod-price"><span class="from">From</span>$00.00</div>
+            </div>
+          </div>
+        {%- endfor -%}
+      {%- endif -%}
+    {%- else -%}
+      {%- comment -%} Fallback when editor has no collection picked yet {%- endcomment -%}
+      {%- for i in (1..4) -%}
+        <div class="product-card" data-texture="straight">
+          <div class="prod-img">
+            <div class="prod-img-inner" style="background: linear-gradient(145deg,#2f2921,#3d3318,#19171b);"></div>
+            <div class="quick-view">Quick View</div>
+          </div>
+          <div class="prod-info">
+            <div class="prod-origin">India</div>
+            <div class="prod-name">Sample Product {{ i }}</div>
+            <div class="prod-stars">★★★★★</div>
+            <div class="prod-price"><span class="from">From</span>$00.00</div>
+          </div>
+        </div>
+      {%- endfor -%}
+    {%- endif -%}
+  </div>
+
+  {%- if section.settings.view_all_link != blank -%}
+    <div style="text-align:center;margin-top:48px;">
+      <a href="{{ section.settings.view_all_link }}" class="btn-outline">{{ section.settings.view_all_label }}</a>
+    </div>
+  {%- endif -%}
+</section>
+
+{% schema %}
+{
+  "name": "Featured Products",
+  "tag": "div",
+  "class": "featured-products-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow text",
+      "default": "Customer Favorites"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Bestselling Bundles"
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Collection to display"
+    },
+    {
+      "type": "range",
+      "id": "products_to_show",
+      "label": "Products to show",
+      "min": 2,
+      "max": 8,
+      "step": 1,
+      "default": 4
+    },
+    {
+      "type": "url",
+      "id": "view_all_link",
+      "label": "View All button link"
+    },
+    {
+      "type": "text",
+      "id": "view_all_label",
+      "label": "View All button label",
+      "default": "View Full Collection"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Featured Products"
+    }
+  ]
+}
+{% endschema %}

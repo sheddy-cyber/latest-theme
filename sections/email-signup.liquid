@@ -1,0 +1,115 @@
+<section class="email-section">
+  <span class="section-label">{{ section.settings.eyebrow }}</span>
+  <h2 class="section-title" style="margin-bottom:16px;">{{ section.settings.heading }}</h2>
+  <p class="section-sub">{{ section.settings.subtext }}</p>
+
+  {%- if section.blocks.size > 0 -%}
+    <div class="email-perk">
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'perk' -%}
+          <span class="eperk" {{ block.shopify_attributes }}>✦ {{ block.settings.perk_text }}</span>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+  {%- endif -%}
+
+  {%- form 'customer', id: 'elysian-newsletter-form' -%}
+    <input type="hidden" name="contact[tags]" value="newsletter">
+    <div class="email-form">
+      <input
+        type="email"
+        name="contact[email]"
+        class="email-input"
+        placeholder="{{ section.settings.placeholder }}"
+        required
+        aria-label="Email address"
+      >
+      <button type="submit" class="email-submit">{{ section.settings.button_label }}</button>
+    </div>
+
+    {%- if form.posted_successfully? -%}
+      <p style="color: var(--gold); font-family: var(--sans); font-size: 12px; margin-top: 14px; text-align: center;">
+        Thank you for subscribing!
+      </p>
+    {%- endif -%}
+
+    {%- if form.errors -%}
+      <p style="color: #e07070; font-family: var(--sans); font-size: 12px; margin-top: 14px; text-align: center;">
+        {{ form.errors.translated_fields.email | capitalize }} {{ form.errors.messages.email }}.
+      </p>
+    {%- endif -%}
+  {%- endform -%}
+
+  <p class="email-note">{{ section.settings.disclaimer }}</p>
+</section>
+
+{% schema %}
+{
+  "name": "Email Signup",
+  "tag": "div",
+  "class": "email-signup-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow text",
+      "default": "Join the Inner Circle"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Exclusive Access. Elevated Perks."
+    },
+    {
+      "type": "text",
+      "id": "subtext",
+      "label": "Subtext",
+      "default": "Be first for new arrivals, member-only discounts, and expert hair care tips delivered to your inbox."
+    },
+    {
+      "type": "text",
+      "id": "placeholder",
+      "label": "Input placeholder",
+      "default": "Your email address"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label",
+      "default": "Join Now"
+    },
+    {
+      "type": "text",
+      "id": "disclaimer",
+      "label": "Disclaimer text",
+      "default": "We respect your privacy. Unsubscribe at any time."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "perk",
+      "name": "Perk",
+      "limit": 5,
+      "settings": [
+        {
+          "type": "text",
+          "id": "perk_text",
+          "label": "Perk text",
+          "default": "10% Off First Order"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Email Signup",
+      "blocks": [
+        { "type": "perk", "settings": { "perk_text": "10% Off First Order" } },
+        { "type": "perk", "settings": { "perk_text": "Early Access"        } },
+        { "type": "perk", "settings": { "perk_text": "VIP Events"          } }
+      ]
+    }
+  ]
+}
+{% endschema %}

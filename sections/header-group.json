@@ -1,0 +1,172 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "name": "Header group",
+  "sections": {
+    "announcement-bar": {
+      "type": "announcement-bar",
+      "blocks": {
+        "msg-1": {
+          "type": "message",
+          "settings": {
+            "message": "Free shipping on orders over $150."
+          }
+        },
+        "msg-2": {
+          "type": "message",
+          "settings": {
+            "message": "Single donor. Zero chemicals. Pure luxury."
+          }
+        },
+        "msg-3": {
+          "type": "message",
+          "settings": {
+            "message": "Lasts 2 to 3 years with proper care."
+          }
+        }
+      },
+      "block_order": [
+        "msg-1",
+        "msg-2",
+        "msg-3"
+      ],
+      "settings": {}
+    },
+    "header": {
+      "type": "header",
+      "blocks": {
+        "origin-1": {
+          "type": "origin_link",
+          "settings": {
+            "title": "Indian Hair",
+            "subtitle": "Straight · Curly",
+            "link": "",
+            "dot_color": "#d4aa5a"
+          }
+        },
+        "origin-2": {
+          "type": "origin_link",
+          "settings": {
+            "title": "Vietnamese Hair",
+            "subtitle": "Straight",
+            "link": "",
+            "dot_color": "#a8843a"
+          }
+        },
+        "origin-3": {
+          "type": "origin_link",
+          "settings": {
+            "title": "Cambodian Hair",
+            "subtitle": "Wavy",
+            "link": "",
+            "dot_color": "#7a5e28"
+          }
+        },
+        "origin-4": {
+          "type": "origin_link",
+          "settings": {
+            "title": "Burmese Hair",
+            "subtitle": "Curly",
+            "link": "",
+            "dot_color": "#2f2921"
+          }
+        },
+        "tex-1": {
+          "type": "texture_link",
+          "settings": {
+            "title": "Straight",
+            "subtitle": "Indian · Vietnamese",
+            "link": "",
+            "dot_color": "#d4aa5a"
+          }
+        },
+        "tex-2": {
+          "type": "texture_link",
+          "settings": {
+            "title": "Wavy",
+            "subtitle": "Cambodian",
+            "link": "",
+            "dot_color": "#7a5e28"
+          }
+        },
+        "tex-3": {
+          "type": "texture_link",
+          "settings": {
+            "title": "Curly",
+            "subtitle": "Indian · Burmese",
+            "link": "",
+            "dot_color": "#2f2921"
+          }
+        },
+        "look-1": {
+          "type": "look_tile",
+          "settings": {
+            "label": "Sleek",
+            "gradient_class": "lt-sleek",
+            "link": ""
+          }
+        },
+        "look-2": {
+          "type": "look_tile",
+          "settings": {
+            "label": "Voluminous",
+            "gradient_class": "lt-volum",
+            "link": ""
+          }
+        },
+        "look-3": {
+          "type": "look_tile",
+          "settings": {
+            "label": "Natural",
+            "gradient_class": "lt-natural",
+            "link": ""
+          }
+        },
+        "look-4": {
+          "type": "look_tile",
+          "settings": {
+            "label": "Textured",
+            "gradient_class": "lt-textured",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "origin-1",
+        "origin-2",
+        "origin-3",
+        "origin-4",
+        "tex-1",
+        "tex-2",
+        "tex-3",
+        "look-1",
+        "look-2",
+        "look-3",
+        "look-4"
+      ],
+      "settings": {
+        "logo_first_word": "",
+        "logo_second_word": "",
+        "shop_all_link": "",
+        "bestsellers_link": "",
+        "sale_link": "",
+        "textures_menu": "",
+        "haircare_menu": "",
+        "about_link": "",
+        "quiz_link": ""
+      }
+    }
+  },
+  "order": [
+    "announcement-bar",
+    "header"
+  ],
+  "type": "header"
+}

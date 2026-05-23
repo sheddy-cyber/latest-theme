@@ -1,0 +1,424 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "hero_carousel_tBNL8y": {
+      "type": "hero-carousel",
+      "blocks": {
+        "slide_eYhbWd": {
+          "type": "slide",
+          "settings": {
+            "background_image": "shopify://shop_images/HEader.png",
+            "eyebrow": "100% Raw Human Hair",
+            "headline": "<p>Above the Rest.<br/><em>Beyond the Ordinary.</em></p>",
+            "subtext": "Single donor raw hair sourced from verified temples in India, Vietnam, Cambodia and Burma. Unprocessed. Unmatched.",
+            "btn1_label": "Shop Collection",
+            "btn1_link": "",
+            "btn2_label": "Take the Hair Quiz",
+            "btn2_link": ""
+          }
+        },
+        "slide_JLTxpL": {
+          "type": "slide",
+          "disabled": true,
+          "settings": {
+            "eyebrow": "The Gateway to Hairven",
+            "headline": "<p>Raw Indian<br><em>Straight Bundles</em></p>",
+            "subtext": "Our most beloved texture. Silky, fine and blowout-ready. Available in 12 to 30 inches.",
+            "btn1_label": "Shop Indian Hair",
+            "btn1_link": "",
+            "btn2_label": "See All Textures",
+            "btn2_link": ""
+          }
+        },
+        "slide_j7tc3C": {
+          "type": "slide",
+          "disabled": true,
+          "settings": {
+            "eyebrow": "New Arrival",
+            "headline": "<p>Raw Burmese<br><em>Curly Bundles</em></p>",
+            "subtext": "Rich, voluminous curl pattern. Zero shedding. Lasts 2 to 3 years with proper care.",
+            "btn1_label": "Shop Burmese Curly",
+            "btn1_link": "",
+            "btn2_label": "View Full Collection",
+            "btn2_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "slide_eYhbWd",
+        "slide_JLTxpL",
+        "slide_j7tc3C"
+      ],
+      "name": "Hero Carousel",
+      "settings": {}
+    },
+    "trust-strip": {
+      "type": "trust-strip",
+      "blocks": {
+        "trust-1": {
+          "type": "item",
+          "settings": {
+            "icon": "✦",
+            "title": "100% Raw Hair",
+            "subtitle": "Unprocessed. Single Donor."
+          }
+        },
+        "trust-2": {
+          "type": "item",
+          "settings": {
+            "icon": "✦",
+            "title": "Free Shipping",
+            "subtitle": "On orders over $150"
+          }
+        },
+        "trust-3": {
+          "type": "item",
+          "settings": {
+            "icon": "✦",
+            "title": "Lasts 2 to 3 Years",
+            "subtitle": "With proper care"
+          }
+        },
+        "trust-4": {
+          "type": "item",
+          "settings": {
+            "icon": "✦",
+            "title": "Verified Sourcing",
+            "subtitle": "Temple collected worldwide"
+          }
+        },
+        "trust-5": {
+          "type": "item",
+          "settings": {
+            "icon": "✦",
+            "title": "30-Day Guarantee",
+            "subtitle": "Satisfaction or exchange"
+          }
+        }
+      },
+      "block_order": [
+        "trust-1",
+        "trust-2",
+        "trust-3",
+        "trust-4",
+        "trust-5"
+      ],
+      "settings": {}
+    },
+    "press-strip": {
+      "type": "press-strip",
+      "blocks": {
+        "press-1": {
+          "type": "logo",
+          "settings": {
+            "name": "Vogue",
+            "link": ""
+          }
+        },
+        "press-2": {
+          "type": "logo",
+          "settings": {
+            "name": "Essence",
+            "link": ""
+          }
+        },
+        "press-3": {
+          "type": "logo",
+          "settings": {
+            "name": "Allure",
+            "link": ""
+          }
+        },
+        "press-4": {
+          "type": "logo",
+          "settings": {
+            "name": "Byrdie",
+            "link": ""
+          }
+        },
+        "press-5": {
+          "type": "logo",
+          "settings": {
+            "name": "Refinery29",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "press-1",
+        "press-2",
+        "press-3",
+        "press-4",
+        "press-5"
+      ],
+      "settings": {
+        "label": "As Featured In"
+      }
+    },
+    "category-grid": {
+      "type": "category-grid",
+      "blocks": {
+        "cat-1": {
+          "type": "tile",
+          "settings": {
+            "image": "shopify://shop_images/B9235ABF-DBAA-40B6-8C33-107D03A4F972_928b0540-2f8a-401e-8ad8-f74e0959201f.jpg",
+            "color_class": "t-indian",
+            "tag": "India",
+            "title": "Raw Indian Straight",
+            "link": "shopify://collections/raw-hair"
+          }
+        },
+        "cat-2": {
+          "type": "tile",
+          "settings": {
+            "image": "shopify://shop_images/B9235ABF-DBAA-40B6-8C33-107D03A4F972_928b0540-2f8a-401e-8ad8-f74e0959201f.jpg",
+            "color_class": "t-viet",
+            "tag": "Vietnam",
+            "title": "Raw Vietnamese Straight",
+            "link": "shopify://collections/raw-vietnamese-straight"
+          }
+        },
+        "cat-3": {
+          "type": "tile",
+          "settings": {
+            "image": "shopify://shop_images/dfebfa_7084aa3f4dc945a6b13581c21c6681e2_mv2.jpg",
+            "color_class": "t-curly",
+            "tag": "India",
+            "title": "Raw Indian Curly",
+            "link": "shopify://collections/raw-indian-curly"
+          }
+        },
+        "cat-4": {
+          "type": "tile",
+          "settings": {
+            "image": "shopify://shop_images/78161F7F-9CD9-4FD0-B401-E21AB9D2BAC9_cd209f04-405d-4840-93a6-fcc70c4854b9.png",
+            "color_class": "t-wavy",
+            "tag": "Cambodia",
+            "title": "Raw Cambodian Wavy",
+            "link": "shopify://collections/raw-cambodian-wavy"
+          }
+        },
+        "cat-5": {
+          "type": "tile",
+          "settings": {
+            "image": "shopify://shop_images/Untitled_design_1.jpg",
+            "color_class": "t-burm",
+            "tag": "Burma",
+            "title": "Raw Burmese Curly",
+            "link": "shopify://collections/raw-burmese-curly-wefts"
+          }
+        }
+      },
+      "block_order": [
+        "cat-1",
+        "cat-2",
+        "cat-3",
+        "cat-4",
+        "cat-5"
+      ],
+      "settings": {
+        "eyebrow": "Explore the Collection",
+        "heading": "Shop by Origin"
+      }
+    },
+    "featured-products": {
+      "type": "featured-products",
+      "settings": {
+        "eyebrow": "Customer Favorites",
+        "heading": "Bestselling Bundles",
+        "collection": "our-products",
+        "products_to_show": 4,
+        "view_all_link": "shopify://collections/all",
+        "view_all_label": "View Full Collection"
+      }
+    },
+    "value-pillars": {
+      "type": "value-pillars",
+      "blocks": {
+        "pillar-1": {
+          "type": "pillar",
+          "settings": {
+            "number": "01",
+            "title": "Single Donor Sourcing",
+            "body": "Every bundle comes from one donor, meaning a naturally consistent texture, cuticle alignment and zero chemical treatment from root to tip."
+          }
+        },
+        "pillar-2": {
+          "type": "pillar",
+          "settings": {
+            "number": "02",
+            "title": "Temple Verified",
+            "body": "Sourced from verified temples across India, Vietnam, Cambodia and Burma — the world's most prized origins for raw human hair."
+          }
+        },
+        "pillar-3": {
+          "type": "pillar",
+          "settings": {
+            "number": "03",
+            "title": "Lasts 2 to 3 Years",
+            "body": "Raw hair, when cared for properly, retains its natural beauty for years. Our bundles are built to outlast and outperform any processed alternative."
+          }
+        },
+        "pillar-4": {
+          "type": "pillar",
+          "settings": {
+            "number": "04",
+            "title": "Color and Style Freely",
+            "body": "Because Elysian hair is 100% raw and unprocessed, it takes to color, heat and styling exactly like your own natural hair."
+          }
+        }
+      },
+      "block_order": [
+        "pillar-1",
+        "pillar-2",
+        "pillar-3",
+        "pillar-4"
+      ],
+      "settings": {
+        "eyebrow": "Why Elysian",
+        "heading": "The Elysian Difference"
+      }
+    },
+    "reviews": {
+      "type": "reviews",
+      "blocks": {
+        "review-1": {
+          "type": "review",
+          "settings": {
+            "review_text": "I have been wearing Elysian hair for over a year and it still looks brand new. The texture on the Raw Indian Straight is exactly what they promise. Silky, natural, and holds a curl beautifully.",
+            "author_name": "Amara J.",
+            "author_location": "Atlanta, GA"
+          }
+        },
+        "review-2": {
+          "type": "review",
+          "settings": {
+            "review_text": "The Burmese Curly bundles are everything I dreamed of. The curl pattern is consistent throughout every single weft. I have had so many compliments. Worth every penny.",
+            "author_name": "Dani R.",
+            "author_location": "Houston, TX"
+          }
+        },
+        "review-3": {
+          "type": "review",
+          "settings": {
+            "review_text": "I was skeptical at first but Elysian has completely converted me to raw hair. The Cambodian Wavy is so natural looking, nobody believes it is not my real hair. My go-to brand from now on.",
+            "author_name": "Tiara M.",
+            "author_location": "Chicago, IL"
+          }
+        }
+      },
+      "block_order": [
+        "review-1",
+        "review-2",
+        "review-3"
+      ],
+      "settings": {
+        "eyebrow": "Real Women. Real Results.",
+        "heading": "What Our Clients Say",
+        "aggregate_score": "4.9",
+        "aggregate_count": "Based on 340+ verified reviews"
+      }
+    },
+    "ugc-grid": {
+      "type": "ugc-grid",
+      "blocks": {
+        "ugc-1": {
+          "type": "tile",
+          "settings": {
+            "image": "shopify://shop_images/Screenshot_2024-04-25_at_4.47.25_PM.png"
+          }
+        },
+        "ugc-2": {
+          "type": "tile",
+          "settings": {
+            "image": "shopify://shop_images/Screenshot_2024-04-25_at_4.47.34_PM.png"
+          }
+        },
+        "ugc-3": {
+          "type": "tile",
+          "settings": {
+            "image": "shopify://shop_images/Screenshot_2024-04-25_at_4.47.25_PM.png"
+          }
+        },
+        "ugc-4": {
+          "type": "tile",
+          "settings": {}
+        },
+        "ugc-5": {
+          "type": "tile",
+          "settings": {
+            "image": "shopify://shop_images/Screenshot_2024-04-25_at_4.47.17_PM.png"
+          }
+        }
+      },
+      "block_order": [
+        "ugc-1",
+        "ugc-2",
+        "ugc-3",
+        "ugc-4",
+        "ugc-5"
+      ],
+      "settings": {
+        "handle_label": "@elysian.imports",
+        "heading": "The Elysian Community",
+        "subtext": "Tag us to be featured. Real clients, real transformations.",
+        "instagram_handle": "elysian.imports"
+      }
+    },
+    "email-signup": {
+      "type": "email-signup",
+      "blocks": {
+        "perk-1": {
+          "type": "perk",
+          "settings": {
+            "perk_text": "10% Off First Order"
+          }
+        },
+        "perk-2": {
+          "type": "perk",
+          "settings": {
+            "perk_text": "Early Access"
+          }
+        },
+        "perk-3": {
+          "type": "perk",
+          "settings": {
+            "perk_text": "VIP Events"
+          }
+        }
+      },
+      "block_order": [
+        "perk-1",
+        "perk-2",
+        "perk-3"
+      ],
+      "settings": {
+        "eyebrow": "Join the Inner Circle",
+        "heading": "Exclusive Access. Elevated Perks.",
+        "subtext": "Be first for new arrivals, member-only discounts, and expert hair care tips delivered to your inbox.",
+        "placeholder": "Your email address",
+        "button_label": "Join Now",
+        "disclaimer": "We respect your privacy. Unsubscribe at any time."
+      }
+    }
+  },
+  "order": [
+    "hero_carousel_tBNL8y",
+    "trust-strip",
+    "press-strip",
+    "category-grid",
+    "featured-products",
+    "value-pillars",
+    "reviews",
+    "ugc-grid",
+    "email-signup"
+  ]
+}

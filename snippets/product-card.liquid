@@ -1,0 +1,63 @@
+{% comment %}
+  Renders a product card.
+  Usage: {% render 'product-card', product: product %}
+{% endcomment %}
+
+{%- liquid
+  assign origin_tag = ''
+  assign texture_tag = ''
+  for tag in product.tags
+    assign tag_lower = tag | downcase
+    if tag contains 'India' or tag contains 'Burma' or tag contains 'Vietnam' or tag contains 'Cambodia'
+      assign origin_tag = tag
+    endif
+    if tag_lower == 'straight' or tag_lower == 'wavy' or tag_lower == 'curly' or tag_lower == 'deep curly' or tag_lower == 'body wave'
+      assign texture_tag = tag_lower
+    endif
+  endfor
+
+  assign show_badge = false
+  assign badge_label = ''
+  if product.tags contains 'Bestseller'
+    assign show_badge = true
+    assign badge_label = 'Bestseller'
+  elsif product.tags contains 'New'
+    assign show_badge = true
+    assign badge_label = 'New'
+  elsif product.compare_at_price > product.price
+    assign show_badge = true
+    assign badge_label = 'Sale'
+  endif
+-%}
+
+<div class="elysian-card" data-texture="{{ texture_tag }}">
+  <a href="{{ product.url }}" class="elysian-prod-img">
+    {%- if product.featured_image != blank -%}
+      <div class="elysian-prod-img-inner" style="background-image: url('{{ product.featured_image | image_url: width: 600 }}'); background-size: cover; background-position: center;"></div>
+    {%- else -%}
+      <div class="elysian-prod-img-inner" style="background: linear-gradient(145deg,#2f2921,#3d3318,#19171b);"></div>
+    {%- endif -%}
+
+    {%- if show_badge -%}
+      <div class="prod-badge">{{ badge_label }}</div>
+    {%- endif -%}
+
+    <div class="quick-view">Quick View</div>
+  </a>
+
+  <div class="prod-info">
+    {%- if origin_tag != '' -%}
+      <div class="prod-origin">{{ origin_tag }}</div>
+    {%- endif -%}
+    <div class="prod-name">{{ product.title }}</div>
+    <div class="prod-stars" aria-label="{{ product.metafields.reviews.rating.value | default: '5' }} out of 5 stars">
+      ★★★★★
+    </div>
+    <div class="prod-price">
+      {%- if product.price_varies -%}
+        <span class="from">From</span>
+      {%- endif -%}
+      {{ product.price_min | money }}
+    </div>
+  </div>
+</div>

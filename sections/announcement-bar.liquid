@@ -1,0 +1,46 @@
+{%- if section.blocks.size > 0 -%}
+<div class="promo-bar" id="promo-bar">
+  <div class="promo-track">
+    {%- for block in section.blocks -%}
+      {%- if block.type == 'message' -%}
+        <div class="promo-msg{% if forloop.first %} active{% endif %}" {{ block.shopify_attributes }}>
+          {{ block.settings.message }}
+        </div>
+      {%- endif -%}
+    {%- endfor -%}
+  </div>
+</div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Announcement Bar",
+  "class": "announcement-bar-section",
+  "settings": [],
+  "blocks": [
+    {
+      "type": "message",
+      "name": "Message",
+      "limit": 6,
+      "settings": [
+        {
+          "type": "text",
+          "id": "message",
+          "label": "Message text",
+          "default": "Free shipping on orders over $150."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Announcement Bar",
+      "blocks": [
+        { "type": "message", "settings": { "message": "Free shipping on orders over $150." } },
+        { "type": "message", "settings": { "message": "Single donor. Zero chemicals. Pure luxury." } },
+        { "type": "message", "settings": { "message": "Lasts 2 to 3 years with proper care." } }
+      ]
+    }
+  ]
+}
+{% endschema %}

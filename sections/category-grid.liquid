@@ -1,0 +1,116 @@
+<section class="category-section">
+  <div style="max-width:1280px;margin:0 auto 48px;text-align:center;">
+    <span class="section-label">{{ section.settings.eyebrow }}</span>
+    <h2 class="section-title">{{ section.settings.heading }}</h2>
+  </div>
+
+  <div class="category-grid">
+    {%- assign large_done = false -%}
+    {%- for block in section.blocks -%}
+      {%- if block.type == 'tile' -%}
+        {%- assign is_large = false -%}
+        {%- if forloop.first -%}
+          {%- assign is_large = true -%}
+        {%- endif -%}
+
+        {%- assign tile_class = 'tile' -%}
+        {%- if is_large -%}
+          {%- assign tile_class = 'tile tile-large' -%}
+        {%- elsif forloop.index > 3 -%}
+          {%- assign tile_class = 'tile tile-sm' -%}
+        {%- endif -%}
+
+        <a href="{{ block.settings.link }}" class="{{ tile_class }} {{ block.settings.color_class }}" {{ block.shopify_attributes }}>
+          <div class="tile-bg"
+            {%- if block.settings.image != blank -%}
+              style="background-image: url('{{ block.settings.image | image_url: width: 1200 }}'); background-size: 100%; background-position: center center; background-repeat: no-repeat;"
+            {%- endif -%}
+          ></div>
+          <div class="tile-info">
+            <span class="tile-tag">{{ block.settings.tag }}</span>
+            <div class="tile-name">{{ block.settings.title }}</div>
+            <div class="tile-cta">Shop Now <span>→</span></div>
+          </div>
+        </a>
+
+      {%- endif -%}
+    {%- endfor -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Category Grid",
+  "tag": "div",
+  "class": "category-grid-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow text",
+      "default": "Explore the Collection"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Shop by Origin"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "tile",
+      "name": "Category tile",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image (optional — uses gradient if blank)"
+        },
+        {
+          "type": "select",
+          "id": "color_class",
+          "label": "Gradient style (fallback when no image)",
+          "options": [
+            { "value": "t-indian", "label": "Indian (gold)" },
+            { "value": "t-viet",   "label": "Vietnamese (amber)" },
+            { "value": "t-curly",  "label": "Curly (brown)" },
+            { "value": "t-wavy",   "label": "Wavy (warm brown)" },
+            { "value": "t-burm",   "label": "Burmese (dark)" }
+          ],
+          "default": "t-indian"
+        },
+        {
+          "type": "text",
+          "id": "tag",
+          "label": "Country / tag label",
+          "default": "India"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Tile title",
+          "default": "Raw Indian Straight"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link to collection"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Category Grid",
+      "blocks": [
+        { "type": "tile", "settings": { "color_class": "t-indian", "tag": "India",    "title": "Raw Indian Straight"     } },
+        { "type": "tile", "settings": { "color_class": "t-viet",   "tag": "Vietnam",  "title": "Raw Vietnamese Straight" } },
+        { "type": "tile", "settings": { "color_class": "t-curly",  "tag": "India",    "title": "Raw Indian Curly"        } },
+        { "type": "tile", "settings": { "color_class": "t-wavy",   "tag": "Cambodia", "title": "Raw Cambodian Wavy"      } },
+        { "type": "tile", "settings": { "color_class": "t-burm",   "tag": "Burma",    "title": "Raw Burmese Curly"       } }
+      ]
+    }
+  ]
+}
+{% endschema %}

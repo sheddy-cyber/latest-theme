@@ -1,0 +1,1228 @@
+<style>
+/* ── Elysian Premium Collection Page ─────────────────────────── */
+:root {
+  --serif: 'Cormorant Garamond', Georgia, serif;
+  --sans: 'Montserrat', Helvetica, sans-serif;
+  --black: #0f0f0f;
+  --black-2: #1a1a1a;
+  --gold: #d4aa5a;
+  --gold-hover: #bda047;
+  --light-gray: #f7f7f7;
+  --border-color: #e8e8e8;
+}
+
+.coll-page {
+  max-width: 1340px;
+  margin: 0 auto;
+  padding: 40px 24px 80px;
+  font-family: var(--sans, 'Montserrat', sans-serif);
+  background: #ffffff;
+  color: var(--black);
+}
+
+/* Banner section styled with dark gold tones & luxury serif typography */
+.coll-banner {
+  position: relative;
+  background: radial-gradient(circle at top right, #251e13 0%, var(--black) 70%);
+  min-height: 280px;
+  display: flex;
+  align-items: flex-end;
+  padding: 64px 64px 48px;
+  margin-bottom: 32px;
+  overflow: hidden;
+  border-radius: 4px;
+  border: 1px solid rgba(212, 170, 90, 0.15);
+}
+.coll-banner-bg {
+  position: absolute; inset: 0;
+  background-size: cover; background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0.35;
+  transition: transform 6s ease;
+}
+.coll-banner:hover .coll-banner-bg {
+  transform: scale(1.03);
+}
+.coll-banner::after {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(to top, rgba(15,15,15,0.85) 0%, transparent 70%);
+  z-index: 1;
+}
+.coll-banner-body { position: relative; z-index: 2; max-width: 720px; }
+.coll-banner-label {
+  font-size: 10px; font-weight: 700;
+  letter-spacing: .25em; text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 12px;
+  display: block;
+}
+.coll-banner-title {
+  font-family: var(--serif, 'Cormorant Garamond', serif);
+  font-size: clamp(38px, 5.5vw, 64px);
+  font-weight: 500;
+  color: #ffffff;
+  margin-bottom: 16px;
+  line-height: 1.05;
+  letter-spacing: -0.01em;
+}
+.coll-banner-desc {
+  font-size: 14px;
+  color: rgba(255,255,255,0.72);
+  line-height: 1.8;
+  max-width: 580px;
+  font-weight: 400;
+}
+.coll-banner-count {
+  margin-top: 18px;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.45);
+}
+
+/* Elegant gold rule separator */
+.coll-section-rule {
+  width: 60px; height: 1px;
+  background: var(--gold);
+  margin: 0 0 24px;
+}
+
+/* Replicated Impulse luxury toolbar */
+.coll-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 0;
+  border-top: 1px solid var(--border-color);
+  border-bottom: 1px solid var(--border-color);
+  margin-bottom: 32px;
+  gap: 20px;
+}
+.coll-toolbar-left {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+.coll-filter-toggle-btn {
+  display: flex; align-items: center; gap: 10px;
+  font-size: 11px; font-weight: 700; letter-spacing: .16em;
+  text-transform: uppercase; color: var(--black);
+  border: 1px solid var(--black);
+  border-radius: 50px;
+  padding: 10px 24px; cursor: pointer;
+  background: transparent; transition: all .3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  font-family: var(--sans);
+}
+.coll-filter-toggle-btn:hover {
+  background: var(--black); color: #fff;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+.coll-filter-toggle-btn svg { width: 14px; height: 14px; }
+
+/* Desktop Grid layout toggles */
+.coll-grid-switches {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  border-left: 1px solid var(--border-color);
+  padding-left: 20px;
+}
+.coll-grid-switch {
+  background: none;
+  border: none;
+  width: 32px; height: 32px;
+  display: flex; align-items: center; justify-content: center;
+  color: #ccc;
+  cursor: pointer;
+  border-radius: 50%;
+  transition: all .2s ease;
+}
+.coll-grid-switch:hover {
+  color: var(--black);
+  background: var(--light-gray);
+}
+.coll-grid-switch.active {
+  color: var(--black);
+  background: #f0f0f0;
+}
+.coll-grid-switch svg { width: 16px; height: 16px; }
+
+.coll-toolbar-right {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+.coll-result-count {
+  font-size: 13px; color: #777; letter-spacing: .02em;
+  font-weight: 500;
+}
+.coll-sort {
+  display: flex; align-items: center; gap: 12px;
+}
+.coll-sort label {
+  font-weight: 700; letter-spacing: .14em;
+  text-transform: uppercase; white-space: nowrap;
+  font-size: 9px; color: var(--black);
+}
+.coll-sort-select-wrapper {
+  position: relative;
+}
+.coll-sort select {
+  font-size: 12px; font-family: var(--sans); font-weight: 600;
+  border: 1px solid #d0d0d0; padding: 10px 36px 10px 16px;
+  background: #fff; color: var(--black); cursor: pointer;
+  appearance: none; border-radius: 50px;
+  transition: border-color .3s, box-shadow .3s;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%230f0f0f' stroke-width='1.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat; background-position: right 14px center;
+  background-size: 10px 6px;
+}
+.coll-sort select:hover {
+  border-color: var(--black);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+}
+
+/* ── Collapsible Main Layout ── */
+.coll-main-layout {
+  display: flex;
+  gap: 36px;
+  position: relative;
+}
+
+/* Desktop Collapsible Left Sidebar */
+.coll-sidebar {
+  width: 270px;
+  flex-shrink: 0;
+  opacity: 1;
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+.coll-sidebar.hidden {
+  width: 0;
+  opacity: 0;
+  margin-right: -36px;
+  pointer-events: none;
+  overflow: hidden;
+}
+.coll-grid-container {
+  flex-grow: 1;
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* Clear Active Filters Button */
+.coll-sidebar-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid var(--black);
+}
+.coll-sidebar-title {
+  font-size: 12px; font-weight: 800; letter-spacing: .18em; text-transform: uppercase;
+}
+.coll-filter-clear-all {
+  font-size: 11px; font-weight: 700; color: #888; text-decoration: underline;
+  letter-spacing: .02em; background: none; border: none; cursor: pointer;
+  padding: 0; font-family: var(--sans);
+}
+.coll-filter-clear-all:hover { color: var(--gold); }
+
+/* Accordion Accordions */
+.filter-group {
+  border-bottom: 1px solid var(--border-color);
+  padding: 16px 0;
+}
+.filter-group:first-child {
+  border-top: none;
+}
+.filter-group-header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: none;
+  border: none;
+  padding: 6px 0;
+  cursor: pointer;
+  font-family: var(--sans);
+  font-weight: 700;
+  font-size: 11px;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--black);
+  text-align: left;
+}
+.filter-group-header .accordion-icon {
+  width: 12px;
+  height: 12px;
+  transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #888;
+}
+.filter-group-header .accordion-icon svg {
+  width: 8px; height: 5px;
+}
+.filter-group-header[aria-expanded="true"] .accordion-icon {
+  transform: rotate(180deg);
+  color: var(--black);
+}
+.filter-group-content {
+  overflow: hidden;
+  transition: max-height 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94), padding 0.35s ease;
+  max-height: 0;
+  padding-top: 0;
+}
+.filter-group-content.open {
+  max-height: 400px;
+  padding-top: 14px;
+}
+
+/* Custom Checkbox Design */
+.filter-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.filter-list-item {
+  display: flex;
+  align-items: center;
+}
+.filter-checkbox-label {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  position: relative;
+  font-size: 13px;
+  color: #444;
+  user-select: none;
+  gap: 10px;
+  width: 100%;
+}
+.filter-checkbox {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0; width: 0;
+}
+.custom-checkbox {
+  position: relative;
+  height: 18px; width: 18px;
+  border: 1.5px solid #d0d0d0;
+  background-color: #fff;
+  transition: all 0.25s ease;
+  flex-shrink: 0;
+  border-radius: 2px;
+}
+.filter-checkbox-label:hover .custom-checkbox {
+  border-color: var(--black);
+}
+.filter-checkbox:checked ~ .custom-checkbox {
+  background-color: var(--black);
+  border-color: var(--black);
+}
+.custom-checkbox::after {
+  content: "";
+  position: absolute;
+  display: none;
+  left: 5px; top: 2px;
+  width: 4px; height: 8px;
+  border: solid white;
+  border-width: 0 1.5px 1.5px 0;
+  transform: rotate(45deg);
+}
+.filter-checkbox:checked ~ .custom-checkbox::after {
+  display: block;
+}
+.filter-checkbox:disabled ~ .custom-checkbox {
+  background-color: #f7f7f7;
+  border-color: #e0e0e0;
+}
+.filter-checkbox:disabled ~ .filter-value-text {
+  color: #bbb;
+  text-decoration: line-through;
+}
+.filter-value-text {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--black);
+  letter-spacing: .02em;
+}
+.filter-value-count {
+  font-size: 11px;
+  color: #aaa;
+  margin-left: auto;
+  font-weight: 500;
+}
+
+/* Price Range fields */
+.filter-price-range {
+  padding: 4px 2px;
+}
+.filter-price-inputs {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.filter-price-field {
+  display: flex;
+  align-items: center;
+  border: 1px solid #d0d0d0;
+  border-radius: 4px;
+  padding: 8px 12px;
+  background: #fff;
+  flex: 1;
+}
+.filter-price-currency {
+  font-size: 12px; color: #888; margin-right: 4px; font-weight: 600;
+}
+.filter-price-input {
+  width: 100%;
+  border: none;
+  background: none;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--black);
+  font-family: var(--sans);
+  padding: 0;
+  outline: none;
+}
+.filter-price-input::placeholder { color: #ccc; }
+.filter-price-to {
+  font-size: 11px; font-weight: 700; color: #888; text-transform: uppercase;
+}
+
+/* ── Product Grid & Custom Cards ── */
+.coll-grid {
+  display: grid;
+  gap: 36px 20px;
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+.coll-grid.cols-2 { grid-template-columns: repeat(2, 1fr); }
+.coll-grid.cols-3 { grid-template-columns: repeat(3, 1fr); }
+.coll-grid.cols-4 { grid-template-columns: repeat(4, 1fr); }
+
+.coll-card {
+  background: #fff;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+/* Double image hover aspect ratio container */
+.coll-card-img-wrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 3/4;
+  overflow: hidden;
+  background: var(--light-gray);
+  border-radius: 4px;
+}
+.coll-card-img-wrap img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform .6s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity .6s ease;
+}
+.coll-img-primary {
+  position: relative;
+  z-index: 2;
+}
+.coll-img-secondary {
+  position: absolute; inset: 0;
+  z-index: 1;
+  opacity: 0;
+}
+.coll-card:hover .coll-img-primary {
+  transform: scale(1.04);
+}
+.coll-card:hover .coll-img-secondary {
+  opacity: 1;
+  transform: scale(1.04);
+}
+.coll-card-img-placeholder {
+  width: 100%; height: 100%;
+  background: linear-gradient(135deg, var(--black-2), var(--black));
+  display: flex; align-items: center; justify-content: center;
+  color: rgba(255,255,255,0.18); font-size: 11px; letter-spacing: .15em; text-transform: uppercase;
+}
+
+/* Luxury rounded badges */
+.coll-badge {
+  position: absolute; top: 12px; left: 12px;
+  font-size: 8px; font-weight: 800;
+  letter-spacing: .18em; text-transform: uppercase;
+  padding: 5px 12px; z-index: 3;
+  border-radius: 50px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.06);
+  font-family: var(--sans);
+}
+.coll-badge-trending { background: var(--black); color: var(--gold); border: 1px solid var(--gold); }
+.coll-badge-new { background: var(--gold); color: var(--black); }
+.coll-badge-sale { background: #96281b; color: #fff; }
+.coll-badge-soldout { background: rgba(255,255,255,0.92); color: #888; border: 1px solid #ddd; }
+
+/* Custom Glassmorphism Quick Buy Trigger */
+.coll-quick-view {
+  position: absolute; bottom: 16px; left: 16px; right: 16px;
+  background: rgba(15, 15, 15, 0.72);
+  backdrop-filter: blur(12px) saturate(180%);
+  -webkit-backdrop-filter: blur(12px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #fff;
+  font-size: 9px; font-weight: 700;
+  letter-spacing: .22em; text-transform: uppercase;
+  text-align: center; padding: 12px;
+  border-radius: 50px;
+  transform: translateY(15px);
+  opacity: 0;
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  z-index: 4;
+  font-family: var(--sans);
+}
+.coll-card:hover .coll-quick-view {
+  transform: translateY(0);
+  opacity: 1;
+}
+.coll-quick-view:hover {
+  background: #ffffff;
+  color: var(--black);
+  border-color: #ffffff;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.18);
+}
+
+.coll-soldout-overlay {
+  position: absolute; inset: 0;
+  background: rgba(255,255,255,0.4);
+  z-index: 2;
+  pointer-events: none;
+}
+
+/* Elegant card body */
+.coll-card-body { padding: 16px 4px 8px; }
+.coll-card-origin {
+  font-size: 8px; font-weight: 800;
+  letter-spacing: .2em; text-transform: uppercase;
+  color: var(--gold); margin-bottom: 6px;
+}
+.coll-card-title {
+  font-family: var(--serif, 'Cormorant Garamond', serif);
+  font-size: 19px; font-weight: 500;
+  color: var(--black); margin-bottom: 6px; line-height: 1.25;
+}
+.coll-card-title a { color: inherit; text-decoration: none; transition: color .2s; }
+.coll-card-title a:hover { color: var(--gold); }
+.coll-card-stars { color: var(--gold); font-size: 11px; margin-bottom: 7px; letter-spacing: .08em; }
+
+.coll-card-price {
+  font-size: 13px; font-weight: 600; color: var(--black);
+  font-family: var(--sans);
+}
+.coll-card-price .from { font-size: 10px; font-weight: 400; color: #888; margin-right: 2px; }
+.coll-card-price .compare { font-size: 12px; color: #bbbbbb; text-decoration: line-through; margin-left: 8px; font-weight: 500; }
+.coll-card-price .save-badge {
+  font-size: 10px; font-weight: 700; color: var(--gold); margin-left: 8px;
+}
+
+/* ── Pagination Buttons ── */
+.coll-pagination {
+  display: flex; justify-content: center; align-items: center;
+  gap: 8px; margin-top: 64px; flex-wrap: wrap;
+}
+.coll-page-btn {
+  width: 44px; height: 44px;
+  display: flex; align-items: center; justify-content: center;
+  border: 1px solid #dcdcdc;
+  border-radius: 50%;
+  font-size: 13px; font-weight: 600; color: var(--black);
+  cursor: pointer; background: #fff; transition: all .3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  text-decoration: none;
+  font-family: var(--sans);
+}
+.coll-page-btn:hover { border-color: var(--black); background: var(--light-gray); }
+.coll-page-btn.active { background: var(--black); color: #fff; border-color: var(--black); }
+.coll-page-btn.prev-next {
+  width: auto; padding: 0 24px; border-radius: 50px;
+  letter-spacing: .12em; font-size: 10px; text-transform: uppercase; font-weight: 700;
+}
+
+/* Empty State page */
+.coll-empty {
+  text-align: center; padding: 96px 24px;
+  color: #999; font-size: 14px;
+}
+.coll-empty h3 {
+  font-size: 32px; color: var(--black);
+  margin-bottom: 12px;
+  font-family: var(--serif, 'Cormorant Garamond', serif);
+  font-weight: 500;
+}
+
+/* ── Mobile & Responsive layout (Slide-over drawer) ── */
+.coll-mobile-backdrop {
+  display: none;
+  position: fixed; inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  z-index: 9998;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+.coll-mobile-backdrop.active {
+  display: block;
+  opacity: 1;
+}
+
+@media (max-width: 1024px) {
+  .coll-grid.cols-4 { grid-template-columns: repeat(3, 1fr); }
+  .coll-grid-switches [data-cols="4"] { display: none; }
+}
+
+@media (max-width: 768px) {
+  .coll-main-layout { gap: 0; }
+  .coll-grid { gap: 24px 12px; }
+  .coll-grid.cols-3, .coll-grid.cols-4 { grid-template-columns: repeat(2, 1fr); }
+  
+  .coll-banner { padding: 40px 28px 32px; min-height: 200px; }
+  .coll-toolbar { flex-wrap: wrap; gap: 14px; padding: 12px 0; }
+  .coll-toolbar-left { width: 100%; justify-content: space-between; gap: 12px; }
+  .coll-toolbar-right { width: 100%; justify-content: space-between; border-top: 1px dashed var(--border-color); padding-top: 12px; }
+  .coll-grid-switches { border-left: none; padding-left: 0; }
+  
+  .coll-card-title { font-size: 16px; }
+  .coll-card-body { padding: 12px 2px 4px; }
+  .coll-page { padding: 20px 12px 60px; }
+  .coll-quick-view { display: none !important; }
+  
+  /* Mobile Sidebar as a slide-out drawer */
+  .coll-sidebar {
+    position: fixed;
+    top: 0;
+    left: -320px;
+    width: 300px;
+    height: 100vh;
+    background: #ffffff;
+    z-index: 9999;
+    padding: 32px 24px;
+    box-shadow: 12px 0 40px rgba(0,0,0,0.18);
+    transition: left 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 0.4s ease;
+    overflow-y: auto;
+    opacity: 0;
+  }
+  .coll-sidebar.active {
+    left: 0;
+    opacity: 1;
+  }
+  .coll-sidebar-header {
+    margin-top: 10px;
+  }
+}
+</style>
+
+{%- liquid
+  assign sort_by = collection.default_sort_by
+  if request.params.sort_by != blank
+    assign sort_by = request.params.sort_by
+  endif
+  assign products_per_page = section.settings.products_per_page | default: 24
+-%}
+
+{%- comment -%} Wrapping collection loop with standard Shopify pagination {%- endcomment -%}
+{%- paginate collection.products by products_per_page -%}
+
+<div class="coll-page">
+
+  {%- comment -%} ── Collection Banner ── {%- endcomment -%}
+  <div class="coll-banner">
+    {%- if collection.image -%}
+      <div class="coll-banner-bg" style="background-image: url('{{ collection.image | image_url: width: 1600 }}');"></div>
+    {%- endif -%}
+    <div class="coll-banner-body">
+      <span class="coll-banner-label">Luxury Extensions</span>
+      <h1 class="coll-banner-title">{{ collection.title }}</h1>
+      <div class="coll-banner-desc">
+        {%- if collection.description != blank -%}
+          {{ collection.description }}
+        {%- else -%}
+          {%- liquid
+            assign coll_title_down = collection.title | downcase
+            if coll_title_down contains 'indian' and coll_title_down contains 'straight'
+              echo 'Revered for its fine silkiness and light bounce, our Raw Indian Straight collection is sourced directly from East Indian temples. This unprocessed hair naturally achieves a thick, sleek appearance that holds a perfect bone-straight finish or effortless curls.'
+            elsif coll_title_down contains 'indian' and coll_title_down contains 'curly'
+              echo 'Offering breathtaking bounce and deep, rich luster, our Raw Indian Curly collection features natural ringlets and defined coils sourced from India. It remains soft, deeply hydrated, and maintains its premium curl pattern year after year.'
+            elsif coll_title_down contains 'vietnamese' and coll_title_down contains 'straight'
+              echo 'Sourced from the high-altitude regions of Vietnam, our Raw Vietnamese Straight collection is famous for its thick, robust strands and high-shine surface. This hair is exceptionally strong, naturally bone-straight, and delivers a sleek, glass-like finish.'
+            elsif coll_title_down contains 'cambodian' and coll_title_down contains 'wavy'
+              echo 'Bold, rich, and full of natural body. Our Raw Cambodian Wavy collection features a slightly textured, medium-luster wave pattern that blends beautifully with natural textures. Strong, resilient, and packed with body.'
+            elsif coll_title_down contains 'burmese' and coll_title_down contains 'curly'
+              echo 'An exotic rarity celebrated for its thick, coarse strands and ultimate volume. Our Raw Burmese Curly collection holds a springy, defined curl pattern that remains exceptionally soft and touchable. Sourced for dramatic bounce and longevity.'
+            elsif coll_title_down contains 'indian'
+              echo 'Exquisite and versatile, our Raw Indian collection offers natural waves and rich textures sourced directly from the temples of India. Revered for its lightness, remarkable thickness, and effortless styling capability, each bundle represents the pinnacle of premium hair couture.'
+            elsif coll_title_down contains 'vietnamese'
+              echo 'Sleek, powerful, and remarkably strong. Sourced from the high-altitude regions of Vietnam, this collection boasts an ultra-healthy cuticle structure that yields exceptional natural shine and bone-straight perfection. Engineered to hold its pristine form.'
+            elsif coll_title_down contains 'cambodian'
+              echo 'Boldly textured and incredibly voluminous. Sourced from Cambodia, this raw hair features a rich, slightly coarse texture that blends seamlessly with natural hair. Strong, medium-to-low luster waves that make a breathtaking statement of pure sophistication.'
+            elsif coll_title_down contains 'burmese'
+              echo 'Exotic, rare, and exceptionally resilient. Our Raw Burmese collection is celebrated for its unique cross-sectional texture that offers a natural, healthy wave and unmatched volume. Luxuriously soft yet highly durable, it responds phenomenally to styling.'
+            elsif coll_title_down contains 'curly'
+              echo 'Breathtaking, defined, and full of life. Our Curly collection offers deep, rich coils and luxurious spirals that remain soft, touchable, and high-gloss. Designed for optimal volume and minimal maintenance, it is the ultimate crown of natural glamour.'
+            elsif coll_title_down contains 'straight'
+              echo 'Bone-straight sophistication and high-gloss luster. This collection is smooth as silk, flowing with exquisite natural movement and a flawless, glass-like finish. Re-engineer your style with sleek elegance that commands presence in any room.'
+            elsif coll_title_down contains 'wavy'
+              echo 'Effortless, beachy elegance and soft volume. Our Wavy collection delivers a natural, cascading wave pattern that is soft to the touch and easy to style. The perfect balance of casual luxury and timeless romantic charm.'
+            else
+              echo 'Indulge in the world’s most exquisite, 100% ethically sourced virgin hair. Hand-selected for its natural luster, superior bounce, and unparalleled longevity, our signature extensions define modern luxury. Crafted for the discerning woman who demands nothing less than absolute perfection.'
+            endif
+          -%}
+        {%- endif -%}
+      </div>
+      <div class="coll-banner-count">{{ collection.products_count }} Luxury Textures</div>
+    </div>
+  </div>
+  <div class="coll-section-rule"></div>
+
+  {%- comment -%} ── Impulse style Toolbar ── {%- endcomment -%}
+  <div class="coll-toolbar">
+    <div class="coll-toolbar-left">
+      <button class="coll-filter-toggle-btn" onclick="toggleSidebar()" aria-expanded="true" id="sidebar-toggle">
+        <svg viewBox="0 0 16 12" fill="none" stroke="currentColor" stroke-width="1.5">
+          <line x1="0" y1="2" x2="16" y2="2"/>
+          <line x1="0" y1="6" x2="16" y2="6"/>
+          <line x1="0" y1="10" x2="16" y2="10"/>
+          <circle cx="4" cy="2" r="1.5" fill="currentColor" stroke="none"/>
+          <circle cx="10" cy="6" r="1.5" fill="currentColor" stroke="none"/>
+          <circle cx="6" cy="10" r="1.5" fill="currentColor" stroke="none"/>
+        </svg>
+        <span>Hide Filters</span>
+      </button>
+      
+      <div class="coll-grid-switches">
+        <button class="coll-grid-switch" data-cols="2" onclick="setGridColumns(2)" aria-label="2 Columns">
+          <svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5">
+            <rect x="1" y="1" width="6" height="16"/>
+            <rect x="11" y="1" width="6" height="16"/>
+          </svg>
+        </button>
+        <button class="coll-grid-switch active" data-cols="3" onclick="setGridColumns(3)" aria-label="3 Columns">
+          <svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5">
+            <rect x="0" y="1" width="4.5" height="16"/>
+            <rect x="6.75" y="1" width="4.5" height="16"/>
+            <rect x="13.5" y="1" width="4.5" height="16"/>
+          </svg>
+        </button>
+        <button class="coll-grid-switch" data-cols="4" onclick="setGridColumns(4)" aria-label="4 Columns">
+          <svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5">
+            <rect x="0" y="1" width="3" height="16"/>
+            <rect x="5" y="1" width="3" height="16"/>
+            <rect x="10" y="1" width="3" height="16"/>
+            <rect x="15" y="1" width="3" height="16"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+    
+    <div class="coll-toolbar-right">
+      <span class="coll-result-count">{{ collection.products_count }} results</span>
+      
+      <div class="coll-sort">
+        <label for="sort-select">Sort by</label>
+        <div class="coll-sort-select-wrapper">
+          <select id="sort-select" onchange="sortCollection(this.value)">
+            <option value="manual"{% if sort_by == 'manual' %} selected{% endif %}>Featured</option>
+            <option value="best-selling"{% if sort_by == 'best-selling' %} selected{% endif %}>Best Selling</option>
+            <option value="created-descending"{% if sort_by == 'created-descending' %} selected{% endif %}>Newest</option>
+            <option value="price-ascending"{% if sort_by == 'price-ascending' %} selected{% endif %}>Price: Low to High</option>
+            <option value="price-descending"{% if sort_by == 'price-descending' %} selected{% endif %}>Price: High to Low</option>
+            <option value="title-ascending"{% if sort_by == 'title-ascending' %} selected{% endif %}>A – Z</option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="coll-main-layout">
+    
+    {%- comment -%} ── Collapsible Filters Sidebar ── {%- endcomment -%}
+    <div class="coll-sidebar" id="coll-sidebar">
+      <div class="coll-sidebar-header">
+        <h2 class="coll-sidebar-title">Filters</h2>
+        {%- if collection.filters.size > 0 -%}
+          {%- assign has_active_filters = false -%}
+          {%- for filter in collection.filters -%}
+            {%- if filter.active_values.size > 0 or filter.min_value.value != blank or filter.max_value.value != blank -%}
+              {%- assign has_active_filters = true -%}
+            {%- endif -%}
+          {%- endfor -%}
+          {%- if has_active_filters -%}
+            <a href="{{ collection.url }}?sort_by={{ sort_by }}" class="coll-filter-clear-all">Clear All</a>
+          {%- endif -%}
+        {%- else -%}
+          <button class="coll-filter-clear-all" onclick="clearAllTagFilters()">Clear All</button>
+        {%- endif -%}
+      </div>
+
+      {%- comment -%} Check if standard Shopify Dynamic Filters are active {%- endcomment -%}
+      {%- if collection.filters.size > 0 -%}
+        <form class="coll-filter-form" id="CollectionFiltersForm">
+          {%- for filter in collection.filters -%}
+            <div class="filter-group">
+              <button type="button" class="filter-group-header" onclick="toggleAccordion(this)" aria-expanded="true">
+                <span>{{ filter.label | escape }}</span>
+                <span class="accordion-icon">
+                  <svg viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <path d="M1 1l4 4 4-4" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </span>
+              </button>
+              <div class="filter-group-content open" style="max-height: 400px;">
+                {%- case filter.type -%}
+                  {%- when 'list' or 'boolean' -%}
+                    <ul class="filter-list" role="list">
+                      {%- for value in filter.values -%}
+                        <li class="filter-list-item">
+                          <label class="filter-checkbox-label">
+                            <input type="checkbox"
+                              name="{{ value.param_name }}"
+                              value="{{ value.value }}"
+                              class="filter-checkbox"
+                              {% if value.active %}checked{% endif %}
+                              {% if value.count == 0 and value.active == false %}disabled{% endif %}
+                              onchange="onFilterChange()"
+                            >
+                            <span class="custom-checkbox"></span>
+                            <span class="filter-value-text">{{ value.label | escape }}</span>
+                            <span class="filter-value-count">({{ value.count }})</span>
+                          </label>
+                        </li>
+                      {%- endfor -%}
+                    </ul>
+                  {%- when 'price_range' -%}
+                    <div class="filter-price-range">
+                      <div class="filter-price-inputs">
+                        <div class="filter-price-field">
+                          <span class="filter-price-currency">{{ cart.currency.symbol }}</span>
+                          <input class="filter-price-input"
+                            name="{{ filter.min_value.param_name }}"
+                            id="Filter-{{ filter.label | escape }}-Min"
+                            {%- if filter.min_value.value -%}
+                              value="{{ filter.min_value.value | money_without_currency | replace: ',', '' }}"
+                            {%- endif -%}
+                            type="number"
+                            placeholder="0"
+                            min="0"
+                            max="{{ filter.range_max | money_without_currency | replace: ',', '' }}"
+                            onchange="onFilterChange()"
+                          >
+                        </div>
+                        <span class="filter-price-to">to</span>
+                        <div class="filter-price-field">
+                          <span class="filter-price-currency">{{ cart.currency.symbol }}</span>
+                          <input class="filter-price-input"
+                            name="{{ filter.max_value.param_name }}"
+                            id="Filter-{{ filter.label | escape }}-Max"
+                            {%- if filter.max_value.value -%}
+                              value="{{ filter.max_value.value | money_without_currency | replace: ',', '' }}"
+                            {%- endif -%}
+                            type="number"
+                            placeholder="{{ filter.range_max | money_without_currency | replace: ',', '' }}"
+                            min="0"
+                            max="{{ filter.range_max | money_without_currency | replace: ',', '' }}"
+                            onchange="onFilterChange()"
+                          >
+                        </div>
+                      </div>
+                    </div>
+                {%- endcase -%}
+              </div>
+            </div>
+          {%- endfor -%}
+        </form>
+      {%- else -%}
+        {%- comment -%} Fallback Checklist Tag Filters for unconfigured standard themes {%- endcomment -%}
+        <div class="filter-group">
+          <button type="button" class="filter-group-header" onclick="toggleAccordion(this)" aria-expanded="true">
+            <span>Texture</span>
+            <span class="accordion-icon">
+              <svg viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M1 1l4 4 4-4" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </span>
+          </button>
+          <div class="filter-group-content open" style="max-height: 400px;">
+            <ul class="filter-list" role="list">
+              <li class="filter-list-item">
+                <label class="filter-checkbox-label">
+                  <input type="checkbox" class="filter-checkbox tag-filter-checkbox" value="straight" onchange="onTagFilterChange()">
+                  <span class="custom-checkbox"></span>
+                  <span class="filter-value-text">Straight</span>
+                </label>
+              </li>
+              <li class="filter-list-item">
+                <label class="filter-checkbox-label">
+                  <input type="checkbox" class="filter-checkbox tag-filter-checkbox" value="wavy" onchange="onTagFilterChange()">
+                  <span class="custom-checkbox"></span>
+                  <span class="filter-value-text">Wavy</span>
+                </label>
+              </li>
+              <li class="filter-list-item">
+                <label class="filter-checkbox-label">
+                  <input type="checkbox" class="filter-checkbox tag-filter-checkbox" value="curly" onchange="onTagFilterChange()">
+                  <span class="custom-checkbox"></span>
+                  <span class="filter-value-text">Curly</span>
+                </label>
+              </li>
+              <li class="filter-list-item">
+                <label class="filter-checkbox-label">
+                  <input type="checkbox" class="filter-checkbox tag-filter-checkbox" value="deep curly" onchange="onTagFilterChange()">
+                  <span class="custom-checkbox"></span>
+                  <span class="filter-value-text">Deep Curly</span>
+                </label>
+              </li>
+            </ul>
+          </div>
+        </div>
+        
+        <div class="filter-group">
+          <button type="button" class="filter-group-header" onclick="toggleAccordion(this)" aria-expanded="true">
+            <span>Origin</span>
+            <span class="accordion-icon">
+              <svg viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M1 1l4 4 4-4" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </span>
+          </button>
+          <div class="filter-group-content open" style="max-height: 400px;">
+            <ul class="filter-list" role="list">
+              <li class="filter-list-item">
+                <label class="filter-checkbox-label">
+                  <input type="checkbox" class="filter-checkbox tag-filter-checkbox" value="indian" onchange="onTagFilterChange()">
+                  <span class="custom-checkbox"></span>
+                  <span class="filter-value-text">Indian</span>
+                </label>
+              </li>
+              <li class="filter-list-item">
+                <label class="filter-checkbox-label">
+                  <input type="checkbox" class="filter-checkbox tag-filter-checkbox" value="vietnamese" onchange="onTagFilterChange()">
+                  <span class="custom-checkbox"></span>
+                  <span class="filter-value-text">Vietnamese</span>
+                </label>
+              </li>
+              <li class="filter-list-item">
+                <label class="filter-checkbox-label">
+                  <input type="checkbox" class="filter-checkbox tag-filter-checkbox" value="cambodian" onchange="onTagFilterChange()">
+                  <span class="custom-checkbox"></span>
+                  <span class="filter-value-text">Cambodian</span>
+                </label>
+              </li>
+              <li class="filter-list-item">
+                <label class="filter-checkbox-label">
+                  <input type="checkbox" class="filter-checkbox tag-filter-checkbox" value="burmese" onchange="onTagFilterChange()">
+                  <span class="custom-checkbox"></span>
+                  <span class="filter-value-text">Burmese</span>
+                </label>
+              </li>
+            </ul>
+          </div>
+        </div>
+      {%- endif -%}
+    </div>
+
+    {%- comment -%} ── Product Grid Container ── {%- endcomment -%}
+    <div class="coll-grid-container">
+      {%- if collection.products.size > 0 -%}
+        <div class="coll-grid cols-3" id="coll-grid">
+          {%- for product in collection.products -%}
+            {%- liquid
+              assign is_sold_out = false
+              unless product.available
+                assign is_sold_out = true
+              endunless
+              assign is_new = false
+              assign is_trending = false
+              assign is_sale = false
+              if product.tags contains 'New' or product.tags contains 'new'
+                assign is_new = true
+              endif
+              if product.tags contains 'Bestseller' or product.tags contains 'Trending' or product.tags contains 'trending' or product.tags contains 'bestseller'
+                assign is_trending = true
+              endif
+              if product.compare_at_price > product.price
+                assign is_sale = true
+              endif
+              assign origin = ''
+              for tag in product.tags
+                assign tag_down = tag | downcase
+                if tag_down == 'indian' or tag_down == 'vietnamese' or tag_down == 'cambodian' or tag_down == 'burmese'
+                  assign origin = tag
+                endif
+              endfor
+            -%}
+            <div class="coll-card" data-tags="{{ product.tags | join: ',' | downcase }}" onclick="window.location.href='{{ product.url }}'">
+              
+              <div class="coll-card-img-wrap">
+                {%- if is_sold_out -%}<div class="coll-soldout-overlay"></div>{%- endif -%}
+
+                {%- if is_sold_out -%}
+                  <span class="coll-badge coll-badge-soldout">Sold Out</span>
+                {%- elsif is_trending -%}
+                  <span class="coll-badge coll-badge-trending">Bestseller</span>
+                {%- elsif is_new -%}
+                  <span class="coll-badge coll-badge-new">New</span>
+                {%- elsif is_sale -%}
+                  <span class="coll-badge coll-badge-sale">Sale</span>
+                {%- endif -%}
+
+                {%- if product.featured_image -%}
+                  <img class="coll-img-primary" src="{{ product.featured_image | image_url: width: 600 }}"
+                       alt="{{ product.featured_image.alt | escape | default: product.title }}"
+                       loading="lazy" width="600" height="{{ 600 | divided_by: product.featured_image.aspect_ratio | round }}">
+                  {%- if product.images[1] != blank -%}
+                    <img class="coll-img-secondary" src="{{ product.images[1] | image_url: width: 600 }}"
+                         alt="{{ product.images[1].alt | escape | default: product.title }}"
+                         loading="lazy" width="600" height="{{ 600 | divided_by: product.images[1].aspect_ratio | round }}">
+                  {%- endif -%}
+                {%- else -%}
+                  <div class="coll-card-img-placeholder">No Image</div>
+                {%- endif -%}
+
+                <div class="coll-quick-view">Quick Shop</div>
+              </div>
+
+              <div class="coll-card-body">
+                {%- if origin != '' -%}
+                  <div class="coll-card-origin">{{ origin }}</div>
+                {%- endif -%}
+                <h3 class="coll-card-title">
+                  <a href="{{ product.url }}" onclick="event.stopPropagation();">{{ product.title }}</a>
+                </h3>
+                <div class="coll-card-stars">★★★★★</div>
+                <div class="coll-card-price">
+                  {%- if product.price_varies -%}<span class="from">from </span>{%- endif -%}
+                  {{ product.price_min | money }}
+                  {%- if is_sale -%}
+                    <span class="compare">{{ product.compare_at_price_min | money }}</span>
+                    {%- assign money_saved = product.compare_at_price_min | minus: product.price_min -%}
+                    {%- assign pct_saved = money_saved | times: 100 | divided_by: product.compare_at_price_min -%}
+                    <span class="save-badge">Save {{ pct_saved }}%</span>
+                  {%- endif -%}
+                </div>
+              </div>
+            </div>
+          {%- endfor -%}
+        </div>
+
+        {%- comment -%} ── Paginated Buttons ── {%- endcomment -%}
+        {%- if paginate.pages > 1 -%}
+          <div class="coll-pagination">
+            {%- if paginate.previous -%}
+              <a href="{{ paginate.previous.url }}" class="coll-page-btn prev-next">← Prev</a>
+            {%- endif -%}
+            {%- for part in paginate.parts -%}
+              {%- if part.is_link -%}
+                <a href="{{ part.url }}" class="coll-page-btn">{{ part.title }}</a>
+              {%- elsif part.title == paginate.current_page -%}
+                <span class="coll-page-btn active">{{ part.title }}</span>
+              {%- else -%}
+                <span class="coll-page-btn" style="border:none;cursor:default;color:#aaa;">{{ part.title }}</span>
+              {%- endif -%}
+            {%- endfor -%}
+            {%- if paginate.next -%}
+              <a href="{{ paginate.next.url }}" class="coll-page-btn prev-next">Next →</a>
+            {%- endif -%}
+          </div>
+        {%- endif -%}
+
+      {%- else -%}
+        <div class="coll-empty">
+          <h3>No textures found</h3>
+          <p>Try adjusting your search filters or browse our full collections.</p>
+        </div>
+      {%- endif -%}
+    </div>
+
+  </div>
+
+</div>
+
+{%- endpaginate -%}
+
+<script>
+function toggleSidebar() {
+  var sidebar = document.getElementById('coll-sidebar');
+  var btn = document.getElementById('sidebar-toggle');
+  if (!sidebar) return;
+  
+  if (window.innerWidth <= 768) {
+    // Mobile slide-out drawer implementation
+    var backdrop = document.getElementById('coll-backdrop');
+    if (!backdrop) {
+      backdrop = document.createElement('div');
+      backdrop.id = 'coll-backdrop';
+      backdrop.className = 'coll-mobile-backdrop';
+      backdrop.onclick = toggleSidebar;
+      document.body.appendChild(backdrop);
+      // Trigger browser layout pass
+      backdrop.offsetHeight;
+    }
+    
+    var isActive = sidebar.classList.toggle('active');
+    backdrop.classList.toggle('active', isActive);
+    document.body.style.overflow = isActive ? 'hidden' : '';
+  } else {
+    // Desktop layout collapsible sidebar
+    var isHidden = sidebar.classList.toggle('hidden');
+    var label = btn.querySelector('span');
+    if (label) {
+      label.textContent = isHidden ? 'Show Filters' : 'Hide Filters';
+    }
+    btn.setAttribute('aria-expanded', !isHidden);
+    localStorage.setItem('elysian_coll_sidebar', isHidden ? 'hidden' : 'visible');
+  }
+}
+
+function toggleAccordion(btn) {
+  var panel = btn.nextElementSibling;
+  var isExpanded = btn.getAttribute('aria-expanded') === 'true';
+  
+  btn.setAttribute('aria-expanded', !isExpanded);
+  panel.classList.toggle('open', !isExpanded);
+  
+  // Set smooth height expand transition dynamically
+  if (!isExpanded) {
+    panel.style.maxHeight = panel.scrollHeight + "px";
+  } else {
+    panel.style.maxHeight = "0px";
+  }
+}
+
+function setGridColumns(cols) {
+  var grid = document.getElementById('coll-grid');
+  if (!grid) return;
+  
+  // Toggle grid layout classes
+  grid.classList.remove('cols-2', 'cols-3', 'cols-4');
+  grid.classList.add('cols-' + cols);
+  
+  // Toggle column switch classes
+  document.querySelectorAll('.coll-grid-switch').forEach(function(btn) {
+    if (parseInt(btn.getAttribute('data-cols')) === cols) {
+      btn.classList.add('active');
+    } else {
+      btn.classList.remove('active');
+    }
+  });
+  
+  localStorage.setItem('elysian_coll_cols', cols);
+}
+
+function sortCollection(val) {
+  var url = new URL(window.location.href);
+  url.searchParams.set('sort_by', val);
+  url.searchParams.delete('page');
+  window.location.href = url.toString();
+}
+
+function onFilterChange() {
+  const form = document.getElementById('CollectionFiltersForm');
+  const params = new URLSearchParams(new FormData(form));
+  const currentUrl = new URL(window.location.href);
+  
+  // Keep active sorting param intact
+  if (currentUrl.searchParams.has('sort_by')) {
+    params.set('sort_by', currentUrl.searchParams.get('sort_by'));
+  }
+  
+  window.location.search = params.toString();
+}
+
+/* Fallback JS checklist filter handler for tag categories */
+function onTagFilterChange() {
+  var active = [];
+  document.querySelectorAll('.tag-filter-checkbox:checked').forEach(function(cb) {
+    active.push(cb.value.toLowerCase());
+  });
+  
+  var cards = document.querySelectorAll('.coll-card');
+  var matchCount = 0;
+  
+  cards.forEach(function(card) {
+    if (active.length === 0) {
+      card.style.display = '';
+      matchCount++;
+      return;
+    }
+    
+    var tags = card.dataset.tags || '';
+    var match = active.every(function(t) {
+      return tags.includes(t);
+    });
+    
+    if (match) {
+      card.style.display = '';
+      matchCount++;
+    } else {
+      card.style.display = 'none';
+    }
+  });
+  
+  // Sync toolbar counter
+  var countEl = document.querySelector('.coll-result-count');
+  if (countEl) {
+    countEl.textContent = matchCount + ' ' + (matchCount === 1 ? 'result' : 'results');
+  }
+}
+
+function clearAllTagFilters() {
+  document.querySelectorAll('.tag-filter-checkbox').forEach(function(cb) {
+    cb.checked = false;
+  });
+  onTagFilterChange();
+}
+
+// Restore saved settings on DOM load
+document.addEventListener('DOMContentLoaded', function() {
+  // Restore column switcher choice
+  var savedCols = localStorage.getItem('elysian_coll_cols');
+  if (savedCols) {
+    setGridColumns(parseInt(savedCols));
+  } else {
+    // Default column layout
+    setGridColumns(3);
+  }
+  
+  // Restore desktop collapsible sidebar preference
+  if (window.innerWidth > 768) {
+    var savedSidebar = localStorage.getItem('elysian_coll_sidebar');
+    if (savedSidebar === 'hidden') {
+      toggleSidebar();
+    }
+  }
+});
+</script>
+
+{% schema %}
+{
+  "name": "Collection",
+  "settings": [
+    {
+      "type": "range",
+      "id": "products_per_page",
+      "label": "Products per page",
+      "min": 12,
+      "max": 48,
+      "step": 4,
+      "default": 24
+    }
+  ],
+  "presets": [{ "name": "Collection" }]
+}
+{% endschema %}

@@ -1,0 +1,62 @@
+<div class="trust-strip">
+  <div class="trust-inner">
+    {%- for block in section.blocks -%}
+      {%- if block.type == 'item' -%}
+        <div class="trust-item" {{ block.shopify_attributes }}>
+          <span class="trust-icon" aria-hidden="true">{{ block.settings.icon }}</span>
+          <div class="trust-text">
+            <strong>{{ block.settings.title }}</strong>
+            <span>{{ block.settings.subtitle }}</span>
+          </div>
+        </div>
+      {%- endif -%}
+    {%- endfor -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Trust Strip",
+  "tag": "div",
+  "class": "trust-strip-section",
+  "settings": [],
+  "blocks": [
+    {
+      "type": "item",
+      "name": "Trust item",
+      "settings": [
+        {
+          "type": "text",
+          "id": "icon",
+          "label": "Icon (emoji or symbol)",
+          "default": "✦"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "100% Raw Hair"
+        },
+        {
+          "type": "text",
+          "id": "subtitle",
+          "label": "Subtitle",
+          "default": "Unprocessed. Single Donor."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Trust Strip",
+      "blocks": [
+        { "type": "item", "settings": { "icon": "✦", "title": "100% Raw Hair",      "subtitle": "Unprocessed. Single Donor."    } },
+        { "type": "item", "settings": { "icon": "✦", "title": "Free Shipping",      "subtitle": "On orders over $150"           } },
+        { "type": "item", "settings": { "icon": "✦", "title": "Lasts 2 to 3 Years", "subtitle": "With proper care"              } },
+        { "type": "item", "settings": { "icon": "✦", "title": "Verified Sourcing",  "subtitle": "Temple collected worldwide"    } },
+        { "type": "item", "settings": { "icon": "✦", "title": "30-Day Guarantee",   "subtitle": "Satisfaction or exchange"      } }
+      ]
+    }
+  ]
+}
+{% endschema %}

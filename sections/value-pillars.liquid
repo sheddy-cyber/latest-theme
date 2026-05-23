@@ -1,0 +1,107 @@
+<section class="pillars">
+  <div class="pillars-inner">
+    <div class="section-head" style="margin-bottom:60px;">
+      <span class="section-label">{{ section.settings.eyebrow }}</span>
+      <h2 class="section-title">{{ section.settings.heading }}</h2>
+    </div>
+
+    <div class="pillars-grid">
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'pillar' -%}
+          <div class="pillar" {{ block.shopify_attributes }}>
+            <div class="pillar-num">{{ block.settings.number }}</div>
+            <h3>{{ block.settings.title }}</h3>
+            <p>{{ block.settings.body }}</p>
+          </div>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Value Pillars",
+  "tag": "div",
+  "class": "value-pillars-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow text",
+      "default": "Why Elysian"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "The Elysian Difference"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "pillar",
+      "name": "Pillar",
+      "settings": [
+        {
+          "type": "text",
+          "id": "number",
+          "label": "Number",
+          "default": "01"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Single Donor Sourcing"
+        },
+        {
+          "type": "textarea",
+          "id": "body",
+          "label": "Body text",
+          "default": "Every bundle comes from one donor, meaning a naturally consistent texture, cuticle alignment and zero chemical treatment from root to tip."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Value Pillars",
+      "blocks": [
+        {
+          "type": "pillar",
+          "settings": {
+            "number": "01",
+            "title": "Single Donor Sourcing",
+            "body": "Every bundle comes from one donor, meaning a naturally consistent texture, cuticle alignment and zero chemical treatment from root to tip."
+          }
+        },
+        {
+          "type": "pillar",
+          "settings": {
+            "number": "02",
+            "title": "Temple Verified",
+            "body": "Sourced from verified temples across India, Vietnam, Cambodia and Burma — the world's most prized origins for raw human hair."
+          }
+        },
+        {
+          "type": "pillar",
+          "settings": {
+            "number": "03",
+            "title": "Lasts 2 to 3 Years",
+            "body": "Raw hair, when cared for properly, retains its natural beauty for years. Our bundles are built to outlast and outperform any processed alternative."
+          }
+        },
+        {
+          "type": "pillar",
+          "settings": {
+            "number": "04",
+            "title": "Color and Style Freely",
+            "body": "Because Elysian hair is 100% raw and unprocessed, it takes to color, heat and styling exactly like your own natural hair."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,63 @@
+<div class="press-strip">
+  <p class="press-label">{{ section.settings.label }}</p>
+  <div class="press-logos">
+    {%- for block in section.blocks -%}
+      {%- if block.type == 'logo' -%}
+        {%- if block.settings.link != blank -%}
+          <a href="{{ block.settings.link }}" class="press-logo" target="_blank" rel="noopener" {{ block.shopify_attributes }}>
+            {{ block.settings.name }}
+          </a>
+        {%- else -%}
+          <span class="press-logo" {{ block.shopify_attributes }}>{{ block.settings.name }}</span>
+        {%- endif -%}
+      {%- endif -%}
+    {%- endfor -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Press Strip",
+  "tag": "div",
+  "class": "press-strip-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "label",
+      "label": "Label text",
+      "default": "As Featured In"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "logo",
+      "name": "Publication",
+      "settings": [
+        {
+          "type": "text",
+          "id": "name",
+          "label": "Publication name",
+          "default": "Vogue"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link (optional)"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Press Strip",
+      "blocks": [
+        { "type": "logo", "settings": { "name": "Vogue"      } },
+        { "type": "logo", "settings": { "name": "Essence"    } },
+        { "type": "logo", "settings": { "name": "Allure"     } },
+        { "type": "logo", "settings": { "name": "Byrdie"     } },
+        { "type": "logo", "settings": { "name": "Refinery29" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

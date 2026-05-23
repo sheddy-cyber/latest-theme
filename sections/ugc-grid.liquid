@@ -1,0 +1,98 @@
+<section class="ugc">
+  <div class="ugc-inner">
+
+    <div class="section-head">
+      <span class="section-label">{{ section.settings.handle_label }}</span>
+      <h2 class="section-title">{{ section.settings.heading }}</h2>
+      <p class="section-sub" style="margin:0 auto;">{{ section.settings.subtext }}</p>
+    </div>
+
+    <div class="ugc-grid">
+      {%- assign tile_gradients = 'linear-gradient(145deg,#2f2921,#3d3318),linear-gradient(145deg,#241c14,#322618),linear-gradient(145deg,#2a2419,#382e18),linear-gradient(145deg,#221a12,#2e2416),linear-gradient(145deg,#2f2921,#3a2e18)' | split: ',' -%}
+
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'tile' -%}
+          {%- assign gradient_index = forloop.index0 | modulo: 5 -%}
+          <div class="ugc-tile" {{ block.shopify_attributes }}>
+            {%- if block.settings.image != blank -%}
+              <div class="ugc-tile-bg" style="background-image: url('{{ block.settings.image | img_url: '600x600', crop: 'center' }}');"></div>
+            {%- else -%}
+              <div class="ugc-tile-bg ug{{ forloop.index }}"></div>
+            {%- endif -%}
+            <div class="ugc-overlay">
+              <span>{{ section.settings.handle_label }}</span>
+            </div>
+          </div>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+
+    <p class="ugc-handle">
+      Follow us on Instagram
+      <a href="https://instagram.com/{{ section.settings.instagram_handle | remove: '@' }}" target="_blank" rel="noopener">
+        @{{ section.settings.instagram_handle | remove: '@' }}
+      </a>
+    </p>
+
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "UGC / Instagram Grid",
+  "tag": "div",
+  "class": "ugc-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "handle_label",
+      "label": "Instagram handle / eyebrow",
+      "default": "@elysian.imports"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "The Elysian Community"
+    },
+    {
+      "type": "text",
+      "id": "subtext",
+      "label": "Subtext",
+      "default": "Tag us to be featured. Real clients, real transformations."
+    },
+    {
+      "type": "text",
+      "id": "instagram_handle",
+      "label": "Instagram handle (without @)",
+      "default": "elysian.imports"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "tile",
+      "name": "Photo tile",
+      "limit": 10,
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Photo (uses gradient placeholder if blank)"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "UGC / Instagram Grid",
+      "blocks": [
+        { "type": "tile" },
+        { "type": "tile" },
+        { "type": "tile" },
+        { "type": "tile" },
+        { "type": "tile" }
+      ]
+    }
+  ]
+}
+{% endschema %}

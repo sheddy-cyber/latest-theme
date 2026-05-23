@@ -1,0 +1,177 @@
+<section class="hero">
+  <div class="slide-track" id="st">
+
+    {%- for block in section.blocks -%}
+      {%- if block.type == 'slide' -%}
+        <div class="slide s{{ forloop.index }}{% if forloop.first %} active{% endif %}" id="slide-{{ forloop.index0 }}" {{ block.shopify_attributes }}>
+
+          <div class="slide-bg"
+            {%- if block.settings.background_image != blank -%}
+              style="background-image: url('{{ block.settings.background_image | image_url: width: 2000 }}'); background-size: cover; background-position: center; background-repeat: no-repeat;"
+            {%- elsif forloop.index0 == 0 -%}
+              style="background-image: linear-gradient(135deg, #2f2921 0%, #3d3318 40%, #19171b 100%);"
+            {%- elsif forloop.index0 == 1 -%}
+              style="background-image: linear-gradient(135deg, #241c14 0%, #322618 40%, #19171b 100%);"
+            {%- else -%}
+              style="background-image: linear-gradient(135deg, #2a2218 0%, #3a2e18 40%, #19171b 100%);"
+            {%- endif -%}
+          ></div>
+
+          <div class="slide-overlay"></div>
+
+          <div class="slide-content">
+            <div class="slide-body">
+              {%- if block.settings.eyebrow != blank -%}
+                <span class="slide-eyebrow s-ey">{{ block.settings.eyebrow }}</span>
+              {%- endif -%}
+
+              {%- if block.settings.headline != blank -%}
+                <h1 class="slide-headline s-ey d2">{{ block.settings.headline }}</h1>
+              {%- endif -%}
+
+              {%- if block.settings.subtext != blank -%}
+                <p class="slide-sub s-ey d3">{{ block.settings.subtext }}</p>
+              {%- endif -%}
+
+              <div class="hero-btns s-ey d4">
+                {%- if block.settings.btn1_label != blank -%}
+                  {%- liquid
+                    assign btn1_url = block.settings.btn1_link
+                    if btn1_url == blank
+                      assign btn1_url = routes.all_products_collection_url
+                    endif
+                  -%}
+                  <a href="{{ btn1_url }}" class="btn-primary">{{ block.settings.btn1_label }}</a>
+                {%- endif -%}
+                {%- if block.settings.btn2_label != blank -%}
+                  {%- liquid
+                    assign btn2_url = block.settings.btn2_link
+                    if btn2_url == blank
+                      assign btn2_url = "#"
+                    endif
+                  -%}
+                  <a href="{{ btn2_url }}" class="btn-outline">{{ block.settings.btn2_label }}</a>
+                {%- endif -%}
+              </div>
+            </div>
+          </div>
+
+        </div>
+      {%- endif -%}
+    {%- endfor -%}
+
+  </div>
+
+  <!-- Prev / Next arrows -->
+  <button class="hero-arrow prev" id="hero-prev" aria-label="Previous slide">&#8592;</button>
+  <button class="hero-arrow next" id="hero-next" aria-label="Next slide">&#8594;</button>
+
+  <!-- Dots -->
+  <div class="hero-dots">
+    {%- for block in section.blocks -%}
+      {%- if block.type == 'slide' -%}
+        <div class="h-dot{% if forloop.first %} active{% endif %}" data-slide="{{ forloop.index0 }}" aria-label="Go to slide {{ forloop.index }}"></div>
+      {%- endif -%}
+    {%- endfor -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Hero Carousel",
+  "tag": "div",
+  "class": "hero-carousel-section",
+  "settings": [],
+  "blocks": [
+    {
+      "type": "slide",
+      "name": "Slide",
+      "limit": 6,
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "background_image",
+          "label": "Background image"
+        },
+        {
+          "type": "text",
+          "id": "eyebrow",
+          "label": "Eyebrow text",
+          "default": "100% Raw Human Hair"
+        },
+        {
+          "type": "richtext",
+          "id": "headline",
+          "label": "Headline",
+          "default": "<p>Above the Rest.<br><em>Beyond the Ordinary.</em></p>"
+        },
+        {
+          "type": "text",
+          "id": "subtext",
+          "label": "Subtext",
+          "default": "Single donor raw hair sourced from verified temples in India, Vietnam, Cambodia and Burma. Unprocessed. Unmatched."
+        },
+        {
+          "type": "text",
+          "id": "btn1_label",
+          "label": "Button 1 label",
+          "default": "Shop Collection"
+        },
+        {
+          "type": "url",
+          "id": "btn1_link",
+          "label": "Button 1 link"
+        },
+        {
+          "type": "text",
+          "id": "btn2_label",
+          "label": "Button 2 label",
+          "default": "Take the Hair Quiz"
+        },
+        {
+          "type": "url",
+          "id": "btn2_link",
+          "label": "Button 2 link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Hero Carousel",
+      "blocks": [
+        {
+          "type": "slide",
+          "settings": {
+            "eyebrow": "100% Raw Human Hair",
+            "headline": "<p>Above the Rest.<br><em>Beyond the Ordinary.</em></p>",
+            "subtext": "Single donor raw hair sourced from verified temples in India, Vietnam, Cambodia and Burma. Unprocessed. Unmatched.",
+            "btn1_label": "Shop Collection",
+            "btn2_label": "Take the Hair Quiz"
+          }
+        },
+        {
+          "type": "slide",
+          "settings": {
+            "eyebrow": "The Gateway to Hairven",
+            "headline": "<p>Raw Indian<br><em>Straight Bundles</em></p>",
+            "subtext": "Our most beloved texture. Silky, fine and blowout-ready. Available in 12 to 30 inches.",
+            "btn1_label": "Shop Indian Hair",
+            "btn2_label": "See All Textures"
+          }
+        },
+        {
+          "type": "slide",
+          "settings": {
+            "eyebrow": "New Arrival",
+            "headline": "<p>Raw Burmese<br><em>Curly Bundles</em></p>",
+            "subtext": "Rich, voluminous curl pattern. Zero shedding. Lasts 2 to 3 years with proper care.",
+            "btn1_label": "Shop Burmese Curly",
+            "btn2_label": "View Full Collection"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

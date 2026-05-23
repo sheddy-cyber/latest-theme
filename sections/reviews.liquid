@@ -1,0 +1,130 @@
+<section class="reviews">
+  <div class="reviews-inner">
+
+    <div class="section-head">
+      <span class="section-label">{{ section.settings.eyebrow }}</span>
+      <h2 class="section-title">{{ section.settings.heading }}</h2>
+    </div>
+
+    <div class="reviews-aggregate">
+      <div class="agg-score" aria-label="{{ section.settings.aggregate_score }} out of 5">
+        {{ section.settings.aggregate_score }}
+      </div>
+      <div class="agg-detail">
+        <div class="agg-stars" aria-hidden="true">★★★★★</div>
+        <div class="agg-count">{{ section.settings.aggregate_count }}</div>
+      </div>
+    </div>
+
+    <div class="reviews-grid">
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'review' -%}
+          <article class="review-card" {{ block.shopify_attributes }}>
+            <div class="rev-stars" aria-label="5 out of 5 stars">★★★★★</div>
+            <p class="rev-text">"{{ block.settings.review_text }}"</p>
+            <div class="rev-author">
+              <div class="rev-avatar" aria-hidden="true">{{ block.settings.author_name | slice: 0 }}</div>
+              <div>
+                <div class="rev-name">{{ block.settings.author_name }}</div>
+                <div class="rev-loc">{{ block.settings.author_location }}</div>
+                <div class="rev-verified">✦ Verified Purchase</div>
+              </div>
+            </div>
+          </article>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Reviews",
+  "tag": "div",
+  "class": "reviews-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow text",
+      "default": "Real Women. Real Results."
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "What Our Clients Say"
+    },
+    {
+      "type": "text",
+      "id": "aggregate_score",
+      "label": "Aggregate rating score",
+      "default": "4.9"
+    },
+    {
+      "type": "text",
+      "id": "aggregate_count",
+      "label": "Review count label",
+      "default": "Based on 340+ verified reviews"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "review",
+      "name": "Review",
+      "settings": [
+        {
+          "type": "textarea",
+          "id": "review_text",
+          "label": "Review text",
+          "default": "I have been wearing Elysian hair for over a year and it still looks brand new."
+        },
+        {
+          "type": "text",
+          "id": "author_name",
+          "label": "Reviewer name",
+          "default": "Amara J."
+        },
+        {
+          "type": "text",
+          "id": "author_location",
+          "label": "Reviewer location",
+          "default": "Atlanta, GA"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Reviews",
+      "blocks": [
+        {
+          "type": "review",
+          "settings": {
+            "review_text": "I have been wearing Elysian hair for over a year and it still looks brand new. The texture on the Raw Indian Straight is exactly what they promise. Silky, natural, and holds a curl beautifully.",
+            "author_name": "Amara J.",
+            "author_location": "Atlanta, GA"
+          }
+        },
+        {
+          "type": "review",
+          "settings": {
+            "review_text": "The Burmese Curly bundles are everything I dreamed of. The curl pattern is consistent throughout every single weft. I have had so many compliments. Worth every penny.",
+            "author_name": "Dani R.",
+            "author_location": "Houston, TX"
+          }
+        },
+        {
+          "type": "review",
+          "settings": {
+            "review_text": "I was skeptical at first but Elysian has completely converted me to raw hair. The Cambodian Wavy is so natural looking, nobody believes it is not my real hair. My go-to brand from now on.",
+            "author_name": "Tiara M.",
+            "author_location": "Chicago, IL"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

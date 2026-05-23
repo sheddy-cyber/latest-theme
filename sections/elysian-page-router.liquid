@@ -1,0 +1,34 @@
+{{ 'elysian-pages.css' | asset_url | stylesheet_tag }}
+
+{%- case page.handle -%}
+  {%- when 'care-guide' -%}
+    {% render 'elysian-care-guide-content' %}
+  {%- when 'faqs', 'faq' -%}
+    {% render 'elysian-faqs-content' %}
+  {%- when 'about' -%}
+    {% render 'elysian-about-content' %}
+  {%- when 'hair-quiz', 'quiz' -%}
+    {% render 'elysian-hair-quiz-content' %}
+  {%- when 'contact' -%}
+    {% render 'elysian-contact-content' %}
+  {%- else -%}
+    <section class="elysian-static-page section-{{ section.id }}">
+      <div class="elysian-static-hero">
+        <h1 class="elysian-static-title">{{ page.title | escape }}</h1>
+      </div>
+      {%- if page.content != blank -%}
+        <div class="elysian-static-body">
+          <div class="elysian-content-block rte">{{ page.content }}</div>
+        </div>
+      {%- endif -%}
+    </section>
+{%- endcase -%}
+
+{% schema %}
+{
+  "name": "Elysian page",
+  "tag": "section",
+  "class": "section",
+  "settings": []
+}
+{% endschema %}

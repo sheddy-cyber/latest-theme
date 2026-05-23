@@ -1,0 +1,62 @@
+<section class="elysian-static-page elysian-quiz-page">
+  <div class="elysian-static-hero">
+    <span class="elysian-static-eyebrow">Find Your Match</span>
+    <h1 class="elysian-static-title">Hair Quiz</h1>
+    <p class="elysian-static-intro">
+      Answer a few quick questions and we will recommend the texture and collection that best fits your goals.
+    </p>
+  </div>
+
+  <div class="elysian-quiz-wrap" data-elysian-quiz>
+    <div class="elysian-quiz-progress" aria-hidden="true">
+      <span class="elysian-quiz-progress-bar" data-quiz-progress></span>
+    </div>
+    <p class="elysian-quiz-step-label" data-quiz-step-label>Question 1 of 3</p>
+
+    <div class="elysian-quiz-step is-active" data-quiz-step="0">
+      <h2 class="elysian-quiz-question">What texture are you looking for?</h2>
+      <div class="elysian-quiz-options">
+        <button type="button" class="elysian-quiz-option" data-quiz-value="straight" data-quiz-key="texture">Straight</button>
+        <button type="button" class="elysian-quiz-option" data-quiz-value="wavy" data-quiz-key="texture">Wavy</button>
+        <button type="button" class="elysian-quiz-option" data-quiz-value="curly" data-quiz-key="texture">Curly</button>
+        <button type="button" class="elysian-quiz-option" data-quiz-value="deep-curly" data-quiz-key="texture">Deep Curly</button>
+      </div>
+    </div>
+
+    <div class="elysian-quiz-step" data-quiz-step="1" hidden>
+      <h2 class="elysian-quiz-question">Which origin appeals to you?</h2>
+      <div class="elysian-quiz-options">
+        <button type="button" class="elysian-quiz-option" data-quiz-value="indian" data-quiz-key="origin">Indian — silky &amp; fine</button>
+        <button type="button" class="elysian-quiz-option" data-quiz-value="vietnamese" data-quiz-key="origin">Vietnamese — soft &amp; versatile</button>
+        <button type="button" class="elysian-quiz-option" data-quiz-value="cambodian" data-quiz-key="origin">Cambodian — natural volume</button>
+        <button type="button" class="elysian-quiz-option" data-quiz-value="burmese" data-quiz-key="origin">Burmese — rich &amp; full</button>
+        <button type="button" class="elysian-quiz-option" data-quiz-value="any" data-quiz-key="origin">Not sure — show me all</button>
+      </div>
+    </div>
+
+    <div class="elysian-quiz-step" data-quiz-step="2" hidden>
+      <h2 class="elysian-quiz-question">What are you shopping for?</h2>
+      <div class="elysian-quiz-options">
+        <button type="button" class="elysian-quiz-option" data-quiz-value="bundles" data-quiz-key="product">Bundles</button>
+        <button type="button" class="elysian-quiz-option" data-quiz-value="wig" data-quiz-key="product">Lace wig / frontal</button>
+        <button type="button" class="elysian-quiz-option" data-quiz-value="any" data-quiz-key="product">Open to anything</button>
+      </div>
+    </div>
+
+    <div class="elysian-quiz-result" data-quiz-result hidden>
+      <span class="elysian-static-eyebrow">Your match</span>
+      <h2 class="elysian-quiz-result-title" data-quiz-result-title></h2>
+      <p class="elysian-quiz-result-text" data-quiz-result-text></p>
+      <div class="elysian-page-cta">
+        <a href="#" class="elysian-btn-primary" data-quiz-result-link>Shop your match</a>
+        <button type="button" class="elysian-btn-outline" data-quiz-restart>Start over</button>
+      </div>
+    </div>
+
+    <div class="elysian-quiz-nav">
+      <button type="button" class="elysian-btn-outline" data-quiz-back hidden>Back</button>
+    </div>
+  </div>
+</section>
+
+<script src="{{ 'elysian-quiz.js' | asset_url }}" defer></script>

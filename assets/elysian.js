@@ -13,22 +13,31 @@
 /* ─── NAV MEGA/DROPDOWN TOGGLE ──────────── */
 (function () {
   var active = null;
-  var menus  = { shop: 'menu-shop', tex: 'menu-tex', care: 'menu-care' };
-  var items  = { shop: 'ni-shop',   tex: 'ni-tex',   care: 'ni-care' };
+  var menus  = { shop: 'menu-shop', care: 'menu-care' };
+  var items  = { shop: 'ni-shop',   care: 'ni-care' };
 
   window.tog = function (k) {
+    var next = k && k === active ? null : k;
+
     Object.keys(menus).forEach(function (id) {
       var el  = document.getElementById(menus[id]);
       var btn = document.getElementById(items[id]);
       if (el) el.classList.remove('open');
-      if (btn) btn.classList.remove('open');
+      if (btn) {
+        btn.classList.remove('open');
+        btn.setAttribute('aria-expanded', 'false');
+      }
     });
-    if (k && k !== active) {
-      var el  = document.getElementById(menus[k]);
-      var btn = document.getElementById(items[k]);
+
+    if (next) {
+      var el  = document.getElementById(menus[next]);
+      var btn = document.getElementById(items[next]);
       if (el) el.classList.add('open');
-      if (btn) btn.classList.add('open');
-      active = k;
+      if (btn) {
+        btn.classList.add('open');
+        btn.setAttribute('aria-expanded', 'true');
+      }
+      active = next;
     } else {
       active = null;
     }
@@ -77,21 +86,37 @@
   });
 })();
 
-/* ─── FILTER TABS ───────────────────────── */
+/* ─── FILTER TABS (homepage featured products) ─ */
 (function () {
   var tabs  = document.querySelectorAll('.ftab');
-  var cards = document.querySelectorAll('.product-card');
-  if (!tabs.length) return;
+  var cards = document.querySelectorAll('.product-card, .elysian-card');
+  if (!tabs.length || !cards.length) return;
+
+  function applyFilter(filter) {
+    cards.forEach(function (card) {
+      var texture = (card.getAttribute('data-texture') || '').toLowerCase();
+      var show = filter === 'all' || texture === filter;
+      card.style.display = show ? '' : 'none';
+    });
+  }
+
+  function activateTab(tab) {
+    tabs.forEach(function (t) {
+      t.classList.remove('active');
+      t.setAttribute('aria-selected', 'false');
+    });
+    tab.classList.add('active');
+    tab.setAttribute('aria-selected', 'true');
+    applyFilter(tab.getAttribute('data-filter') || 'all');
+  }
 
   tabs.forEach(function (tab) {
-    tab.addEventListener('click', function () {
-      tabs.forEach(function (t) { t.classList.remove('active'); });
-      tab.classList.add('active');
-      var filter = tab.getAttribute('data-filter');
-      cards.forEach(function (card) {
-        var show = filter === 'all' || card.getAttribute('data-texture') === filter;
-        card.style.display = show ? '' : 'none';
-      });
+    tab.addEventListener('click', function () { activateTab(tab); });
+    tab.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        activateTab(tab);
+      }
     });
   });
 })();

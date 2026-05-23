@@ -1,0 +1,6 @@
+[theme]
+id = "152743837875"
+name = "Latest Theme"
+
+[environments.development]
+store = "elysian-import.myshopify.com"

@@ -1,28 +1,17 @@
-/*
- * ------------------------------------------------------------
- * IMPORTANT: The contents of this file are auto-generated.
- *
- * This file may be updated by the Shopify admin theme editor
- * or related systems. Please exercise caution as any changes
- * made to this file may be overwritten.
- * ------------------------------------------------------------
- */
 {
   "sections": {
     "main": {
-      "type": "main-blog",
+      "type": "elysian-blog",
       "settings": {
-        "layout": "collage",
-        "show_image": true,
-        "image_height": "medium",
+        "eyebrow": "Hair Care",
+        "title": "Blog",
+        "intro": "Expert tips on caring for raw hair extensions, lace fronts, and bundles — from wash day to long-term maintenance.",
+        "articles_per_page": 9,
         "show_date": true,
-        "show_author": false,
-        "padding_top": 36,
-        "padding_bottom": 36
+        "read_more_label": "Read article",
+        "empty_message": "New articles are on the way. Check back soon."
       }
     }
   },
-  "order": [
-    "main"
-  ]
+  "order": ["main"]
 }

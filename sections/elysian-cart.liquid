@@ -1,0 +1,262 @@
+{{ 'elysian-cart.css' | asset_url | stylesheet_tag }}
+{{ 'component-price.css' | asset_url | stylesheet_tag }}
+{{ 'component-discounts.css' | asset_url | stylesheet_tag }}
+
+<script src="{{ 'cart.js' | asset_url }}" defer="defer"></script>
+
+<section class="elysian-cart-section">
+  <div class="elysian-cart-header">
+    <div>
+      <span class="elysian-cart-eyebrow">Your Bag</span>
+      <h1 class="elysian-cart-title">{{ 'sections.cart.title' | t }}</h1>
+    </div>
+    <a href="{{ routes.all_products_collection_url }}" class="elysian-cart-continue">
+      {{- 'general.continue_shopping' | t -}}
+    </a>
+  </div>
+
+  <div class="elysian-cart-layout">
+    <div class="elysian-cart-main">
+      <cart-items class="{% if cart == empty %}is-empty{% endif %}">
+        <div class="elysian-cart-empty">
+          <h2>{{ 'sections.cart.empty' | t }}</h2>
+          <p>Discover raw, single-donor hair curated for installs that last.</p>
+          <a href="{{ routes.all_products_collection_url }}" class="elysian-cart-btn-primary">
+            {{ 'general.continue_shopping' | t }}
+          </a>
+          {%- if shop.customer_accounts_enabled and customer == null -%}
+            <p class="elysian-cart-login">
+              <a href="{{ routes.account_login_url }}" class="elysian-cart-login-link">Log in</a>
+              <span class="elysian-cart-login-text"> to check out faster.</span>
+            </p>
+          {%- endif -%}
+        </div>
+
+        <form action="{{ routes.cart_url }}" class="elysian-cart-form cart__contents" method="post" id="cart">
+          <div class="cart__items" id="main-cart-items" data-id="{{ section.id }}">
+            <div class="js-contents">
+              {%- if cart != empty -%}
+                <div class="elysian-cart-lines">
+                  {%- for item in cart.items -%}
+                    <div
+                      class="elysian-cart-line cart-item"
+                      id="CartItem-{{ item.index | plus: 1 }}"
+                    >
+                      <div class="elysian-cart-line__media">
+                        {%- if item.image -%}
+                          <a href="{{ item.url }}" class="cart-item__link" tabindex="-1" aria-hidden="true">
+                            <img
+                              src="{{ item.image | image_url: width: 240 }}"
+                              alt="{{ item.image.alt | escape }}"
+                              class="elysian-cart-line__image"
+                              loading="lazy"
+                              width="100"
+                              height="{{ 100 | divided_by: item.image.aspect_ratio | ceil }}"
+                            >
+                          </a>
+                        {%- endif -%}
+                      </div>
+
+                      <div class="elysian-cart-line__details">
+                        <a href="{{ item.url }}" class="elysian-cart-line__name">{{ item.product.title | escape }}</a>
+
+                        {%- if item.original_price != item.final_price -%}
+                          <div class="cart-item__discounted-prices">
+                            <s class="cart-item__old-price">{{ item.original_price | money }}</s>
+                            <span class="cart-item__final-price elysian-cart-line__price-unit">{{ item.final_price | money }}</span>
+                          </div>
+                        {%- else -%}
+                          <div class="elysian-cart-line__price-unit product-option">{{ item.original_price | money }}</div>
+                        {%- endif -%}
+
+                        {%- unless item.product.has_only_default_variant -%}
+                          <dl class="elysian-cart-line__variant">
+                            {%- for option in item.options_with_values -%}
+                              <div class="product-option">
+                                <dt>{{ option.name }}:</dt>
+                                <dd>{{ option.value }}</dd>
+                              </div>
+                            {%- endfor -%}
+                          </dl>
+                        {%- endunless -%}
+
+                        <ul class="discounts list-unstyled" role="list">
+                          {%- for discount in item.line_level_discount_allocations -%}
+                            <li class="discounts__discount">{{ discount.discount_application.title | escape }}</li>
+                          {%- endfor -%}
+                        </ul>
+
+                        <div class="elysian-cart-line__actions">
+                          <quantity-input class="quantity cart-quantity">
+                            {% assign can_update_quantity = item.instructions.can_update_quantity | default: true %}
+                            <button
+                              class="quantity__button"
+                              name="minus"
+                              type="button"
+                              aria-label="{{ 'products.product.quantity.decrease' | t: product: item.product.title | escape }}"
+                              {% if can_update_quantity == false %}disabled{% endif %}
+                            >
+                              <span aria-hidden="true">−</span>
+                            </button>
+                            <input
+                              class="quantity__input"
+                              data-quantity-variant-id="{{ item.variant.id }}"
+                              type="number"
+                              name="updates[]"
+                              value="{{ item.quantity }}"
+                              data-cart-quantity="{{ cart | item_count_for_variant: item.variant.id }}"
+                              min="0"
+                              data-min="{{ item.variant.quantity_rule.min }}"
+                              {% if item.variant.quantity_rule.max != null %}
+                                max="{{ item.variant.quantity_rule.max }}"
+                              {% endif %}
+                              step="{{ item.variant.quantity_rule.increment }}"
+                              aria-label="{{ 'products.product.quantity.input_label' | t: product: item.product.title | escape }}"
+                              id="Quantity-{{ item.index | plus: 1 }}"
+                              data-index="{{ item.index | plus: 1 }}"
+                              {% if can_update_quantity == false %}disabled{% endif %}
+                            >
+                            <button
+                              class="quantity__button"
+                              name="plus"
+                              type="button"
+                              aria-label="{{ 'products.product.quantity.increase' | t: product: item.product.title | escape }}"
+                              {% if can_update_quantity == false %}disabled{% endif %}
+                            >
+                              <span aria-hidden="true">+</span>
+                            </button>
+                          </quantity-input>
+
+                          <cart-remove-button
+                            id="Remove-{{ item.index | plus: 1 }}"
+                            data-index="{{ item.index | plus: 1 }}"
+                          >
+                            <a href="{{ item.url_to_remove }}" class="elysian-cart-remove" aria-label="{{ 'sections.cart.remove_title' | t: title: item.title | escape }}">
+                              Remove
+                            </a>
+                          </cart-remove-button>
+                        </div>
+
+                        <div class="cart-item__error" id="Line-item-error-{{ item.index | plus: 1 }}" role="alert">
+                          <small class="cart-item__error-text"></small>
+                        </div>
+                      </div>
+
+                      <div class="elysian-cart-line__total cart-item__totals">
+                        {%- render 'loading-spinner' -%}
+                        <div class="cart-item__price-wrapper">
+                          {%- if item.original_line_price != item.final_line_price -%}
+                            <s class="cart-item__old-price price">{{ item.original_line_price | money }}</s>
+                            <span class="price">{{ item.final_line_price | money }}</span>
+                          {%- else -%}
+                            <span class="price">{{ item.original_line_price | money }}</span>
+                          {%- endif -%}
+                        </div>
+                      </div>
+                    </div>
+                  {%- endfor -%}
+                </div>
+              {%- endif -%}
+            </div>
+          </div>
+
+          <p class="visually-hidden" id="cart-live-region-text" aria-live="polite" role="status"></p>
+          <p class="visually-hidden" id="shopping-cart-line-item-status" aria-live="polite" aria-hidden="true" role="status">
+            {{ 'accessibility.loading' | t }}
+          </p>
+        </form>
+      </cart-items>
+    </div>
+
+    <aside class="elysian-cart-sidebar">
+      <div
+        class="elysian-cart-summary{% if cart == empty %} is-empty{% endif %}"
+        id="main-cart-footer"
+        data-id="{{ section.id }}"
+      >
+        <div class="js-contents">
+          {%- unless cart == empty -%}
+            <h2>Order summary</h2>
+
+            {%- if settings.show_cart_note -%}
+              <cart-note class="elysian-cart-note field">
+                <label for="Cart-note">{{ 'sections.cart.note' | t }}</label>
+                <textarea
+                  id="Cart-note"
+                  name="note"
+                  form="cart"
+                  placeholder="{{ 'sections.cart.note' | t }}"
+                >{{ cart.note }}</textarea>
+              </cart-note>
+            {%- endif -%}
+
+            {%- if cart.cart_level_discount_applications.size > 0 -%}
+              <ul class="discounts list-unstyled" role="list">
+                {%- for discount in cart.cart_level_discount_applications -%}
+                  <li class="discounts__discount">
+                    {{ discount.title | escape }} (−{{ discount.total_allocated_amount | money }})
+                  </li>
+                {%- endfor -%}
+              </ul>
+            {%- endif -%}
+
+            <div class="totals">
+              <h2 class="totals__total">{{ 'sections.cart.estimated_total' | t }}</h2>
+              <p class="totals__total-value">{{ cart.total_price | money_with_currency }}</p>
+            </div>
+
+            <small class="tax-note caption-large rte">
+              {%- if shop.shipping_policy.body != blank -%}
+                {{ 'sections.cart.taxes_at_checkout_shipping_at_checkout_with_policy_html' | t: link: shop.shipping_policy.url }}
+              {%- else -%}
+                {{ 'sections.cart.taxes_at_checkout_shipping_at_checkout_without_policy' | t }}
+              {%- endif -%}
+            </small>
+
+            <div class="cart__ctas">
+              <button
+                type="submit"
+                id="checkout"
+                class="elysian-cart-checkout cart__checkout-button button"
+                name="checkout"
+                form="cart"
+              >
+                {{ 'sections.cart.checkout' | t }}
+              </button>
+            </div>
+
+            {%- if additional_checkout_buttons -%}
+              <div class="cart__dynamic-checkout-buttons additional-checkout-buttons">
+                {{ content_for_additional_checkout_buttons }}
+              </div>
+            {%- endif -%}
+
+            {%- if section.settings.show_shipping_note -%}
+              <p class="elysian-cart-shipping-note">
+                <strong>Free shipping</strong> on orders over $150
+              </p>
+            {%- endif -%}
+
+            <div id="cart-errors"></div>
+          {%- endunless -%}
+        </div>
+      </div>
+    </aside>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Elysian cart",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_shipping_note",
+      "label": "Show free shipping note",
+      "default": true
+    }
+  ]
+}
+{% endschema %}

@@ -105,6 +105,15 @@
             "dot_color": "#2f2921"
           }
         },
+        "tex-4": {
+          "type": "texture_link",
+          "settings": {
+            "title": "Deep Curly",
+            "subtitle": "Volume · Definition",
+            "link": "/collections/deep-curly",
+            "dot_color": "#563a17"
+          }
+        },
         "look-1": {
           "type": "look_tile",
           "settings": {
@@ -146,19 +155,19 @@
         "tex-1",
         "tex-2",
         "tex-3",
+        "tex-4",
         "look-1",
         "look-2",
         "look-3",
         "look-4"
       ],
       "settings": {
-        "logo_first_word": "",
-        "logo_second_word": "",
+        "logo_first_word": "ELYSIAN",
+        "logo_second_word": "IMPORT",
         "shop_all_link": "",
         "bestsellers_link": "",
         "sale_link": "",
-        "textures_menu": "",
-        "haircare_menu": "",
+        "haircare_blog_handle": "news",
         "about_link": "",
         "quiz_link": ""
       }

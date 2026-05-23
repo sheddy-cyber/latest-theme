@@ -30,29 +30,50 @@
   endif
 -%}
 
-<div class="elysian-card" data-texture="{{ texture_tag }}">
-  <a href="{{ product.url }}" class="elysian-prod-img">
-    {%- if product.featured_image != blank -%}
-      <div class="elysian-prod-img-inner" style="background-image: url('{{ product.featured_image | image_url: width: 600 }}'); background-size: cover; background-position: center;"></div>
-    {%- else -%}
-      <div class="elysian-prod-img-inner" style="background: linear-gradient(145deg,#2f2921,#3d3318,#19171b);"></div>
-    {%- endif -%}
+<div class="product-card elysian-card" data-texture="{{ texture_tag }}">
+  <div class="elysian-card-media">
+    <a href="{{ product.url }}" class="elysian-prod-img" aria-label="{{ product.title | escape }}">
+      {%- if product.featured_media != blank -%}
+        {{
+          product.featured_media
+          | image_url: width: 900
+          | image_tag:
+            class: 'elysian-prod-photo',
+            loading: 'lazy',
+            widths: '300, 450, 600, 900',
+            sizes: '(min-width: 990px) 22vw, (min-width: 750px) 33vw, 50vw',
+            alt: product.featured_media.alt | default: product.title | escape
+        }}
+      {%- elsif product.featured_image != blank -%}
+        {{
+          product.featured_image
+          | image_url: width: 900
+          | image_tag:
+            class: 'elysian-prod-photo',
+            loading: 'lazy',
+            widths: '300, 450, 600, 900',
+            sizes: '(min-width: 990px) 22vw, (min-width: 750px) 33vw, 50vw',
+            alt: product.featured_image.alt | default: product.title | escape
+        }}
+      {%- else -%}
+        <span class="elysian-prod-placeholder" aria-hidden="true"></span>
+      {%- endif -%}
 
-    {%- if show_badge -%}
-      <div class="prod-badge">{{ badge_label }}</div>
-    {%- endif -%}
-
-    <div class="quick-view">Quick View</div>
-  </a>
+      {%- if show_badge -%}
+        <span class="prod-badge">{{ badge_label }}</span>
+      {%- endif -%}
+    </a>
+    <a href="{{ product.url }}" class="quick-view">Quick View</a>
+  </div>
 
   <div class="prod-info">
     {%- if origin_tag != '' -%}
       <div class="prod-origin">{{ origin_tag }}</div>
     {%- endif -%}
-    <div class="prod-name">{{ product.title }}</div>
-    <div class="prod-stars" aria-label="{{ product.metafields.reviews.rating.value | default: '5' }} out of 5 stars">
-      ★★★★★
+    <div class="prod-name">
+      <a href="{{ product.url }}">{{ product.title }}</a>
     </div>
+    <div class="prod-stars" aria-hidden="true">★★★★★</div>
     <div class="prod-price">
       {%- if product.price_varies -%}
         <span class="from">From</span>

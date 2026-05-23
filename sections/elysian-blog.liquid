@@ -1,0 +1,120 @@
+{{ 'elysian-pages.css' | asset_url | stylesheet_tag }}
+
+{%- paginate blog.articles by section.settings.articles_per_page -%}
+  <section class="elysian-blog-page section-{{ section.id }}">
+    <div class="elysian-blog-hero">
+      {%- if section.settings.eyebrow != blank -%}
+        <span class="elysian-blog-eyebrow">{{ section.settings.eyebrow }}</span>
+      {%- endif -%}
+      <h1 class="elysian-blog-title">{{ section.settings.title | default: blog.title | escape }}</h1>
+      {%- if section.settings.intro != blank -%}
+        <p class="elysian-blog-intro">{{ section.settings.intro }}</p>
+      {%- endif -%}
+    </div>
+
+    <div class="elysian-blog-grid-wrap">
+      {%- if blog.articles.size > 0 -%}
+        <div class="elysian-blog-grid">
+          {%- for article in blog.articles -%}
+            <a href="{{ article.url }}" class="elysian-blog-card">
+              <div class="elysian-blog-card-media">
+                {%- if article.image -%}
+                  {{
+                    article.image
+                    | image_url: width: 800
+                    | image_tag:
+                      loading: 'lazy',
+                      widths: '400, 600, 800',
+                      sizes: '(min-width: 990px) 33vw, (min-width: 750px) 50vw, 100vw',
+                      alt: article.image.alt | default: article.title | escape
+                  }}
+                {%- endif -%}
+              </div>
+              <div class="elysian-blog-card-body">
+                {%- if section.settings.show_date -%}
+                  <time class="elysian-blog-card-date" datetime="{{ article.published_at | date: '%Y-%m-%d' }}">
+                    {{ article.published_at | time_tag: format: 'date' }}
+                  </time>
+                {%- endif -%}
+                <h2 class="elysian-blog-card-title">{{ article.title | escape }}</h2>
+                {%- if article.excerpt.size > 0 -%}
+                  <p class="elysian-blog-card-excerpt">{{ article.excerpt | strip_html | truncate: 120 }}</p>
+                {%- elsif article.content.size > 0 -%}
+                  <p class="elysian-blog-card-excerpt">{{ article.content | strip_html | truncate: 120 }}</p>
+                {%- endif -%}
+                <span class="elysian-blog-card-link">{{ section.settings.read_more_label }}</span>
+              </div>
+            </a>
+          {%- endfor -%}
+        </div>
+
+        {%- if paginate.pages > 1 -%}
+          <div class="elysian-blog-pagination">
+            {%- render 'pagination', paginate: paginate -%}
+          </div>
+        {%- endif -%}
+      {%- else -%}
+        <p class="elysian-blog-empty">{{ section.settings.empty_message }}</p>
+      {%- endif -%}
+    </div>
+  </section>
+{%- endpaginate -%}
+
+{% schema %}
+{
+  "name": "Elysian blog",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Hair Care"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title override"
+    },
+    {
+      "type": "textarea",
+      "id": "intro",
+      "label": "Introduction",
+      "default": "Expert tips on caring for raw hair extensions, lace fronts, and bundles — from wash day to long-term maintenance."
+    },
+    {
+      "type": "range",
+      "id": "articles_per_page",
+      "min": 3,
+      "max": 24,
+      "step": 3,
+      "default": 9,
+      "label": "Articles per page"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_date",
+      "default": true,
+      "label": "Show publish date"
+    },
+    {
+      "type": "text",
+      "id": "read_more_label",
+      "label": "Read more label",
+      "default": "Read article"
+    },
+    {
+      "type": "text",
+      "id": "empty_message",
+      "label": "Empty state message",
+      "default": "New articles are on the way. Check back soon."
+    }
+  ],
+  "presets": [
+    {
+      "name": "Elysian blog"
+    }
+  ]
+}
+{% endschema %}

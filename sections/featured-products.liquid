@@ -6,10 +6,10 @@
 
   <!-- Filter tabs -->
   <div class="filter-tabs" role="tablist" aria-label="Filter by texture">
-    <div class="ftab active" data-filter="all" role="tab" tabindex="0">All</div>
-    <div class="ftab" data-filter="straight" role="tab" tabindex="0">Straight</div>
-    <div class="ftab" data-filter="wavy" role="tab" tabindex="0">Wavy</div>
-    <div class="ftab" data-filter="curly" role="tab" tabindex="0">Curly</div>
+    <button type="button" class="ftab active" data-filter="all" role="tab" aria-selected="true">All</button>
+    <button type="button" class="ftab" data-filter="straight" role="tab" aria-selected="false">Straight</button>
+    <button type="button" class="ftab" data-filter="wavy" role="tab" aria-selected="false">Wavy</button>
+    <button type="button" class="ftab" data-filter="curly" role="tab" aria-selected="false">Curly</button>
   </div>
 
   <!-- Products Grid -->
@@ -23,11 +23,13 @@
       {%- else -%}
         {%- comment -%} Fallback placeholder cards when no collection is set {%- endcomment -%}
         {%- for i in (1..4) -%}
-          <div class="product-card" data-texture="straight">
-            <div class="prod-img pi-{{ i }}">
-              <div class="prod-img-inner" style="background: linear-gradient(145deg,#2f2921,#3d3318,#19171b);"></div>
-              {%- if i == 1 -%}<div class="prod-badge">Bestseller</div>{%- endif -%}
-              <div class="quick-view">Quick View</div>
+          <div class="product-card elysian-card" data-texture="straight">
+            <div class="elysian-card-media">
+              <a href="#" class="elysian-prod-img">
+                <span class="elysian-prod-placeholder" aria-hidden="true"></span>
+                {%- if i == 1 -%}<span class="prod-badge">Bestseller</span>{%- endif -%}
+              </a>
+              <a href="#" class="quick-view">Quick View</a>
             </div>
             <div class="prod-info">
               <div class="prod-origin">India</div>
@@ -41,10 +43,12 @@
     {%- else -%}
       {%- comment -%} Fallback when editor has no collection picked yet {%- endcomment -%}
       {%- for i in (1..4) -%}
-        <div class="product-card" data-texture="straight">
-          <div class="prod-img">
-            <div class="prod-img-inner" style="background: linear-gradient(145deg,#2f2921,#3d3318,#19171b);"></div>
-            <div class="quick-view">Quick View</div>
+        <div class="product-card elysian-card" data-texture="straight">
+          <div class="elysian-card-media">
+            <a href="#" class="elysian-prod-img">
+              <span class="elysian-prod-placeholder" aria-hidden="true"></span>
+            </a>
+            <a href="#" class="quick-view">Quick View</a>
           </div>
           <div class="prod-info">
             <div class="prod-origin">India</div>

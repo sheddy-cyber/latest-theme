@@ -2,8 +2,9 @@
   <div class="nav-wrap" id="nav-wrap">
 
     <!-- Logo -->
-    <a href="{{ routes.root_url }}" class="nav-logo">
-      {{ section.settings.logo_first_word }} <span>{{ section.settings.logo_second_word }}</span>
+    <a href="{{ routes.root_url }}" class="nav-logo" aria-label="Elysian Import home">
+      {{ section.settings.logo_first_word | default: 'ELYSIAN' }}
+      <span>{{ section.settings.logo_second_word | default: 'IMPORT' }}</span>
     </a>
 
     <!-- Desktop Nav -->
@@ -11,7 +12,7 @@
 
       <!-- Shop (mega menu) -->
       <li>
-        <button class="nav-item-btn" id="ni-shop" onclick="tog('shop')" aria-haspopup="true" aria-expanded="false">
+        <button type="button" class="nav-item-btn" id="ni-shop" onclick="tog('shop')" aria-haspopup="true" aria-expanded="false">
           Shop <span class="arr">▾</span>
         </button>
 
@@ -90,6 +91,8 @@
                         assign link_url = '/collections/straight'
                       elsif link_title_down contains 'wavy'
                         assign link_url = '/collections/wavy'
+                      elsif link_title_down contains 'deep curly' or link_title_down contains 'deep-curly'
+                        assign link_url = '/collections/deep-curly'
                       elsif link_title_down contains 'curly'
                         assign link_url = '/collections/curly'
                       else
@@ -170,56 +173,32 @@
         </div>
       </li>
 
-      <!-- Textures dropdown -->
-      {%- if section.settings.textures_menu != blank -%}
-        {%- assign textures_linklist = linklists[section.settings.textures_menu] -%}
-      {%- endif -%}
-      <li style="position:relative;">
-        <button class="nav-item-btn" id="ni-tex" onclick="tog('tex')" aria-haspopup="true">
-          Textures <span class="arr">▾</span>
-        </button>
-        <div class="sdrop" id="menu-tex">
-          {%- if textures_linklist.links.size > 0 -%}
-            {%- for link in textures_linklist.links -%}
-              <a href="{{ link.url }}">{{ link.title }}</a>
-            {%- endfor -%}
-          {%- else -%}
-            <a href="/collections/straight">Straight</a>
-            <a href="/collections/wavy">Wavy</a>
-            <a href="/collections/curly">Curly</a>
-            <a href="/collections/deep-curly">Deep Curly</a>
-            <a href="/collections/body-wave">Body Wave</a>
-            <a href="/collections/all">View All →</a>
-          {%- endif -%}
-        </div>
-      </li>
-
       <!-- Hair Care dropdown -->
-      {%- if section.settings.haircare_menu != blank -%}
-        {%- assign haircare_linklist = linklists[section.settings.haircare_menu] -%}
-      {%- endif -%}
-      <li style="position:relative;">
-        <button class="nav-item-btn" id="ni-care" onclick="tog('care')" aria-haspopup="true">
+      {%- liquid
+        assign haircare_blog = blogs[section.settings.haircare_blog_handle]
+        if haircare_blog != blank
+          assign haircare_blog_url = haircare_blog.url
+        else
+          assign haircare_blog_url = '/blogs/news'
+        endif
+      -%}
+      <li class="nav-dropdown-li">
+        <button type="button" class="nav-item-btn" id="ni-care" onclick="tog('care')" aria-haspopup="true" aria-expanded="false">
           Hair Care <span class="arr">▾</span>
         </button>
-        <div class="sdrop" id="menu-care">
-          {%- if haircare_linklist.links.size > 0 -%}
-            {%- for link in haircare_linklist.links -%}
-              <a href="{{ link.url }}">{{ link.title }}</a>
-            {%- endfor -%}
-          {%- else -%}
+        <div class="sdrop sdrop--single" id="menu-care" role="region" aria-label="Hair Care menu">
+          <p class="sdrop-heading">Hair Care</p>
+          <div class="sdrop-links">
             <a href="/pages/care-guide">Care Guide</a>
-            <a href="/pages/washing-tips">Washing Tips</a>
-            <a href="/pages/styling-guide">Styling Guide</a>
-            <a href="/pages/moisturizing">Moisturizing</a>
-            <a href="/pages/faq">FAQs</a>
-            <a href="/blogs/news">Blog →</a>
-          {%- endif -%}
+            <a href="/pages/faqs">FAQs</a>
+            <a href="{{ haircare_blog_url }}">Blog</a>
+          </div>
         </div>
       </li>
 
       <li><a href="{{ section.settings.about_link | default: '/pages/about' }}">About</a></li>
       <li><a href="{{ section.settings.quiz_link | default: '/pages/hair-quiz' }}">Quiz</a></li>
+      <li><a href="{{ section.settings.contact_link | default: '/pages/contact' }}">Contact</a></li>
 
     </ul>
 
@@ -280,46 +259,45 @@
           <a href="{{ link_url }}">{{ block.settings.title }}</a>
         {%- endif -%}
       {%- endfor -%}
-      <a href="{{ section.settings.shop_all_link }}">View All Collections</a>
-    </div>
-  </div>
-
-  <div class="mob-nav-section">
-    <button class="mob-nav-toggle" onclick="toggleMobSub('ms-tex')">Textures <span class="arr">▾</span></button>
-    <div class="mob-nav-sub" id="ms-tex">
-      {%- if textures_linklist.links.size > 0 -%}
-        {%- for link in textures_linklist.links -%}
-          <a href="{{ link.url }}">{{ link.title }}</a>
-        {%- endfor -%}
-      {%- else -%}
-        <a href="/collections/straight">Straight</a>
-        <a href="/collections/wavy">Wavy</a>
-        <a href="/collections/curly">Curly</a>
-        <a href="/collections/deep-curly">Deep Curly</a>
-        <a href="/collections/body-wave">Body Wave</a>
-      {%- endif -%}
+      <a href="{{ section.settings.shop_all_link | default: routes.all_products_collection_url }}">View All Collections</a>
+      <p class="mob-nav-subhead">By Texture</p>
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'texture_link' -%}
+          {%- liquid
+            assign link_url = block.settings.link
+            if link_url == blank
+              assign link_title_down = block.settings.title | downcase
+              if link_title_down contains 'straight'
+                assign link_url = '/collections/straight'
+              elsif link_title_down contains 'wavy'
+                assign link_url = '/collections/wavy'
+              elsif link_title_down contains 'deep curly' or link_title_down contains 'deep-curly'
+                assign link_url = '/collections/deep-curly'
+              elsif link_title_down contains 'curly'
+                assign link_url = '/collections/curly'
+              else
+                assign link_url = routes.all_products_collection_url
+              endif
+            endif
+          -%}
+          <a href="{{ link_url }}">{{ block.settings.title }}</a>
+        {%- endif -%}
+      {%- endfor -%}
     </div>
   </div>
 
   <div class="mob-nav-section">
     <button class="mob-nav-toggle" onclick="toggleMobSub('ms-care')">Hair Care <span class="arr">▾</span></button>
     <div class="mob-nav-sub" id="ms-care">
-      {%- if haircare_linklist.links.size > 0 -%}
-        {%- for link in haircare_linklist.links -%}
-          <a href="{{ link.url }}">{{ link.title }}</a>
-        {%- endfor -%}
-      {%- else -%}
-        <a href="/pages/care-guide">Care Guide</a>
-        <a href="/pages/washing-tips">Washing Tips</a>
-        <a href="/pages/styling-guide">Styling Guide</a>
-        <a href="/pages/faq">FAQs</a>
-        <a href="/blogs/news">Blog</a>
-      {%- endif -%}
+      <a href="/pages/care-guide">Care Guide</a>
+      <a href="/pages/faqs">FAQs</a>
+      <a href="{{ haircare_blog_url }}">Blog</a>
     </div>
   </div>
 
   <a href="{{ section.settings.about_link | default: '/pages/about' }}" class="mob-nav-link">About</a>
   <a href="{{ section.settings.quiz_link | default: '/pages/hair-quiz' }}" class="mob-nav-link">Hair Quiz</a>
+  <a href="{{ section.settings.contact_link | default: '/pages/contact' }}" class="mob-nav-link">Contact</a>
 
   <div class="mob-nav-footer">
     <a href="{{ routes.search_url }}">Search</a>
@@ -336,13 +314,13 @@
       "type": "text",
       "id": "logo_first_word",
       "label": "Logo — first word",
-      "default": "Elysian"
+      "default": "ELYSIAN"
     },
     {
       "type": "text",
       "id": "logo_second_word",
-      "label": "Logo — second word (italic)",
-      "default": "Imports"
+      "label": "Logo — second word (accent)",
+      "default": "IMPORT"
     },
     {
       "type": "header",
@@ -368,16 +346,11 @@
       "content": "Dropdown menus"
     },
     {
-      "type": "link_list",
-      "id": "textures_menu",
-      "label": "Textures dropdown menu",
-      "info": "Create a navigation menu named 'textures-menu' in Shopify admin"
-    },
-    {
-      "type": "link_list",
-      "id": "haircare_menu",
-      "label": "Hair Care dropdown menu",
-      "info": "Create a navigation menu named 'haircare-menu' in Shopify admin"
+      "type": "text",
+      "id": "haircare_blog_handle",
+      "label": "Hair Care blog handle",
+      "default": "news",
+      "info": "Blog linked from the Hair Care menu (default: news)"
     },
     {
       "type": "header",
@@ -392,6 +365,11 @@
       "type": "url",
       "id": "quiz_link",
       "label": "Hair Quiz link"
+    },
+    {
+      "type": "url",
+      "id": "contact_link",
+      "label": "Contact page link"
     }
   ],
   "blocks": [
@@ -500,6 +478,7 @@
         { "type": "texture_link", "settings": { "title": "Straight",         "subtitle": "Indian · Vietnamese", "dot_color": "#d4aa5a" } },
         { "type": "texture_link", "settings": { "title": "Wavy",             "subtitle": "Cambodian",           "dot_color": "#7a5e28" } },
         { "type": "texture_link", "settings": { "title": "Curly",            "subtitle": "Indian · Burmese",    "dot_color": "#2f2921" } },
+        { "type": "texture_link", "settings": { "title": "Deep Curly",       "subtitle": "Volume · Definition", "dot_color": "#563a17", "link": "/collections/deep-curly" } },
         { "type": "look_tile",    "settings": { "label": "Sleek",       "gradient_class": "lt-sleek"    } },
         { "type": "look_tile",    "settings": { "label": "Voluminous",   "gradient_class": "lt-volum"    } },
         { "type": "look_tile",    "settings": { "label": "Natural",      "gradient_class": "lt-natural"  } },

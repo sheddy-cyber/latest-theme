@@ -1,0 +1,163 @@
+{{ 'elysian-pages.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign page_title = section.settings.title
+  if page_title == blank
+    assign page_title = page.title
+  endif
+-%}
+
+<section class="elysian-static-page section-{{ section.id }}">
+  <div class="elysian-static-hero">
+    {%- if section.settings.eyebrow != blank -%}
+      <span class="elysian-static-eyebrow">{{ section.settings.eyebrow }}</span>
+    {%- endif -%}
+    <h1 class="elysian-static-title">{{ page_title | escape }}</h1>
+    {%- if section.settings.intro != blank -%}
+      <p class="elysian-static-intro">{{ section.settings.intro }}</p>
+    {%- endif -%}
+  </div>
+
+  {%- if section.settings.layout == 'faq' -%}
+    <div class="elysian-faq-list">
+      {%- if section.settings.show_page_content and page.content != blank -%}
+        <div class="elysian-content-block rte">{{ page.content }}</div>
+      {%- endif -%}
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'faq' -%}
+          <details class="elysian-faq-item" {{ block.shopify_attributes }}>
+            <summary>{{ block.settings.question }}</summary>
+            <div class="elysian-faq-answer rte">{{ block.settings.answer }}</div>
+          </details>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+  {%- else -%}
+    <div class="elysian-static-body">
+      {%- if section.settings.show_page_content and page.content != blank -%}
+        <div class="elysian-content-block rte">{{ page.content }}</div>
+      {%- endif -%}
+      {%- for block in section.blocks -%}
+        {%- case block.type -%}
+          {%- when 'content' -%}
+            <div class="elysian-content-block" {{ block.shopify_attributes }}>
+              {%- if block.settings.heading != blank -%}
+                <h2>{{ block.settings.heading }}</h2>
+              {%- endif -%}
+              {%- if block.settings.text != blank -%}
+                <div class="rte">{{ block.settings.text }}</div>
+              {%- endif -%}
+            </div>
+          {%- when 'tip' -%}
+            <div class="elysian-tip-card" {{ block.shopify_attributes }}>
+              {%- if block.settings.heading != blank -%}
+                <h3>{{ block.settings.heading }}</h3>
+              {%- endif -%}
+              {%- if block.settings.text != blank -%}
+                <p>{{ block.settings.text }}</p>
+              {%- endif -%}
+            </div>
+        {%- endcase -%}
+      {%- endfor -%}
+    </div>
+  {%- endif -%}
+</section>
+
+{% schema %}
+{
+  "name": "Elysian content page",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "select",
+      "id": "layout",
+      "label": "Layout",
+      "options": [
+        { "value": "content", "label": "Content blocks" },
+        { "value": "faq", "label": "FAQ accordion" }
+      ],
+      "default": "content"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow label",
+      "default": "Hair Care"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Page title override"
+    },
+    {
+      "type": "textarea",
+      "id": "intro",
+      "label": "Introduction"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_page_content",
+      "label": "Show Shopify page body content",
+      "default": false
+    }
+  ],
+  "blocks": [
+    {
+      "type": "content",
+      "name": "Content section",
+      "settings": [
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading"
+        },
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Text"
+        }
+      ]
+    },
+    {
+      "type": "tip",
+      "name": "Tip card",
+      "settings": [
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Text"
+        }
+      ]
+    },
+    {
+      "type": "faq",
+      "name": "FAQ item",
+      "settings": [
+        {
+          "type": "text",
+          "id": "question",
+          "label": "Question",
+          "default": "Question"
+        },
+        {
+          "type": "richtext",
+          "id": "answer",
+          "label": "Answer",
+          "default": "<p>Answer</p>"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Elysian content page"
+    }
+  ]
+}
+{% endschema %}

@@ -20,9 +20,9 @@
             "headline": "<p>Above the Rest.<br/><em>Beyond the Ordinary.</em></p>",
             "subtext": "Single donor raw hair sourced from verified temples in India, Vietnam, Cambodia and Burma. Unprocessed. Unmatched.",
             "btn1_label": "Shop Collection",
-            "btn1_link": "",
+            "btn1_link": "shopify://collections/all",
             "btn2_label": "Take the Hair Quiz",
-            "btn2_link": ""
+            "btn2_link": "shopify://pages/hair-quiz"
           }
         },
         "slide_JLTxpL": {

@@ -1,0 +1,60 @@
+{
+  "sections": {
+    "main": {
+      "type": "elysian-content-page",
+      "settings": {
+        "layout": "content",
+        "eyebrow": "Hair Care",
+        "title": "Care Guide",
+        "intro": "Protect your investment with a simple routine built for raw, single-donor hair. Follow these steps to keep your extensions soft, shiny, and tangle-free.",
+        "show_page_content": false
+      },
+      "blocks": {
+        "wash": {
+          "type": "content",
+          "settings": {
+            "heading": "Wash day",
+            "text": "<p>Detangle gently from ends to roots before getting hair wet. Use lukewarm water and a sulfate-free shampoo — focus on the scalp and weft area, not the mid-lengths. Rinse thoroughly.</p><ul><li>Wash every 7–14 days, or when product buildup appears</li><li>Never rub hair together; squeeze and rinse downward</li><li>Pat dry with a microfiber towel — do not wring</li></ul>"
+          }
+        },
+        "condition": {
+          "type": "content",
+          "settings": {
+            "heading": "Condition & moisture",
+            "text": "<p>Apply a moisturizing conditioner from mid-shaft to ends. Leave on 5–10 minutes under a shower cap for extra hydration. Rinse with cool water to seal the cuticle.</p><p>For curly and wavy textures, follow with a leave-in conditioner and light oil on the ends only.</p>"
+          }
+        },
+        "dry": {
+          "type": "content",
+          "settings": {
+            "heading": "Drying & heat",
+            "text": "<p>Air-dry whenever possible. If you use a blow dryer, use low heat and a diffuser on curly textures. Always apply a heat protectant before flat ironing or curling — keep tools under 350°F (175°C).</p>"
+          }
+        },
+        "night": {
+          "type": "tip",
+          "settings": {
+            "heading": "Night routine",
+            "text": "Braid hair loosely or wrap in a silk scarf before bed. Sleep on a silk or satin pillowcase to reduce friction and preserve your install."
+          }
+        },
+        "storage": {
+          "type": "tip",
+          "settings": {
+            "heading": "Storage between wears",
+            "text": "Store clean, fully dry hair in a breathable satin bag. Keep away from direct sunlight and humidity. Lightly mist with leave-in before reinstalling if hair feels dry."
+          }
+        },
+        "avoid": {
+          "type": "content",
+          "settings": {
+            "heading": "What to avoid",
+            "text": "<ul><li>Heavy oils at the root or lace base</li><li>Products with alcohol, sulfates, or heavy silicones</li><li>Brushing wet hair aggressively</li><li>Chlorine and salt water without rinsing immediately after</li></ul>"
+          }
+        }
+      },
+      "block_order": ["wash", "condition", "dry", "night", "storage", "avoid"]
+    }
+  },
+  "order": ["main"]
+}

@@ -1,0 +1,318 @@
+{{ 'elysian-product.css' | asset_url | stylesheet_tag }}
+{{ 'component-price.css' | asset_url | stylesheet_tag }}
+
+{% unless product.has_only_default_variant %}
+  {{ 'component-product-variant-picker.css' | asset_url | stylesheet_tag }}
+  {{ 'component-swatch-input.css' | asset_url | stylesheet_tag }}
+  {{ 'component-swatch.css' | asset_url | stylesheet_tag }}
+{% endunless %}
+
+{%- liquid
+  assign origin_label = ''
+  for tag in product.tags
+    if tag contains 'India' or tag contains 'Burma' or tag contains 'Vietnam' or tag contains 'Cambodia'
+      assign origin_label = tag
+      break
+    endif
+  endfor
+
+  assign featured_media = product.selected_or_first_available_variant.featured_media | default: product.featured_media
+  assign product_form_id = 'product-form-' | append: section.id
+-%}
+
+<product-info
+  id="MainProduct-{{ section.id }}"
+  class="elysian-pdp"
+  data-section="{{ section.id }}"
+  data-product-id="{{ product.id }}"
+  data-update-url="true"
+  data-url="{{ product.url }}"
+>
+  <script src="{{ 'product-info.js' | asset_url }}" defer="defer"></script>
+  <script src="{{ 'product-form.js' | asset_url }}" defer="defer"></script>
+
+  <div class="elysian-pdp-wrap">
+    <nav class="elysian-pdp-breadcrumb" aria-label="Breadcrumb">
+      <a href="{{ routes.root_url }}">Home</a>
+      <span aria-hidden="true">/</span>
+      {%- if collection -%}
+        <a href="{{ collection.url }}">{{ collection.title }}</a>
+        <span aria-hidden="true">/</span>
+      {%- endif -%}
+      <span aria-current="page">{{ product.title }}</span>
+    </nav>
+
+    <div class="elysian-pdp-grid">
+      <div class="elysian-pdp-gallery" data-elysian-gallery>
+        <div class="elysian-pdp-main" data-active-media-id="{{ featured_media.id }}">
+          {%- if featured_media != blank -%}
+            {{
+              featured_media
+              | image_url: width: 1600
+              | image_tag:
+                class: 'elysian-pdp-main-img',
+                id: 'ElysianPdpMainImg',
+                loading: 'eager',
+                widths: '600, 900, 1200, 1600',
+                sizes: '(min-width: 990px) 50vw, 100vw',
+                alt: featured_media.alt | default: product.title | escape
+            }}
+          {%- else -%}
+            <div class="elysian-pdp-main-placeholder" id="ElysianPdpMainImg" aria-hidden="true"></div>
+          {%- endif -%}
+        </div>
+
+        {%- if product.media.size > 1 -%}
+          <div class="elysian-pdp-thumbs" role="tablist" aria-label="Product images">
+            {%- for media in product.media -%}
+              {%- if media.media_type == 'image' -%}
+                <button
+                  type="button"
+                  class="elysian-pdp-thumb{% if media.id == featured_media.id %} is-active{% endif %}"
+                  data-media-id="{{ media.id }}"
+                  data-media-src="{{ media | image_url: width: 1200 }}"
+                  data-media-alt="{{ media.alt | default: product.title | escape }}"
+                  aria-label="View image {{ forloop.index }}"
+                  {% if media.id == featured_media.id %}aria-selected="true"{% endif %}
+                >
+                  {{
+                    media
+                    | image_url: width: 160
+                    | image_tag:
+                      loading: 'lazy',
+                      widths: '80, 120, 160',
+                      sizes: '80px',
+                      alt: ''
+                  }}
+                </button>
+              {%- endif -%}
+            {%- endfor -%}
+          </div>
+        {%- endif -%}
+
+      </div>
+
+      <div id="ProductInfo-{{ section.id }}" class="elysian-pdp-info">
+        {%- if origin_label != '' -%}
+          <span class="elysian-pdp-origin">{{ origin_label }}</span>
+        {%- endif -%}
+
+        {%- for block in section.blocks -%}
+          {%- case block.type -%}
+            {%- when 'title' -%}
+              <div class="elysian-pdp-title" {{ block.shopify_attributes }}>
+                <h1>{{ product.title | escape }}</h1>
+              </div>
+
+            {%- when 'price' -%}
+              <div class="elysian-pdp-stars" aria-hidden="true">★★★★★</div>
+              <div class="elysian-pdp-price-wrap" id="price-{{ section.id }}" role="status" {{ block.shopify_attributes }}>
+                {% render 'price', product: product, use_variant: true, show_badges: true, price_class: 'price--large' %}
+              </div>
+              <div class="elysian-pdp-divider"></div>
+
+            {%- when 'variant_picker' -%}
+              <div class="elysian-pdp-variants" {{ block.shopify_attributes }}>
+                {% render 'product-variant-picker', product: product, block: block, product_form_id: product_form_id %}
+              </div>
+
+            {%- when 'quantity_selector' -%}
+              <div
+                id="Quantity-Form-{{ section.id }}"
+                class="elysian-pdp-qty product-form__input product-form__quantity"
+                {{ block.shopify_attributes }}
+              >
+                <label class="form__label" for="Quantity-{{ section.id }}">
+                  {{ 'products.product.quantity.label' | t }}
+                </label>
+              <quantity-input class="quantity elysian-qty-input" data-url="{{ product.url }}" data-section="{{ section.id }}">
+                <button
+                  class="quantity__button"
+                  name="minus"
+                  type="button"
+                  aria-label="{{ 'products.product.quantity.decrease' | t: product: product.title | escape }}"
+                >
+                  <span aria-hidden="true">−</span>
+                </button>
+                <input
+                  class="quantity__input"
+                  type="number"
+                  name="quantity"
+                  id="Quantity-{{ section.id }}"
+                  data-min="{{ product.selected_or_first_available_variant.quantity_rule.min }}"
+                  min="{{ product.selected_or_first_available_variant.quantity_rule.min }}"
+                  {% if product.selected_or_first_available_variant.quantity_rule.max != null %}
+                    data-max="{{ product.selected_or_first_available_variant.quantity_rule.max }}"
+                    max="{{ product.selected_or_first_available_variant.quantity_rule.max }}"
+                  {% endif %}
+                  step="{{ product.selected_or_first_available_variant.quantity_rule.increment }}"
+                  value="{{ product.selected_or_first_available_variant.quantity_rule.min }}"
+                  form="{{ product_form_id }}"
+                  aria-label="{{ 'products.product.quantity.input_label' | t: product: product.title | escape }}"
+                >
+                <button
+                  class="quantity__button"
+                  name="plus"
+                  type="button"
+                  aria-label="{{ 'products.product.quantity.increase' | t: product: product.title | escape }}"
+                >
+                  <span aria-hidden="true">+</span>
+                </button>
+              </quantity-input>
+              </div>
+
+            {%- when 'buy_buttons' -%}
+              <div class="elysian-pdp-buy" {{ block.shopify_attributes }}>
+                {% render 'buy-buttons',
+                  block: block,
+                  product: product,
+                  product_form_id: product_form_id,
+                  section_id: section.id,
+                  show_pickup_availability: false
+                %}
+              </div>
+
+            {%- when 'description' -%}
+              <div class="elysian-pdp-trust">
+                <span>100% Raw Hair</span>
+                <span>Single Donor</span>
+                <span>Free Shipping $150+</span>
+              </div>
+              {%- if product.description != blank -%}
+                <div class="elysian-pdp-desc rte" {{ block.shopify_attributes }}>
+                  {{ product.description }}
+                </div>
+              {%- endif -%}
+          {%- endcase -%}
+        {%- endfor -%}
+      </div>
+    </div>
+  </div>
+</product-info>
+
+<script>
+(function () {
+  var gallery = document.querySelector('[data-elysian-gallery]');
+  if (!gallery) return;
+
+  var mainImg = document.getElementById('ElysianPdpMainImg');
+  var thumbs = gallery.querySelectorAll('.elysian-pdp-thumb');
+
+  thumbs.forEach(function (thumb) {
+    thumb.addEventListener('click', function () {
+      var src = thumb.getAttribute('data-media-src');
+      var alt = thumb.getAttribute('data-media-alt') || '';
+      if (!src) return;
+
+      if (mainImg && mainImg.tagName === 'IMG') {
+        mainImg.src = src;
+        mainImg.alt = alt;
+        mainImg.setAttribute('data-media-id', thumb.getAttribute('data-media-id'));
+      }
+
+      thumbs.forEach(function (t) {
+        t.classList.remove('is-active');
+        t.removeAttribute('aria-selected');
+      });
+      thumb.classList.add('is-active');
+      thumb.setAttribute('aria-selected', 'true');
+    });
+  });
+
+  if (typeof subscribe !== 'undefined' && typeof PUB_SUB_EVENTS !== 'undefined') {
+    subscribe(PUB_SUB_EVENTS.variantChange, function (evt) {
+      var variant = evt.data && evt.data.variant;
+      if (!variant || !variant.featured_media) return;
+      if (!document.querySelector('product-info.elysian-pdp')) return;
+
+      var preview = variant.featured_media.preview_image;
+      if (!preview || !mainImg || mainImg.tagName !== 'IMG') return;
+
+      mainImg.src = preview.src;
+      if (variant.featured_media.alt) mainImg.alt = variant.featured_media.alt;
+
+      thumbs.forEach(function (t) {
+        var active = t.getAttribute('data-media-id') === String(variant.featured_media.id);
+        t.classList.toggle('is-active', active);
+        if (active) t.setAttribute('aria-selected', 'true');
+        else t.removeAttribute('aria-selected');
+      });
+    });
+  }
+})();
+</script>
+
+{% schema %}
+{
+  "name": "Elysian Product",
+  "tag": "section",
+  "class": "elysian-product-section",
+  "blocks": [
+    { "type": "title", "name": "Title", "limit": 1 },
+    { "type": "price", "name": "Price", "limit": 1 },
+    {
+      "type": "variant_picker",
+      "name": "Variant picker",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "select",
+          "id": "picker_type",
+          "label": "Type",
+          "options": [
+            { "value": "button", "label": "Buttons" },
+            { "value": "dropdown", "label": "Dropdown" }
+          ],
+          "default": "button"
+        },
+        {
+          "type": "select",
+          "id": "swatch_shape",
+          "label": "Swatch shape",
+          "options": [
+            { "value": "circle", "label": "Circle" },
+            { "value": "square", "label": "Square" },
+            { "value": "none", "label": "None" }
+          ],
+          "default": "none"
+        }
+      ]
+    },
+    { "type": "quantity_selector", "name": "Quantity", "limit": 1 },
+    {
+      "type": "buy_buttons",
+      "name": "Buy buttons",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "checkbox",
+          "id": "show_dynamic_checkout",
+          "label": "Show Shop Pay / dynamic checkout",
+          "default": true
+        },
+        {
+          "type": "checkbox",
+          "id": "show_gift_card_recipient",
+          "label": "Gift card recipient",
+          "default": false
+        }
+      ]
+    },
+    { "type": "description", "name": "Description", "limit": 1 }
+  ],
+  "settings": [],
+  "presets": [
+    {
+      "name": "Elysian Product",
+      "blocks": [
+        { "type": "title" },
+        { "type": "price" },
+        { "type": "variant_picker" },
+        { "type": "quantity_selector" },
+        { "type": "buy_buttons" },
+        { "type": "description" }
+      ]
+    }
+  ]
+}
+{% endschema %}

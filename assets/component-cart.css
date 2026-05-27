@@ -29,8 +29,12 @@ cart-items.is-empty .title-wrapper-with-link,
   margin-top: 2.5rem;
 }
 
+.cart__warnings .button {
+  margin-bottom: 4rem;
+}
+
 .cart__login-title {
-  margin: 5.5rem 0 0.5rem;
+  margin: 0 0 0.5rem;
 }
 
 .cart__login-paragraph {

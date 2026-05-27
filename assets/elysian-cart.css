@@ -1,12 +1,12 @@
 /* ─── Elysian Cart Page ─────────────────────────────────── */
 .template-cart #MainContent,
 .template-cart .content-for-layout {
-  background: #0f0f0f;
+  background: var(--black);
 }
 
 .elysian-cart-section {
-  background: #0f0f0f;
-  color: #f5f0e8;
+  background: var(--black);
+  color: var(--white);
   padding-bottom: 80px;
 }
 
@@ -28,7 +28,7 @@
   font-weight: 700;
   letter-spacing: 0.28em;
   text-transform: uppercase;
-  color: #d4aa5a;
+  color: var(--gold);
   display: block;
   margin-bottom: 10px;
 }
@@ -37,7 +37,7 @@
   font-family: var(--serif, 'Cormorant Garamond', Georgia, serif);
   font-size: clamp(32px, 4vw, 48px);
   font-weight: 500;
-  color: #ffffff;
+  color: var(--white);
   margin: 0;
   line-height: 1.1;
 }
@@ -48,7 +48,7 @@
   font-weight: 700;
   letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: #d4aa5a;
+  color: var(--gold);
   text-decoration: none;
   border-bottom: 1px solid rgba(212, 170, 90, 0.4);
   padding-bottom: 2px;
@@ -56,8 +56,8 @@
 }
 
 .elysian-cart-continue:hover {
-  color: #ffffff;
-  border-color: #ffffff;
+  color: var(--white);
+  border-color: var(--gold);
 }
 
 .elysian-cart-layout {
@@ -137,20 +137,24 @@ cart-items.is-empty .elysian-cart-empty {
 .elysian-cart-empty h2 {
   font-family: var(--serif, 'Cormorant Garamond', Georgia, serif);
   font-size: 28px;
-  color: #ffffff;
+  color: var(--white);
   margin: 0 0 12px;
 }
 
 .elysian-cart-empty p {
   font-size: 14px;
-  color: rgba(245, 240, 232, 0.65);
+  color: var(--white-dim);
   margin: 0 0 28px;
   line-height: 1.7;
   max-width: 400px;
 }
 
+.elysian-cart-empty .elysian-cart-btn-primary {
+  margin-bottom: 4.8rem;
+}
+
 .elysian-cart-login {
-  margin-top: 24px;
+  margin: 0;
   font-family: var(--sans, 'Montserrat', sans-serif);
   font-size: 13px;
   line-height: 1.6;
@@ -158,23 +162,23 @@ cart-items.is-empty .elysian-cart-empty {
 }
 
 .elysian-cart-login-text {
-  color: rgba(245, 240, 232, 0.55);
+  color: var(--white-dim);
 }
 
 .elysian-cart-login-link {
-  color: #d4aa5a !important;
+  color: var(--gold) !important;
   font-weight: 700;
   letter-spacing: 0.06em;
   text-decoration: underline;
   text-underline-offset: 4px;
-  text-decoration-color: #d4aa5a;
+  text-decoration-color: var(--gold);
   text-decoration-thickness: 1px;
   transition: color 0.2s, text-decoration-color 0.2s;
 }
 
 .elysian-cart-login-link:hover {
-  color: #ffffff !important;
-  text-decoration-color: #ffffff;
+  color: var(--white) !important;
+  text-decoration-color: var(--white);
 }
 
 .elysian-cart-lines {
@@ -188,7 +192,7 @@ cart-items.is-empty .elysian-cart-empty {
   grid-template-columns: 100px minmax(0, 1fr) auto;
   gap: 20px 24px;
   align-items: start;
-  background: #1a1a1a;
+  background: var(--black-3);
   border: 1px solid rgba(212, 170, 90, 0.2);
   padding: 20px;
 }
@@ -202,7 +206,7 @@ cart-items.is-empty .elysian-cart-empty {
   width: 100px;
   aspect-ratio: 3 / 4;
   object-fit: cover;
-  background: #252525;
+  background: var(--black-3);
   border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
@@ -210,7 +214,7 @@ cart-items.is-empty .elysian-cart-empty {
   font-family: var(--sans, 'Montserrat', sans-serif);
   font-size: 14px;
   font-weight: 600;
-  color: #ffffff !important;
+  color: var(--white) !important;
   text-decoration: none;
   letter-spacing: 0.03em;
   line-height: 1.4;
@@ -219,13 +223,13 @@ cart-items.is-empty .elysian-cart-empty {
 }
 
 .elysian-cart-line__name:hover {
-  color: #d4aa5a !important;
+  color: var(--gold) !important;
 }
 
 .elysian-cart-line__variant,
 .elysian-cart-line .product-option {
   font-size: 12px;
-  color: rgba(245, 240, 232, 0.55) !important;
+  color: var(--white-dim) !important;
   margin: 0 0 4px;
 }
 
@@ -238,7 +242,7 @@ cart-items.is-empty .elysian-cart-empty {
 .elysian-cart-line__price-unit {
   font-size: 13px;
   font-weight: 600;
-  color: #d4aa5a !important;
+  color: var(--gold) !important;
 }
 
 .elysian-cart-line__actions {
@@ -253,7 +257,7 @@ cart-items.is-empty .elysian-cart-empty {
   display: inline-flex !important;
   align-items: center;
   border: 1px solid rgba(255, 255, 255, 0.35);
-  background: #0f0f0f;
+  background: var(--black);
   min-height: 40px;
 }
 
@@ -264,7 +268,7 @@ cart-items.is-empty .elysian-cart-empty {
   padding: 0 !important;
   background: transparent !important;
   border: none !important;
-  color: #f5f0e8 !important;
+  color: var(--white) !important;
   font-size: 16px !important;
   cursor: pointer;
   display: inline-flex !important;
@@ -286,7 +290,7 @@ cart-items.is-empty .elysian-cart-empty {
   text-align: center;
   background: transparent !important;
   border: none !important;
-  color: #ffffff !important;
+  color: var(--white) !important;
   font-size: 13px !important;
   font-weight: 600;
   -moz-appearance: textfield;
@@ -305,7 +309,7 @@ cart-items.is-empty .elysian-cart-empty {
   font-weight: 700;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: rgba(245, 240, 232, 0.5) !important;
+  color: var(--white-dim) !important;
   text-decoration: none;
   background: none !important;
   border: none !important;
@@ -316,7 +320,7 @@ cart-items.is-empty .elysian-cart-empty {
 }
 
 .elysian-cart-remove:hover {
-  color: #d4aa5a !important;
+  color: var(--gold) !important;
 }
 
 .elysian-cart-remove .svg-wrapper {
@@ -334,16 +338,16 @@ cart-items.is-empty .elysian-cart-empty {
   font-family: var(--sans, 'Montserrat', sans-serif);
   font-size: 16px;
   font-weight: 600;
-  color: #ffffff !important;
+  color: var(--white) !important;
 }
 
 .elysian-cart-line__total .cart-item__old-price {
-  color: rgba(245, 240, 232, 0.45) !important;
+  color: var(--white-dim) !important;
   font-size: 13px;
 }
 
 .elysian-cart-line .discounts__discount {
-  color: #d4aa5a;
+  color: var(--gold);
   font-size: 11px;
 }
 
@@ -372,7 +376,7 @@ cart-items.is-empty .elysian-cart-empty {
 }
 
 .elysian-cart-summary {
-  background: #1a1a1a;
+  background: var(--black-3);
   border: 1px solid rgba(212, 170, 90, 0.3);
   padding: 28px 24px;
 }
@@ -388,7 +392,7 @@ cart-items.is-empty .elysian-cart-empty {
   font-weight: 700;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: #d4aa5a;
+  color: var(--gold);
   margin: 0 0 20px;
 }
 
@@ -406,7 +410,7 @@ cart-items.is-empty .elysian-cart-empty {
   font-weight: 600;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: rgba(245, 240, 232, 0.65);
+  color: var(--white-dim);
   margin: 0;
 }
 
@@ -414,7 +418,7 @@ cart-items.is-empty .elysian-cart-empty {
   font-family: var(--serif, 'Cormorant Garamond', Georgia, serif);
   font-size: 28px;
   font-weight: 500;
-  color: #ffffff !important;
+  color: var(--white) !important;
   margin: 0;
 }
 
@@ -422,16 +426,16 @@ cart-items.is-empty .elysian-cart-empty {
   display: block;
   font-size: 11px;
   line-height: 1.6;
-  color: rgba(245, 240, 232, 0.45) !important;
+  color: var(--white-dim) !important;
   margin-bottom: 24px;
 }
 
 .elysian-cart-summary .tax-note a {
-  color: #d4aa5a;
+  color: var(--gold);
 }
 
 .elysian-cart-summary .discounts__discount {
-  color: #d4aa5a;
+  color: var(--gold);
   font-size: 12px;
   margin-bottom: 12px;
 }
@@ -446,16 +450,16 @@ cart-items.is-empty .elysian-cart-empty {
   font-weight: 700;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: #d4aa5a;
+  color: var(--gold);
   margin-bottom: 8px;
 }
 
 .elysian-cart-note textarea {
   width: 100%;
   min-height: 80px;
-  background: #0f0f0f;
+  background: var(--black);
   border: 1px solid rgba(212, 170, 90, 0.3);
-  color: #ffffff;
+  color: var(--white);
   font-family: var(--sans, 'Montserrat', sans-serif);
   font-size: 13px;
   padding: 12px;
@@ -465,15 +469,15 @@ cart-items.is-empty .elysian-cart-empty {
 
 .elysian-cart-note textarea:focus {
   outline: none;
-  border-color: #d4aa5a;
+  border-color: var(--gold);
 }
 
 .elysian-cart-checkout {
   width: 100%;
   min-height: 52px;
-  background: #ffffff !important;
-  color: #0f0f0f !important;
-  border: 1px solid #ffffff !important;
+  background: var(--black-2) !important;
+  color: var(--white) !important;
+  border: 1px solid var(--black-2) !important;
   font-family: var(--sans, 'Montserrat', sans-serif) !important;
   font-size: 10px !important;
   font-weight: 700 !important;
@@ -485,9 +489,9 @@ cart-items.is-empty .elysian-cart-empty {
 }
 
 .elysian-cart-checkout:hover:not(:disabled) {
-  background: #d4aa5a !important;
-  border-color: #d4aa5a !important;
-  color: #0f0f0f !important;
+  background: var(--gold) !important;
+  border-color: var(--gold) !important;
+  color: var(--black) !important;
 }
 
 .elysian-cart-checkout:disabled {
@@ -498,13 +502,13 @@ cart-items.is-empty .elysian-cart-empty {
 .elysian-cart-shipping-note {
   font-size: 11px;
   text-align: center;
-  color: rgba(245, 240, 232, 0.5);
+  color: var(--white-dim);
   margin-top: 16px;
   line-height: 1.5;
 }
 
 .elysian-cart-shipping-note strong {
-  color: #d4aa5a;
+  color: var(--gold);
   font-weight: 600;
 }
 
@@ -522,9 +526,9 @@ cart-items.is-empty .elysian-cart-empty {
   justify-content: center;
   min-height: 48px;
   padding: 0 28px;
-  background: #ffffff;
-  color: #0f0f0f;
-  border: 1px solid #ffffff;
+  background: var(--black-2);
+  color: var(--white);
+  border: 1px solid var(--black-2);
   font-family: var(--sans, 'Montserrat', sans-serif);
   font-size: 10px;
   font-weight: 700;
@@ -535,8 +539,8 @@ cart-items.is-empty .elysian-cart-empty {
 }
 
 .elysian-cart-btn-primary:hover {
-  background: #d4aa5a;
-  border-color: #d4aa5a;
+  background: var(--gold);
+  border-color: var(--gold);
 }
 
 @media (max-width: 989px) {

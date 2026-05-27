@@ -1,15 +1,39 @@
 {%- if section.blocks.size > 0 -%}
-<div class="promo-bar" id="promo-bar">
-  <div class="promo-track">
-    {%- for block in section.blocks -%}
-      {%- if block.type == 'message' -%}
-        <div class="promo-msg{% if forloop.first %} active{% endif %}" {{ block.shopify_attributes }}>
-          {{ block.settings.message }}
-        </div>
-      {%- endif -%}
-    {%- endfor -%}
+  {%- assign promo_duration = section.blocks.size | times: 8 | at_least: 18 -%}
+  <div
+    class="promo-bar{% if section.blocks.size > 1 %} promo-bar--ticker{% endif %}"
+    id="promo-bar"
+    style="--promo-duration: {{ promo_duration }}s;"
+    role="region"
+    aria-label="Store announcements"
+  >
+    {%- if section.blocks.size == 1 -%}
+      <div class="promo-track promo-track--static">
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'message' -%}
+            <span class="promo-msg" {{ block.shopify_attributes }}>
+              {{ block.settings.message }}
+            </span>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+    {%- else -%}
+      <div class="promo-marquee">
+        {%- for copy in (1..2) -%}
+          <div class="promo-track{% if copy == 2 %} promo-track--clone{% endif %}"{% if copy == 2 %} aria-hidden="true"{% endif %}>
+            {%- for block in section.blocks -%}
+              {%- if block.type == 'message' -%}
+                <span class="promo-msg"{% if copy == 1 %} {{ block.shopify_attributes }}{% endif %}>
+                  {{ block.settings.message }}
+                </span>
+                <span class="promo-separator" aria-hidden="true"></span>
+              {%- endif -%}
+            {%- endfor -%}
+          </div>
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
   </div>
-</div>
 {%- endif -%}
 
 {% schema %}

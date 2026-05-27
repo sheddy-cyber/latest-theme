@@ -1,0 +1,853 @@
+.template-search,
+.elysian-collections-page,
+.article-template,
+.template-404,
+.customer {
+  color: var(--white);
+}
+
+.template-search,
+.elysian-collections-page,
+.template-404,
+.customer {
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: 56px 24px 96px;
+}
+
+.article-template {
+  padding: 0 24px 88px;
+}
+
+.template-search h1,
+.elysian-collections-page .title--primary,
+.template-404 .title,
+.customer h1,
+.customer .customer__title {
+  margin: 0 0 1.2rem;
+  color: var(--white);
+  font-family: var(--serif);
+  font-size: clamp(3.2rem, 5vw, 5.8rem);
+  font-weight: 400;
+  letter-spacing: -0.03em;
+  line-height: 1.05;
+}
+
+.template-search p,
+.elysian-collections-page p,
+.article-template p,
+.template-404 p,
+.customer p,
+.customer address {
+  color: var(--white-dim);
+  line-height: 1.8;
+}
+
+.template-404 .button,
+.customer button,
+.customer input[type='submit'],
+.article-template .button,
+.article-template .share-button__button,
+.article-template .share-button__copy,
+.article-template .share-button__close,
+.template-search .button,
+.elysian-collections-page .button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 5.2rem;
+  padding: 0 2.8rem;
+  border: 1px solid var(--gold-line);
+  background: var(--black-2);
+  box-shadow: none;
+  color: var(--white);
+  cursor: pointer;
+  font-family: var(--sans);
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+}
+
+.template-404 .button:hover,
+.customer button:hover,
+.customer input[type='submit']:hover,
+.article-template .button:hover,
+.article-template .share-button__button:hover,
+.article-template .share-button__copy:hover,
+.article-template .share-button__close:hover,
+.template-search .button:hover,
+.elysian-collections-page .button:hover {
+  border-color: var(--gold);
+  background: var(--gold);
+  color: var(--black);
+  transform: translateY(-1px);
+}
+
+.customer button[name='decline'],
+.customer button[type='reset'] {
+  background: transparent;
+  color: var(--white-dim);
+}
+
+.customer button[name='decline']:hover,
+.customer button[type='reset']:hover {
+  color: var(--gold);
+}
+
+.template-search .link,
+.template-search .underlined-link,
+.elysian-collections-page a,
+.article-template a,
+.template-404 a,
+.customer a {
+  color: var(--gold);
+  text-underline-offset: 0.28rem;
+}
+
+.template-search .link:hover,
+.template-search .underlined-link:hover,
+.elysian-collections-page a:hover,
+.article-template a:hover,
+.template-404 a:hover,
+.customer a:hover {
+  color: var(--gold-lt);
+}
+
+.template-search .pagination__list,
+.elysian-collections-page .pagination__list,
+.article-template .pagination__list,
+.customer .pagination ul {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin: 3.2rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.template-search .pagination__item,
+.elysian-collections-page .pagination__item,
+.article-template .pagination__item,
+.customer .pagination a,
+.customer .pagination span {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 4.4rem;
+  min-height: 4.4rem;
+  padding: 0 1.4rem;
+  border: 1px solid var(--gold-line);
+  border-radius: 999px;
+  background: var(--black-2);
+  color: var(--white);
+  text-decoration: none;
+  transition: border-color 0.2s ease, background 0.2s ease, color 0.2s ease;
+}
+
+.template-search .pagination__item:hover,
+.elysian-collections-page .pagination__item:hover,
+.article-template .pagination__item:hover,
+.customer .pagination a:hover {
+  border-color: var(--gold);
+  background: var(--black-3);
+}
+
+.template-search .pagination__item--current,
+.customer .pagination span[aria-current='page'] {
+  border-color: var(--white);
+  background: var(--white);
+  color: var(--black);
+}
+
+.template-search__header {
+  margin-bottom: 4rem;
+  text-align: center;
+}
+
+.template-search__search {
+  margin: 0 auto 3.2rem;
+  max-width: 80rem;
+  padding: 2.4rem;
+  border: 1px solid rgba(181, 138, 74, 0.18);
+  border-radius: 2.8rem;
+  background: linear-gradient(180deg, rgba(255, 254, 251, 0.96), rgba(246, 241, 231, 0.96));
+  box-shadow: 0 2.2rem 5rem rgba(28, 24, 20, 0.06);
+}
+
+.template-search__header > p {
+  max-width: 64rem;
+  margin: 0 auto;
+}
+
+.template-search .field::before,
+.template-search .field::after,
+.article-template .field::before,
+.article-template .field::after {
+  display: none;
+}
+
+.template-search .field {
+  position: relative;
+}
+
+.template-search .search__input.field__input,
+.article-template .field__input,
+.article-template .text-area.field__input {
+  width: 100%;
+  min-height: 6rem;
+  padding: 2.4rem 6rem 1.2rem 1.8rem;
+  border: 1px solid var(--gold-line);
+  border-radius: 1.8rem;
+  background: var(--black-2);
+  box-shadow: none;
+  color: var(--white);
+}
+
+.template-search .search__input.field__input::placeholder,
+.article-template .field__input::placeholder,
+.article-template .text-area.field__input::placeholder {
+  color: transparent;
+}
+
+.template-search .field__label,
+.article-template .field__label {
+  top: 1rem;
+  left: 1.8rem;
+  color: var(--white-dim);
+  font-family: var(--sans);
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.template-search .field__button {
+  top: 1rem;
+  right: 0.8rem;
+  color: var(--white-dim);
+}
+
+.template-search .reset__button {
+  right: 4.6rem;
+}
+
+.template-search .search__button:hover,
+.template-search .reset__button:hover {
+  color: var(--gold);
+}
+
+.template-search .facets-wrapper,
+.template-search .facets-vertical-sort {
+  margin-bottom: 2.8rem;
+}
+
+.template-search .facets-container,
+.template-search .facets {
+  color: var(--white);
+}
+
+.template-search .facet-filters__field,
+.template-search .facets__form,
+.template-search .facets__summary,
+.template-search .active-facets__button,
+.template-search .facet-filters__sort {
+  background: var(--black-2);
+  color: var(--white);
+}
+
+.template-search .facet-filters__sort,
+.template-search .facets__summary,
+.template-search .active-facets__button {
+  border: 1px solid var(--gold-line);
+  box-shadow: none;
+}
+
+.template-search .facets__summary,
+.template-search .facet-filters__label,
+.template-search .facet-filters__label label,
+.template-search .facets__heading,
+.template-search .facets__label {
+  color: var(--white);
+}
+
+.template-search .facets__display,
+.template-search .facets-vertical {
+  color: var(--white);
+}
+
+.template-search .facets__price .field__input,
+.template-search .facets__price .field__label {
+  color: var(--white);
+}
+
+.template-search .active-facets__button:hover {
+  border-color: var(--gold);
+  color: var(--gold);
+}
+
+.template-search .template-search__results.collection,
+.template-search .collection.collection--empty {
+  padding: 0;
+}
+
+.template-search .grid.product-grid {
+  gap: 2rem;
+}
+
+.template-search .grid__item > .card-wrapper {
+  height: 100%;
+}
+
+.template-search .card {
+  height: 100%;
+  overflow: hidden;
+  border: 1px solid rgba(181, 138, 74, 0.18);
+  border-radius: 2.4rem;
+  background: var(--black-2);
+  box-shadow: 0 2rem 4.8rem rgba(28, 24, 20, 0.06);
+}
+
+.template-search .card__inner,
+.elysian-collections-page .card__inner {
+  background: transparent;
+}
+
+.template-search .card__media,
+.elysian-collections-page .card__media {
+  background: var(--black-3);
+}
+
+.template-search .card__media img,
+.elysian-collections-page .card__media img {
+  transition: transform 0.55s ease;
+}
+
+.template-search .card:hover .card__media img,
+.elysian-collections-page .card:hover .card__media img {
+  transform: scale(1.04);
+}
+
+.template-search .card__information,
+.elysian-collections-page .card__information {
+  padding: 1.8rem 1.8rem 2rem;
+}
+
+.template-search .card__heading,
+.elysian-collections-page .card__heading {
+  margin: 0 0 0.8rem;
+}
+
+.template-search .card__heading a,
+.elysian-collections-page .card__heading a {
+  color: var(--white);
+  font-family: var(--serif);
+  font-size: clamp(2rem, 3vw, 3rem);
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  line-height: 1.12;
+}
+
+.template-search .card__heading a:hover,
+.elysian-collections-page .card__heading a:hover {
+  color: var(--gold);
+}
+
+.template-search .card-information,
+.template-search .caption-with-letter-spacing,
+.template-search .caption-large,
+.template-search .card__caption,
+.template-search .article-card__excerpt,
+.elysian-collections-page .card__caption {
+  color: var(--white-dim);
+}
+
+.template-search .price,
+.template-search .price *,
+.template-search .price .price-item {
+  color: var(--white) !important;
+}
+
+.template-search .badge {
+  border: 1px solid rgba(181, 138, 74, 0.24);
+  background: rgba(181, 138, 74, 0.12);
+  color: var(--gold);
+}
+
+.template-search .collection.collection--empty .title-wrapper {
+  padding: 6rem 2.4rem;
+  border: 1px solid var(--gold-line);
+  border-radius: 2.8rem;
+  background: var(--black-2);
+}
+
+.elysian-collections-page {
+  padding-top: 6.4rem;
+}
+
+.elysian-collections-page > .title--primary {
+  max-width: 72rem;
+  margin: 0 auto 3.2rem;
+  text-align: center;
+}
+
+.elysian-collections-page .collection-list {
+  gap: 2.4rem;
+  margin: 0;
+  padding: 0;
+}
+
+.elysian-collections-page .collection-card-wrapper .card {
+  overflow: hidden;
+  border: 1px solid rgba(181, 138, 74, 0.18);
+  border-radius: 2.6rem;
+  background: var(--black-2);
+  box-shadow: 0 2rem 4.8rem rgba(28, 24, 20, 0.06);
+}
+
+.elysian-collections-page .card__caption {
+  font-size: 1.35rem;
+  line-height: 1.8;
+}
+
+.elysian-collections-page .icon-wrap {
+  color: var(--gold);
+}
+
+.article-template__hero-container {
+  max-width: 1200px;
+  margin: 5.6rem auto 0;
+  overflow: hidden;
+  border: 1px solid rgba(181, 138, 74, 0.18);
+  border-radius: 2.8rem;
+  box-shadow: 0 2.4rem 5.6rem rgba(28, 24, 20, 0.08);
+}
+
+.article-template header.page-width--narrow,
+.article-template__content.page-width--narrow,
+.article-template__social-sharing.page-width--narrow,
+.article-template__comment-wrapper .page-width--narrow {
+  max-width: 82rem;
+  margin-inline: auto;
+}
+
+.article-template header.page-width--narrow {
+  padding: 4.8rem 0 2.4rem;
+  text-align: center;
+  border-bottom: 1px solid var(--gold-line);
+}
+
+.article-template__title {
+  margin: 0 0 1.6rem;
+  color: var(--white);
+  font-family: var(--serif);
+  font-size: clamp(3.4rem, 5.4vw, 5.8rem);
+  font-weight: 400;
+  line-height: 1.06;
+}
+
+.article-template__content.page-width--narrow {
+  padding-top: 3.6rem;
+  color: var(--white-dim);
+  font-size: 1.5rem;
+  line-height: 1.95;
+}
+
+.article-template__content blockquote {
+  margin: 2.4rem 0;
+  padding: 2.4rem 2.8rem;
+  border-left: 2px solid var(--gold);
+  background: var(--black-2);
+  color: var(--white);
+}
+
+.article-template__social-sharing {
+  margin-top: 2.8rem;
+}
+
+.article-template .share-button details {
+  position: relative;
+}
+
+.article-template .share-button__fallback {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  margin-top: 1.2rem;
+  padding: 1.6rem;
+  border: 1px solid var(--gold-line);
+  border-radius: 1.8rem;
+  background: var(--black-2);
+}
+
+.article-template .share-button__fallback .field {
+  flex: 1;
+}
+
+.article-template .share-button__copy,
+.article-template .share-button__close {
+  min-width: 5.2rem;
+  padding: 0;
+}
+
+.article-template__back {
+  margin-top: 3.2rem;
+}
+
+.article-template__comment-wrapper {
+  margin-top: 6.4rem;
+  padding-top: 4rem;
+  border-top: 1px solid var(--gold-line);
+  background: transparent;
+}
+
+.article-template__comments-comment {
+  margin-bottom: 1.6rem;
+  padding: 2.4rem;
+  border: 1px solid rgba(181, 138, 74, 0.18);
+  border-radius: 2rem;
+  background: var(--black-2);
+  color: var(--white-dim);
+}
+
+.article-template__comments-fields,
+.article-template__comment-fields {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.6rem;
+}
+
+.article-template .form__message,
+.article-template .form-status,
+.article-template .form-status-list {
+  color: var(--white);
+}
+
+.article-template .form__message .svg-wrapper,
+.customer .form__message .svg-wrapper {
+  color: var(--gold);
+}
+
+.article-template .text-area.field__input {
+  min-height: 16rem;
+  padding-top: 2.6rem;
+}
+
+.template-404 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 62vh;
+  text-align: center;
+}
+
+.template-404 p {
+  margin-bottom: 1rem;
+  color: var(--gold);
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.template-404 .button {
+  margin-top: 1rem;
+}
+
+.customer {
+  display: flex;
+  flex-direction: column;
+  gap: 2.4rem;
+}
+
+.customer.login > h1,
+.customer.register > h1,
+.customer.activate > h1,
+.customer.reset-password > h1 {
+  text-align: center;
+}
+
+.customer.login > div,
+.customer.register form,
+.customer.activate form,
+.customer.reset-password form {
+  width: 100%;
+  max-width: 58rem;
+  margin: 0 auto;
+  padding: 3rem 2.8rem;
+  border: 1px solid rgba(181, 138, 74, 0.18);
+  border-radius: 2.6rem;
+  background: var(--black-2);
+  box-shadow: 0 2.2rem 5rem rgba(28, 24, 20, 0.06);
+}
+
+.customer.account > div:first-child,
+.customer.order > div:first-child {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1.6rem;
+  padding-bottom: 1.8rem;
+  border-bottom: 1px solid var(--gold-line);
+}
+
+.customer.account > div:last-child,
+.customer.order > div:last-child {
+  display: grid;
+  grid-template-columns: minmax(0, 1.7fr) minmax(28rem, 0.95fr);
+  gap: 2.4rem;
+  align-items: start;
+}
+
+.customer.account > div:last-child > div,
+.customer.order > div:last-child > div:first-child,
+.customer.order > div:last-child > div:last-child > div,
+.customer.addresses > div[data-address],
+.customer.addresses li[data-address] {
+  padding: 2.8rem;
+  border: 1px solid rgba(181, 138, 74, 0.18);
+  border-radius: 2.6rem;
+  background: var(--black-2);
+  box-shadow: 0 2rem 4.8rem rgba(28, 24, 20, 0.06);
+}
+
+.customer.addresses > a {
+  align-self: flex-start;
+}
+
+.customer.addresses [id='AddAddress'],
+.customer.addresses [id^='EditAddress_'] {
+  margin-top: 2rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--gold-line);
+}
+
+.customer.addresses ul[role='list'] {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 2.4rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.customer h2 {
+  margin: 0 0 1.6rem;
+  color: var(--white);
+  font-family: var(--sans);
+  font-size: 1.1rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.customer .field {
+  position: relative;
+  margin-bottom: 1.6rem;
+}
+
+.customer .field input,
+.customer .field textarea,
+.customer .select select {
+  width: 100%;
+  min-height: 5.6rem;
+  padding: 2.3rem 1.4rem 1rem;
+  border: 1px solid var(--gold-line);
+  border-radius: 1.8rem;
+  background: var(--black);
+  box-shadow: none;
+  color: var(--white);
+  font-family: var(--sans);
+  font-size: 1.4rem;
+}
+
+.customer .select select {
+  padding: 1.6rem 4rem 1.6rem 1.4rem;
+  appearance: none;
+}
+
+.customer .field textarea {
+  min-height: 14rem;
+  resize: vertical;
+}
+
+.customer .field input::placeholder,
+.customer .field textarea::placeholder {
+  color: transparent;
+}
+
+.customer .field label {
+  position: absolute;
+  top: 1rem;
+  left: 1.4rem;
+  color: var(--white-dim);
+  font-family: var(--sans);
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  pointer-events: none;
+}
+
+.customer .field input:focus,
+.customer .field textarea:focus,
+.customer .select select:focus {
+  border-color: var(--gold);
+  outline: none;
+}
+
+.customer .select {
+  position: relative;
+  margin-bottom: 1.6rem;
+}
+
+.customer .select .svg-wrapper {
+  position: absolute;
+  top: 50%;
+  right: 1.4rem;
+  color: var(--white-dim);
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+.customer .errors,
+.customer .form__message,
+.customer .form-status-list {
+  color: var(--white);
+}
+
+.customer .errors,
+.customer .form-status-list,
+.article-template .form-status-list {
+  margin: 1rem 0 1.8rem;
+  padding: 1.6rem 1.8rem;
+  border: 1px solid rgba(150, 40, 27, 0.28);
+  border-radius: 1.8rem;
+  background: rgba(150, 40, 27, 0.08);
+}
+
+.customer hr {
+  margin: 1.8rem 0;
+  border: 0;
+  border-top: 1px solid var(--gold-line);
+}
+
+.customer table {
+  width: 100%;
+  margin-top: 2rem;
+  border-collapse: collapse;
+}
+
+.customer th,
+.customer td {
+  padding: 1.4rem 0;
+  border-bottom: 1px solid rgba(181, 138, 74, 0.16);
+  text-align: left;
+  vertical-align: top;
+}
+
+.customer th {
+  color: var(--white-dim);
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.customer td {
+  color: var(--white);
+}
+
+.customer td a {
+  color: var(--white);
+  text-decoration: none;
+}
+
+.customer td a:hover {
+  color: var(--gold);
+}
+
+.customer .properties,
+.customer .fulfillment,
+.customer .product-option,
+.customer .discounts,
+.customer .cart-discount {
+  color: var(--white-dim);
+}
+
+.customer .discounts[role='list'],
+.customer .properties,
+.customer .fulfillment {
+  margin-top: 1rem;
+}
+
+.customer .svg-wrapper {
+  color: currentColor;
+}
+
+@media (max-width: 990px) {
+  .customer.account > div:last-child,
+  .customer.order > div:last-child {
+    grid-template-columns: 1fr;
+  }
+
+  .customer.addresses ul[role='list'] {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 749px) {
+  .template-search,
+  .elysian-collections-page,
+  .template-404,
+  .customer {
+    padding: 4rem 1.6rem 7.2rem;
+  }
+
+  .article-template {
+    padding: 0 1.6rem 7.2rem;
+  }
+
+  .template-search__search,
+  .customer.login > div,
+  .customer.register form,
+  .customer.activate form,
+  .customer.reset-password form,
+  .customer.account > div:last-child > div,
+  .customer.order > div:last-child > div:first-child,
+  .customer.order > div:last-child > div:last-child > div,
+  .customer.addresses > div[data-address],
+  .customer.addresses li[data-address] {
+    padding: 2.4rem 2rem;
+  }
+
+  .template-search .grid.product-grid,
+  .elysian-collections-page .collection-list {
+    gap: 1.6rem;
+  }
+
+  .article-template__hero-container {
+    margin-top: 4rem;
+    border-radius: 2rem;
+  }
+
+  .article-template header.page-width--narrow {
+    padding-top: 3.6rem;
+  }
+
+  .article-template__comments-fields,
+  .article-template__comment-fields {
+    grid-template-columns: 1fr;
+  }
+
+  .customer.account > div:first-child,
+  .customer.order > div:first-child {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

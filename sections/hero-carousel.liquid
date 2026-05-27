@@ -1,5 +1,18 @@
-<section class="hero">
-  <div class="slide-track" id="st">
+{%- liquid
+  assign slide_count = 0
+  for block in section.blocks
+    if block.type == 'slide'
+      assign slide_count = slide_count | plus: 1
+    endif
+  endfor
+-%}
+
+<section
+  class="hero{% if slide_count > 1 %} hero--carousel{% else %} hero--single{% endif %}"
+  data-hero-carousel
+  data-autoplay-ms="8500"
+>
+  <div class="slide-track" data-hero-track>
 
     {%- for block in section.blocks -%}
       {%- if block.type == 'slide' -%}
@@ -62,18 +75,24 @@
 
   </div>
 
-  <!-- Prev / Next arrows -->
-  <button class="hero-arrow prev" id="hero-prev" aria-label="Previous slide">&#8592;</button>
-  <button class="hero-arrow next" id="hero-next" aria-label="Next slide">&#8594;</button>
+  {%- if slide_count > 1 -%}
+    <button class="hero-arrow prev" type="button" data-hero-prev aria-label="Previous slide">&#8592;</button>
+    <button class="hero-arrow next" type="button" data-hero-next aria-label="Next slide">&#8594;</button>
 
-  <!-- Dots -->
-  <div class="hero-dots">
-    {%- for block in section.blocks -%}
-      {%- if block.type == 'slide' -%}
-        <div class="h-dot{% if forloop.first %} active{% endif %}" data-slide="{{ forloop.index0 }}" aria-label="Go to slide {{ forloop.index }}"></div>
-      {%- endif -%}
-    {%- endfor -%}
-  </div>
+    <div class="hero-dots">
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'slide' -%}
+          <button
+            class="h-dot{% if forloop.first %} active{% endif %}"
+            type="button"
+            data-hero-dot
+            data-slide="{{ forloop.index0 }}"
+            aria-label="Go to slide {{ forloop.index }}"
+          ></button>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+  {%- endif -%}
 </section>
 
 {% schema %}

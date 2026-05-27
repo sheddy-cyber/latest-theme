@@ -6,9 +6,11 @@
 {%- liquid
   assign origin_tag = ''
   assign texture_tag = ''
+  assign data_tags = product.tags | join: ',' | downcase
+  assign show_compare_price = false
   for tag in product.tags
     assign tag_lower = tag | downcase
-    if tag contains 'India' or tag contains 'Burma' or tag contains 'Vietnam' or tag contains 'Cambodia'
+    if tag_lower contains 'indian' or tag_lower contains 'burmese' or tag_lower contains 'vietnamese' or tag_lower contains 'cambodian'
       assign origin_tag = tag
     endif
     if tag_lower == 'straight' or tag_lower == 'wavy' or tag_lower == 'curly' or tag_lower == 'deep curly' or tag_lower == 'body wave'
@@ -18,7 +20,10 @@
 
   assign show_badge = false
   assign badge_label = ''
-  if product.tags contains 'Bestseller'
+  if product.available == false
+    assign show_badge = true
+    assign badge_label = 'Sold Out'
+  elsif product.tags contains 'Bestseller'
     assign show_badge = true
     assign badge_label = 'Bestseller'
   elsif product.tags contains 'New'
@@ -28,9 +33,12 @@
     assign show_badge = true
     assign badge_label = 'Sale'
   endif
+  if product.compare_at_price_min > product.price_min
+    assign show_compare_price = true
+  endif
 -%}
 
-<div class="product-card elysian-card" data-texture="{{ texture_tag }}">
+<div class="product-card elysian-card{% unless product.available %} is-sold-out{% endunless %}{% if product.images[1] != blank %} has-secondary-media{% endif %}{% if card_class != blank %} {{ card_class }}{% endif %}" data-texture="{{ texture_tag }}" data-tags="{{ data_tags }}">
   <div class="elysian-card-media">
     <a href="{{ product.url }}" class="elysian-prod-img" aria-label="{{ product.title | escape }}">
       {%- if product.featured_media != blank -%}
@@ -44,6 +52,18 @@
             sizes: '(min-width: 990px) 22vw, (min-width: 750px) 33vw, 50vw',
             alt: product.featured_media.alt | default: product.title | escape
         }}
+        {%- if product.images[1] != blank -%}
+          {{
+            product.images[1]
+            | image_url: width: 900
+            | image_tag:
+              class: 'elysian-prod-photo elysian-prod-photo--secondary',
+              loading: 'lazy',
+              widths: '300, 450, 600, 900',
+              sizes: '(min-width: 990px) 22vw, (min-width: 750px) 33vw, 50vw',
+              alt: product.images[1].alt | default: product.title | escape
+          }}
+        {%- endif -%}
       {%- elsif product.featured_image != blank -%}
         {{
           product.featured_image
@@ -55,6 +75,18 @@
             sizes: '(min-width: 990px) 22vw, (min-width: 750px) 33vw, 50vw',
             alt: product.featured_image.alt | default: product.title | escape
         }}
+        {%- if product.images[1] != blank -%}
+          {{
+            product.images[1]
+            | image_url: width: 900
+            | image_tag:
+              class: 'elysian-prod-photo elysian-prod-photo--secondary',
+              loading: 'lazy',
+              widths: '300, 450, 600, 900',
+              sizes: '(min-width: 990px) 22vw, (min-width: 750px) 33vw, 50vw',
+              alt: product.images[1].alt | default: product.title | escape
+          }}
+        {%- endif -%}
       {%- else -%}
         <span class="elysian-prod-placeholder" aria-hidden="true"></span>
       {%- endif -%}
@@ -73,12 +105,15 @@
     <div class="prod-name">
       <a href="{{ product.url }}">{{ product.title }}</a>
     </div>
-    <div class="prod-stars" aria-hidden="true">★★★★★</div>
+    <div class="prod-stars" aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
     <div class="prod-price">
       {%- if product.price_varies -%}
         <span class="from">From</span>
       {%- endif -%}
-      {{ product.price_min | money }}
+      <span class="current-price">{{ product.price_min | money }}</span>
+      {%- if show_compare_price -%}
+        <span class="compare">{{ product.compare_at_price_min | money }}</span>
+      {%- endif -%}
     </div>
   </div>
 </div>

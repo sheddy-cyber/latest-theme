@@ -1,627 +1,872 @@
 <style>
-/* ── Elysian Premium Collection Page ─────────────────────────── */
-:root {
-  --serif: 'Cormorant Garamond', Georgia, serif;
-  --sans: 'Montserrat', Helvetica, sans-serif;
-  --black: #0f0f0f;
-  --black-2: #1a1a1a;
-  --gold: #d4aa5a;
-  --gold-hover: #bda047;
-  --light-gray: #f7f7f7;
-  --border-color: #e8e8e8;
-}
-
 .coll-page {
+  --coll-bg: var(--black);
+  --coll-surface: var(--black-2);
+  --coll-surface-alt: var(--black-3);
+  --coll-text: var(--white);
+  --coll-muted: var(--white-dim);
+  --coll-accent: var(--gold);
+  --coll-accent-soft: var(--gold-lt);
+  --coll-border: rgba(181, 138, 74, 0.24);
+  --coll-radius-control: 6px;
+  --coll-radius-card: 8px;
+  --coll-radius-panel: 8px;
+  --coll-radius-hero: 8px;
   max-width: 1340px;
   margin: 0 auto;
-  padding: 40px 24px 80px;
+  padding: 48px 24px 88px;
   font-family: var(--sans, 'Montserrat', sans-serif);
-  background: #ffffff;
-  color: var(--black);
+  color: var(--coll-text);
 }
 
-/* Banner section styled with dark gold tones & luxury serif typography */
 .coll-banner {
   position: relative;
-  background: radial-gradient(circle at top right, #251e13 0%, var(--black) 70%);
-  min-height: 280px;
   display: flex;
   align-items: flex-end;
-  padding: 64px 64px 48px;
+  min-height: 300px;
+  padding: 72px 64px 56px;
   margin-bottom: 32px;
   overflow: hidden;
-  border-radius: 4px;
-  border: 1px solid rgba(212, 170, 90, 0.15);
+  border-radius: var(--coll-radius-hero);
+  border: 1px solid var(--coll-border);
+  background:
+    radial-gradient(circle at top right, rgba(201, 144, 104, 0.22), transparent 38%),
+    linear-gradient(135deg, rgba(255, 254, 251, 0.96) 0%, rgba(246, 241, 231, 0.94) 54%, rgba(237, 229, 212, 0.92) 100%);
+  box-shadow: 0 30px 80px rgba(28, 24, 20, 0.08);
 }
+
 .coll-banner-bg {
-  position: absolute; inset: 0;
-  background-size: cover; background-position: center;
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
   background-repeat: no-repeat;
-  opacity: 0.35;
+  opacity: 0.18;
+  mix-blend-mode: multiply;
+  filter: saturate(0.8) contrast(0.94);
   transition: transform 6s ease;
 }
+
 .coll-banner:hover .coll-banner-bg {
   transform: scale(1.03);
 }
+
 .coll-banner::after {
   content: '';
-  position: absolute; inset: 0;
-  background: linear-gradient(to top, rgba(15,15,15,0.85) 0%, transparent 70%);
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, rgba(255, 254, 251, 0.94) 0%, rgba(255, 254, 251, 0.82) 52%, rgba(255, 254, 251, 0.26) 100%);
   z-index: 1;
 }
-.coll-banner-body { position: relative; z-index: 2; max-width: 720px; }
-.coll-banner-label {
-  font-size: 10px; font-weight: 700;
-  letter-spacing: .25em; text-transform: uppercase;
-  color: var(--gold);
-  margin-bottom: 12px;
-  display: block;
+
+.coll-banner-body {
+  position: relative;
+  z-index: 2;
+  max-width: 720px;
 }
+
+.coll-banner-label {
+  display: block;
+  margin-bottom: 12px;
+  color: var(--coll-accent);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+}
+
 .coll-banner-title {
+  margin-bottom: 16px;
+  color: var(--coll-text);
   font-family: var(--serif, 'Cormorant Garamond', serif);
   font-size: clamp(38px, 5.5vw, 64px);
   font-weight: 500;
-  color: #ffffff;
-  margin-bottom: 16px;
   line-height: 1.05;
   letter-spacing: -0.01em;
 }
+
 .coll-banner-desc {
-  font-size: 14px;
-  color: rgba(255,255,255,0.72);
-  line-height: 1.8;
   max-width: 580px;
+  color: var(--coll-muted);
+  font-size: 14px;
   font-weight: 400;
+  line-height: 1.8;
 }
+
+.coll-banner-desc p {
+  margin: 0;
+}
+
 .coll-banner-count {
   margin-top: 18px;
+  color: rgba(28, 24, 20, 0.56);
   font-size: 10px;
   font-weight: 600;
-  letter-spacing: .18em;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: rgba(255,255,255,0.45);
 }
 
-/* Elegant gold rule separator */
 .coll-section-rule {
-  width: 60px; height: 1px;
-  background: var(--gold);
+  width: 60px;
+  height: 1px;
   margin: 0 0 24px;
+  background: var(--coll-accent);
 }
 
-/* Replicated Impulse luxury toolbar */
 .coll-toolbar {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 16px 0;
-  border-top: 1px solid var(--border-color);
-  border-bottom: 1px solid var(--border-color);
-  margin-bottom: 32px;
   gap: 20px;
+  margin-bottom: 32px;
+  padding: 16px 0;
+  border-top: 1px solid var(--coll-border);
+  border-bottom: 1px solid var(--coll-border);
 }
-.coll-toolbar-left {
+
+.coll-toolbar-left,
+.coll-toolbar-right {
   display: flex;
   align-items: center;
+}
+
+.coll-toolbar-left {
   gap: 20px;
 }
-.coll-filter-toggle-btn {
-  display: flex; align-items: center; gap: 10px;
-  font-size: 11px; font-weight: 700; letter-spacing: .16em;
-  text-transform: uppercase; color: var(--black);
-  border: 1px solid var(--black);
-  border-radius: 50px;
-  padding: 10px 24px; cursor: pointer;
-  background: transparent; transition: all .3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  font-family: var(--sans);
-}
-.coll-filter-toggle-btn:hover {
-  background: var(--black); color: #fff;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-}
-.coll-filter-toggle-btn svg { width: 14px; height: 14px; }
 
-/* Desktop Grid layout toggles */
+.coll-toolbar-right {
+  gap: 24px;
+}
+
+.coll-filter-toggle-btn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 24px;
+  border: 1px solid var(--coll-border);
+  border-radius: var(--coll-radius-control);
+  background: var(--coll-surface);
+  color: var(--coll-text);
+  cursor: pointer;
+  font-family: var(--sans);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.coll-filter-toggle-btn:hover {
+  background: var(--coll-text);
+  border-color: var(--coll-text);
+  color: var(--coll-bg);
+  box-shadow: 0 16px 28px rgba(28, 24, 20, 0.1);
+}
+
+.coll-filter-toggle-btn svg {
+  width: 14px;
+  height: 14px;
+}
+
 .coll-grid-switches {
   display: flex;
   align-items: center;
   gap: 6px;
-  border-left: 1px solid var(--border-color);
   padding-left: 20px;
+  border-left: 1px solid var(--coll-border);
 }
-.coll-grid-switch {
-  background: none;
-  border: none;
-  width: 32px; height: 32px;
-  display: flex; align-items: center; justify-content: center;
-  color: #ccc;
-  cursor: pointer;
-  border-radius: 50%;
-  transition: all .2s ease;
-}
-.coll-grid-switch:hover {
-  color: var(--black);
-  background: var(--light-gray);
-}
-.coll-grid-switch.active {
-  color: var(--black);
-  background: #f0f0f0;
-}
-.coll-grid-switch svg { width: 16px; height: 16px; }
 
-.coll-toolbar-right {
+.coll-grid-switch {
   display: flex;
   align-items: center;
-  gap: 24px;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border: none;
+  border-radius: var(--coll-radius-control);
+  background: none;
+  color: rgba(28, 24, 20, 0.44);
+  cursor: pointer;
+  transition: all 0.2s ease;
 }
+
+.coll-grid-switch:hover {
+  background: var(--coll-surface);
+  color: var(--coll-text);
+}
+
+.coll-grid-switch.active {
+  background: var(--coll-surface-alt);
+  color: var(--coll-text);
+}
+
+.coll-grid-switch svg {
+  width: 16px;
+  height: 16px;
+}
+
 .coll-result-count {
-  font-size: 13px; color: #777; letter-spacing: .02em;
+  color: var(--coll-muted);
+  font-size: 13px;
   font-weight: 500;
+  letter-spacing: 0.02em;
 }
+
 .coll-sort {
-  display: flex; align-items: center; gap: 12px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
 }
+
 .coll-sort label {
-  font-weight: 700; letter-spacing: .14em;
-  text-transform: uppercase; white-space: nowrap;
-  font-size: 9px; color: var(--black);
+  color: var(--coll-text);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  white-space: nowrap;
 }
+
 .coll-sort-select-wrapper {
   position: relative;
 }
+
 .coll-sort select {
-  font-size: 12px; font-family: var(--sans); font-weight: 600;
-  border: 1px solid #d0d0d0; padding: 10px 36px 10px 16px;
-  background: #fff; color: var(--black); cursor: pointer;
-  appearance: none; border-radius: 50px;
-  transition: border-color .3s, box-shadow .3s;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%230f0f0f' stroke-width='1.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
-  background-repeat: no-repeat; background-position: right 14px center;
+  padding: 10px 36px 10px 16px;
+  border: 1px solid var(--coll-border);
+  border-radius: var(--coll-radius-control);
+  background: var(--coll-surface);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%231C1814' stroke-width='1.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
   background-size: 10px 6px;
-}
-.coll-sort select:hover {
-  border-color: var(--black);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+  color: var(--coll-text);
+  cursor: pointer;
+  appearance: none;
+  font-family: var(--sans);
+  font-size: 12px;
+  font-weight: 600;
+  transition: border-color 0.3s, box-shadow 0.3s;
 }
 
-/* ── Collapsible Main Layout ── */
+.coll-sort select:hover {
+  border-color: rgba(181, 138, 74, 0.42);
+  box-shadow: 0 12px 24px rgba(28, 24, 20, 0.06);
+}
+
 .coll-main-layout {
   display: flex;
   gap: 36px;
   position: relative;
 }
 
-/* Desktop Collapsible Left Sidebar */
 .coll-sidebar {
+  position: sticky;
+  top: 96px;
   width: 270px;
   flex-shrink: 0;
+  align-self: flex-start;
+  padding: 24px;
+  border: 1px solid var(--coll-border);
+  border-radius: var(--coll-radius-panel);
+  background: var(--coll-surface);
+  box-shadow: 0 22px 52px rgba(28, 24, 20, 0.06);
   opacity: 1;
   transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
+
 .coll-sidebar.hidden {
   width: 0;
-  opacity: 0;
   margin-right: -36px;
-  pointer-events: none;
+  padding: 0;
+  border-width: 0;
+  background: transparent;
+  box-shadow: none;
+  opacity: 0;
   overflow: hidden;
+  pointer-events: none;
 }
+
 .coll-grid-container {
   flex-grow: 1;
+  min-width: 0;
   transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
-/* Clear Active Filters Button */
 .coll-sidebar-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
   margin-bottom: 20px;
   padding-bottom: 10px;
-  border-bottom: 2px solid var(--black);
+  border-bottom: 1px solid var(--coll-border);
 }
-.coll-sidebar-title {
-  font-size: 12px; font-weight: 800; letter-spacing: .18em; text-transform: uppercase;
-}
-.coll-filter-clear-all {
-  font-size: 11px; font-weight: 700; color: #888; text-decoration: underline;
-  letter-spacing: .02em; background: none; border: none; cursor: pointer;
-  padding: 0; font-family: var(--sans);
-}
-.coll-filter-clear-all:hover { color: var(--gold); }
 
-/* Accordion Accordions */
-.filter-group {
-  border-bottom: 1px solid var(--border-color);
-  padding: 16px 0;
+.coll-sidebar-title {
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
 }
+
+.coll-filter-clear-all {
+  padding: 0;
+  border: none;
+  background: none;
+  color: var(--coll-muted);
+  cursor: pointer;
+  font-family: var(--sans);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  text-decoration: underline;
+}
+
+.coll-filter-clear-all:hover {
+  color: var(--coll-accent);
+}
+
+.filter-group {
+  padding: 16px 0;
+  border-bottom: 1px solid rgba(181, 138, 74, 0.18);
+}
+
 .filter-group:first-child {
   border-top: none;
 }
+
 .filter-group-header {
-  width: 100%;
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  background: none;
-  border: none;
+  justify-content: space-between;
+  width: 100%;
   padding: 6px 0;
+  border: none;
+  background: none;
+  color: var(--coll-text);
   cursor: pointer;
   font-family: var(--sans);
-  font-weight: 700;
   font-size: 11px;
-  letter-spacing: .14em;
-  text-transform: uppercase;
-  color: var(--black);
+  font-weight: 700;
+  letter-spacing: 0.14em;
   text-align: left;
+  text-transform: uppercase;
 }
+
 .filter-group-header .accordion-icon {
-  width: 12px;
-  height: 12px;
-  transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #888;
+  width: 12px;
+  height: 12px;
+  color: var(--coll-muted);
+  transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
+
 .filter-group-header .accordion-icon svg {
-  width: 8px; height: 5px;
+  width: 8px;
+  height: 5px;
 }
+
 .filter-group-header[aria-expanded="true"] .accordion-icon {
+  color: var(--coll-text);
   transform: rotate(180deg);
-  color: var(--black);
 }
+
 .filter-group-content {
-  overflow: hidden;
-  transition: max-height 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94), padding 0.35s ease;
   max-height: 0;
+  overflow: hidden;
   padding-top: 0;
+  transition: max-height 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94), padding 0.35s ease;
 }
+
 .filter-group-content.open {
   max-height: 400px;
   padding-top: 14px;
 }
 
-/* Custom Checkbox Design */
 .filter-list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
   display: flex;
   flex-direction: column;
   gap: 12px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
 }
+
 .filter-list-item {
   display: flex;
   align-items: center;
 }
+
 .filter-checkbox-label {
+  position: relative;
   display: flex;
   align-items: center;
-  cursor: pointer;
-  position: relative;
-  font-size: 13px;
-  color: #444;
-  user-select: none;
   gap: 10px;
   width: 100%;
+  color: var(--coll-text);
+  cursor: pointer;
+  font-size: 13px;
+  user-select: none;
 }
+
 .filter-checkbox {
   position: absolute;
+  width: 0;
+  height: 0;
   opacity: 0;
-  cursor: pointer;
-  height: 0; width: 0;
 }
+
 .custom-checkbox {
   position: relative;
-  height: 18px; width: 18px;
-  border: 1.5px solid #d0d0d0;
-  background-color: #fff;
-  transition: all 0.25s ease;
   flex-shrink: 0;
-  border-radius: 2px;
+  width: 18px;
+  height: 18px;
+  border: 1.5px solid rgba(181, 138, 74, 0.3);
+  border-radius: 6px;
+  background-color: var(--coll-bg);
+  transition: all 0.25s ease;
 }
+
 .filter-checkbox-label:hover .custom-checkbox {
-  border-color: var(--black);
+  border-color: var(--coll-accent);
 }
+
 .filter-checkbox:checked ~ .custom-checkbox {
-  background-color: var(--black);
-  border-color: var(--black);
+  border-color: var(--coll-accent);
+  background-color: var(--coll-accent);
 }
+
 .custom-checkbox::after {
   content: "";
   position: absolute;
+  top: 2px;
+  left: 5px;
   display: none;
-  left: 5px; top: 2px;
-  width: 4px; height: 8px;
-  border: solid white;
+  width: 4px;
+  height: 8px;
+  border: solid var(--coll-bg);
   border-width: 0 1.5px 1.5px 0;
   transform: rotate(45deg);
 }
+
 .filter-checkbox:checked ~ .custom-checkbox::after {
   display: block;
 }
+
 .filter-checkbox:disabled ~ .custom-checkbox {
-  background-color: #f7f7f7;
-  border-color: #e0e0e0;
+  border-color: rgba(181, 138, 74, 0.14);
+  background-color: rgba(237, 229, 212, 0.7);
 }
+
 .filter-checkbox:disabled ~ .filter-value-text {
-  color: #bbb;
+  color: rgba(107, 99, 90, 0.55);
   text-decoration: line-through;
 }
+
 .filter-value-text {
+  color: var(--coll-text);
   font-size: 13px;
   font-weight: 500;
-  color: var(--black);
-  letter-spacing: .02em;
+  letter-spacing: 0.02em;
 }
+
 .filter-value-count {
-  font-size: 11px;
-  color: #aaa;
   margin-left: auto;
+  color: rgba(107, 99, 90, 0.74);
+  font-size: 11px;
   font-weight: 500;
 }
 
-/* Price Range fields */
 .filter-price-range {
   padding: 4px 2px;
 }
+
 .filter-price-inputs {
   display: flex;
   align-items: center;
   gap: 10px;
 }
+
 .filter-price-field {
   display: flex;
   align-items: center;
-  border: 1px solid #d0d0d0;
-  border-radius: 4px;
-  padding: 8px 12px;
-  background: #fff;
   flex: 1;
+  padding: 8px 12px;
+  border: 1px solid var(--coll-border);
+  border-radius: var(--coll-radius-control);
+  background: var(--coll-bg);
 }
+
 .filter-price-currency {
-  font-size: 12px; color: #888; margin-right: 4px; font-weight: 600;
+  margin-right: 4px;
+  color: var(--coll-muted);
+  font-size: 12px;
+  font-weight: 600;
 }
+
 .filter-price-input {
   width: 100%;
+  padding: 0;
   border: none;
   background: none;
+  color: var(--coll-text);
+  font-family: var(--sans);
   font-size: 13px;
   font-weight: 600;
-  color: var(--black);
-  font-family: var(--sans);
-  padding: 0;
   outline: none;
 }
-.filter-price-input::placeholder { color: #ccc; }
-.filter-price-to {
-  font-size: 11px; font-weight: 700; color: #888; text-transform: uppercase;
+
+.filter-price-input::placeholder {
+  color: rgba(107, 99, 90, 0.58);
 }
 
-/* ── Product Grid & Custom Cards ── */
+.filter-price-to {
+  color: var(--coll-muted);
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
 .coll-grid {
   display: grid;
-  gap: 36px 20px;
+  gap: 32px 20px;
   transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
-.coll-grid.cols-2 { grid-template-columns: repeat(2, 1fr); }
-.coll-grid.cols-3 { grid-template-columns: repeat(3, 1fr); }
-.coll-grid.cols-4 { grid-template-columns: repeat(4, 1fr); }
 
-.coll-card {
-  background: #fff;
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  cursor: pointer;
-  overflow: hidden;
+.coll-grid.cols-2 {
+  grid-template-columns: repeat(2, 1fr);
 }
 
-/* Double image hover aspect ratio container */
-.coll-card-img-wrap {
-  position: relative;
-  width: 100%;
-  aspect-ratio: 3/4;
-  overflow: hidden;
-  background: var(--light-gray);
-  border-radius: 4px;
-}
-.coll-card-img-wrap img {
-  width: 100%; height: 100%;
-  object-fit: cover;
-  display: block;
-  transition: transform .6s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity .6s ease;
-}
-.coll-img-primary {
-  position: relative;
-  z-index: 2;
-}
-.coll-img-secondary {
-  position: absolute; inset: 0;
-  z-index: 1;
-  opacity: 0;
-}
-.coll-card:hover .coll-img-primary {
-  transform: scale(1.04);
-}
-.coll-card:hover .coll-img-secondary {
-  opacity: 1;
-  transform: scale(1.04);
-}
-.coll-card-img-placeholder {
-  width: 100%; height: 100%;
-  background: linear-gradient(135deg, var(--black-2), var(--black));
-  display: flex; align-items: center; justify-content: center;
-  color: rgba(255,255,255,0.18); font-size: 11px; letter-spacing: .15em; text-transform: uppercase;
+.coll-grid.cols-3 {
+  grid-template-columns: repeat(3, 1fr);
 }
 
-/* Luxury rounded badges */
-.coll-badge {
-  position: absolute; top: 12px; left: 12px;
-  font-size: 8px; font-weight: 800;
-  letter-spacing: .18em; text-transform: uppercase;
-  padding: 5px 12px; z-index: 3;
-  border-radius: 50px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.06);
-  font-family: var(--sans);
-}
-.coll-badge-trending { background: var(--black); color: var(--gold); border: 1px solid var(--gold); }
-.coll-badge-new { background: var(--gold); color: var(--black); }
-.coll-badge-sale { background: #96281b; color: #fff; }
-.coll-badge-soldout { background: rgba(255,255,255,0.92); color: #888; border: 1px solid #ddd; }
-
-/* Custom Glassmorphism Quick Buy Trigger */
-.coll-quick-view {
-  position: absolute; bottom: 16px; left: 16px; right: 16px;
-  background: rgba(15, 15, 15, 0.72);
-  backdrop-filter: blur(12px) saturate(180%);
-  -webkit-backdrop-filter: blur(12px) saturate(180%);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  color: #fff;
-  font-size: 9px; font-weight: 700;
-  letter-spacing: .22em; text-transform: uppercase;
-  text-align: center; padding: 12px;
-  border-radius: 50px;
-  transform: translateY(15px);
-  opacity: 0;
-  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  z-index: 4;
-  font-family: var(--sans);
-}
-.coll-card:hover .coll-quick-view {
-  transform: translateY(0);
-  opacity: 1;
-}
-.coll-quick-view:hover {
-  background: #ffffff;
-  color: var(--black);
-  border-color: #ffffff;
-  box-shadow: 0 8px 24px rgba(0,0,0,0.18);
+.coll-grid.cols-4 {
+  grid-template-columns: repeat(4, 1fr);
 }
 
-.coll-soldout-overlay {
-  position: absolute; inset: 0;
-  background: rgba(255,255,255,0.4);
-  z-index: 2;
+.elysian-collection-page .product-card {
+  border: 1px solid rgba(181, 138, 74, 0.18);
+  border-radius: var(--coll-radius-card);
+  background: linear-gradient(180deg, rgba(255, 254, 251, 0.98) 0%, rgba(246, 241, 231, 0.95) 100%);
+  box-shadow: 0 18px 36px rgba(28, 24, 20, 0.06);
+  transition: transform 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94), border-color 0.35s ease, box-shadow 0.35s ease;
+}
+
+.elysian-collection-page .product-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(181, 138, 74, 0.34);
+  box-shadow: 0 24px 48px rgba(28, 24, 20, 0.1);
+}
+
+.elysian-collection-page .elysian-card-media {
+  border-bottom: 1px solid rgba(181, 138, 74, 0.14);
+  background: var(--coll-surface-alt);
+}
+
+.elysian-collection-page .elysian-prod-img {
+  background: linear-gradient(145deg, rgba(237, 229, 212, 0.9), rgba(255, 254, 251, 0.86));
+}
+
+.elysian-collection-page .elysian-prod-placeholder {
+  min-height: 100%;
+  background: linear-gradient(145deg, rgba(237, 229, 212, 0.9), rgba(255, 254, 251, 0.86));
+}
+
+.elysian-collection-page .collection-product-card.is-sold-out .elysian-card-media::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 254, 251, 0.34);
   pointer-events: none;
 }
 
-/* Elegant card body */
-.coll-card-body { padding: 16px 4px 8px; }
-.coll-card-origin {
-  font-size: 8px; font-weight: 800;
-  letter-spacing: .2em; text-transform: uppercase;
-  color: var(--gold); margin-bottom: 6px;
-}
-.coll-card-title {
-  font-family: var(--serif, 'Cormorant Garamond', serif);
-  font-size: 19px; font-weight: 500;
-  color: var(--black); margin-bottom: 6px; line-height: 1.25;
-}
-.coll-card-title a { color: inherit; text-decoration: none; transition: color .2s; }
-.coll-card-title a:hover { color: var(--gold); }
-.coll-card-stars { color: var(--gold); font-size: 11px; margin-bottom: 7px; letter-spacing: .08em; }
-
-.coll-card-price {
-  font-size: 13px; font-weight: 600; color: var(--black);
-  font-family: var(--sans);
-}
-.coll-card-price .from { font-size: 10px; font-weight: 400; color: #888; margin-right: 2px; }
-.coll-card-price .compare { font-size: 12px; color: #bbbbbb; text-decoration: line-through; margin-left: 8px; font-weight: 500; }
-.coll-card-price .save-badge {
-  font-size: 10px; font-weight: 700; color: var(--gold); margin-left: 8px;
+.elysian-collection-page .prod-badge {
+  top: 14px;
+  left: 14px;
+  padding: 6px 12px;
+  border: 1px solid rgba(181, 138, 74, 0.18);
+  border-radius: 999px;
+  background: rgba(255, 254, 251, 0.94);
+  color: var(--coll-text);
+  box-shadow: 0 10px 20px rgba(28, 24, 20, 0.1);
 }
 
-/* ── Pagination Buttons ── */
+.elysian-collection-page .collection-product-card .quick-view {
+  right: 16px;
+  bottom: 16px;
+  left: 16px;
+  border: 1px solid rgba(181, 138, 74, 0.22);
+  border-radius: 999px;
+  background: rgba(255, 254, 251, 0.84);
+  color: var(--coll-text);
+  backdrop-filter: blur(12px) saturate(180%);
+  -webkit-backdrop-filter: blur(12px) saturate(180%);
+  font-size: 9px;
+  letter-spacing: 0.22em;
+  opacity: 0;
+  transform: translateY(15px);
+}
+
+.elysian-collection-page .collection-product-card:hover .quick-view {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.elysian-collection-page .collection-product-card .quick-view:hover {
+  border-color: var(--coll-text);
+  background: var(--coll-text);
+  color: var(--coll-bg);
+  box-shadow: 0 16px 30px rgba(28, 24, 20, 0.18);
+}
+
+.elysian-collection-page .prod-info {
+  padding: 18px 18px 20px;
+  background: transparent;
+}
+
+.elysian-collection-page .prod-origin {
+  margin-bottom: 6px;
+  color: var(--coll-accent);
+  font-size: 8px;
+  font-weight: 800;
+  letter-spacing: 0.2em;
+}
+
+.elysian-collection-page .prod-name {
+  margin-bottom: 6px;
+  color: var(--coll-text);
+  font-size: 19px;
+  font-weight: 500;
+  line-height: 1.25;
+}
+
+.elysian-collection-page .prod-name a {
+  transition: color 0.2s ease;
+}
+
+.elysian-collection-page .prod-name a:hover {
+  color: var(--coll-accent);
+}
+
+.elysian-collection-page .prod-stars {
+  margin-bottom: 7px;
+  color: var(--coll-accent);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+}
+
+.elysian-collection-page .prod-price {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  color: var(--coll-text);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.elysian-collection-page .prod-price .from {
+  margin-right: 2px;
+  color: var(--coll-muted);
+  font-size: 10px;
+  font-weight: 400;
+}
+
+.elysian-collection-page .prod-price .compare {
+  color: rgba(107, 99, 90, 0.65);
+  font-size: 12px;
+  font-weight: 500;
+  text-decoration: line-through;
+}
+
 .coll-pagination {
-  display: flex; justify-content: center; align-items: center;
-  gap: 8px; margin-top: 64px; flex-wrap: wrap;
-}
-.coll-page-btn {
-  width: 44px; height: 44px;
-  display: flex; align-items: center; justify-content: center;
-  border: 1px solid #dcdcdc;
-  border-radius: 50%;
-  font-size: 13px; font-weight: 600; color: var(--black);
-  cursor: pointer; background: #fff; transition: all .3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  text-decoration: none;
-  font-family: var(--sans);
-}
-.coll-page-btn:hover { border-color: var(--black); background: var(--light-gray); }
-.coll-page-btn.active { background: var(--black); color: #fff; border-color: var(--black); }
-.coll-page-btn.prev-next {
-  width: auto; padding: 0 24px; border-radius: 50px;
-  letter-spacing: .12em; font-size: 10px; text-transform: uppercase; font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 64px;
 }
 
-/* Empty State page */
-.coll-empty {
-  text-align: center; padding: 96px 24px;
-  color: #999; font-size: 14px;
+.coll-page-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border: 1px solid var(--coll-border);
+  border-radius: var(--coll-radius-control);
+  background: var(--coll-surface);
+  color: var(--coll-text);
+  cursor: pointer;
+  font-family: var(--sans);
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
+
+.coll-page-btn:hover {
+  border-color: rgba(181, 138, 74, 0.42);
+  background: var(--coll-surface-alt);
+}
+
+.coll-page-btn.active {
+  border-color: var(--coll-text);
+  background: var(--coll-text);
+  color: var(--coll-bg);
+}
+
+.coll-page-btn.prev-next {
+  width: auto;
+  padding: 0 24px;
+  border-radius: var(--coll-radius-control);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.coll-page-btn--ellipsis {
+  border-color: transparent;
+  color: rgba(107, 99, 90, 0.7);
+  cursor: default;
+  pointer-events: none;
+}
+
+.coll-empty {
+  padding: 96px 24px;
+  border: 1px solid var(--coll-border);
+  border-radius: var(--coll-radius-panel);
+  background: var(--coll-surface);
+  color: var(--coll-muted);
+  text-align: center;
+  font-size: 14px;
+}
+
 .coll-empty h3 {
-  font-size: 32px; color: var(--black);
   margin-bottom: 12px;
+  color: var(--coll-text);
   font-family: var(--serif, 'Cormorant Garamond', serif);
+  font-size: 32px;
   font-weight: 500;
 }
 
-/* ── Mobile & Responsive layout (Slide-over drawer) ── */
 .coll-mobile-backdrop {
   display: none;
-  position: fixed; inset: 0;
+  position: fixed;
+  inset: 0;
+  z-index: 9998;
   background: rgba(0, 0, 0, 0.55);
   backdrop-filter: blur(5px);
   -webkit-backdrop-filter: blur(5px);
-  z-index: 9998;
   opacity: 0;
   transition: opacity 0.4s ease;
 }
+
 .coll-mobile-backdrop.active {
   display: block;
   opacity: 1;
 }
 
 @media (max-width: 1024px) {
-  .coll-grid.cols-4 { grid-template-columns: repeat(3, 1fr); }
-  .coll-grid-switches [data-cols="4"] { display: none; }
+  .coll-main-layout {
+    gap: 28px;
+  }
+
+  .coll-grid.cols-4 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .coll-grid-switches [data-cols="4"] {
+    display: none;
+  }
 }
 
 @media (max-width: 768px) {
-  .coll-main-layout { gap: 0; }
-  .coll-grid { gap: 24px 12px; }
-  .coll-grid.cols-3, .coll-grid.cols-4 { grid-template-columns: repeat(2, 1fr); }
-  
-  .coll-banner { padding: 40px 28px 32px; min-height: 200px; }
-  .coll-toolbar { flex-wrap: wrap; gap: 14px; padding: 12px 0; }
-  .coll-toolbar-left { width: 100%; justify-content: space-between; gap: 12px; }
-  .coll-toolbar-right { width: 100%; justify-content: space-between; border-top: 1px dashed var(--border-color); padding-top: 12px; }
-  .coll-grid-switches { border-left: none; padding-left: 0; }
-  
-  .coll-card-title { font-size: 16px; }
-  .coll-card-body { padding: 12px 2px 4px; }
-  .coll-page { padding: 20px 12px 60px; }
-  .coll-quick-view { display: none !important; }
-  
-  /* Mobile Sidebar as a slide-out drawer */
+  .coll-main-layout {
+    gap: 0;
+  }
+
+  .coll-grid {
+    gap: 24px 12px;
+  }
+
+  .coll-grid.cols-3,
+  .coll-grid.cols-4 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .coll-banner {
+    min-height: 220px;
+    padding: 40px 28px 32px;
+    border-radius: var(--coll-radius-hero);
+  }
+
+  .coll-toolbar {
+    flex-wrap: wrap;
+    gap: 14px;
+    padding: 12px 0;
+  }
+
+  .coll-toolbar-left {
+    width: 100%;
+    justify-content: space-between;
+    gap: 12px;
+  }
+
+  .coll-toolbar-right {
+    width: 100%;
+    justify-content: space-between;
+    padding-top: 12px;
+    border-top: 1px dashed rgba(181, 138, 74, 0.2);
+  }
+
+  .coll-grid-switches {
+    padding-left: 0;
+    border-left: none;
+  }
+
+  .elysian-collection-page .prod-name {
+    font-size: 16px;
+  }
+
+  .elysian-collection-page .prod-info {
+    padding: 14px 14px 16px;
+  }
+
+  .coll-page {
+    padding: 28px 12px 60px;
+  }
+
+  .elysian-collection-page .collection-product-card .quick-view {
+    display: none !important;
+  }
+
   .coll-sidebar {
     position: fixed;
     top: 0;
     left: -320px;
     width: 300px;
     height: 100vh;
-    background: #ffffff;
-    z-index: 9999;
     padding: 32px 24px;
-    box-shadow: 12px 0 40px rgba(0,0,0,0.18);
-    transition: left 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 0.4s ease;
-    overflow-y: auto;
+    border-radius: 0;
+    background: var(--coll-surface);
+    box-shadow: 12px 0 40px rgba(28, 24, 20, 0.18);
+    z-index: 9999;
     opacity: 0;
+    overflow-y: auto;
+    transition: left 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 0.4s ease;
   }
+
   .coll-sidebar.active {
     left: 0;
     opacity: 1;
   }
+
   .coll-sidebar-header {
     margin-top: 10px;
   }
@@ -639,7 +884,7 @@
 {%- comment -%} Wrapping collection loop with standard Shopify pagination {%- endcomment -%}
 {%- paginate collection.products by products_per_page -%}
 
-<div class="coll-page">
+<div class="coll-page elysian-collection-page">
 
   {%- comment -%} ── Collection Banner ── {%- endcomment -%}
   <div class="coll-banner">
@@ -680,7 +925,7 @@
             elsif coll_title_down contains 'wavy'
               echo 'Effortless, beachy elegance and soft volume. Our Wavy collection delivers a natural, cascading wave pattern that is soft to the touch and easy to style. The perfect balance of casual luxury and timeless romantic charm.'
             else
-              echo 'Indulge in the world’s most exquisite, 100% ethically sourced virgin hair. Hand-selected for its natural luster, superior bounce, and unparalleled longevity, our signature extensions define modern luxury. Crafted for the discerning woman who demands nothing less than absolute perfection.'
+              echo "Indulge in the world's most exquisite, 100% ethically sourced virgin hair. Hand-selected for its natural luster, superior bounce, and unparalleled longevity, our signature extensions define modern luxury. Crafted for the discerning woman who demands nothing less than absolute perfection."
             endif
           -%}
         {%- endif -%}
@@ -742,7 +987,7 @@
             <option value="created-descending"{% if sort_by == 'created-descending' %} selected{% endif %}>Newest</option>
             <option value="price-ascending"{% if sort_by == 'price-ascending' %} selected{% endif %}>Price: Low to High</option>
             <option value="price-descending"{% if sort_by == 'price-descending' %} selected{% endif %}>Price: High to Low</option>
-            <option value="title-ascending"{% if sort_by == 'title-ascending' %} selected{% endif %}>A – Z</option>
+            <option value="title-ascending"{% if sort_by == 'title-ascending' %} selected{% endif %}>A to Z</option>
           </select>
         </div>
       </div>
@@ -941,82 +1186,7 @@
       {%- if collection.products.size > 0 -%}
         <div class="coll-grid cols-3" id="coll-grid">
           {%- for product in collection.products -%}
-            {%- liquid
-              assign is_sold_out = false
-              unless product.available
-                assign is_sold_out = true
-              endunless
-              assign is_new = false
-              assign is_trending = false
-              assign is_sale = false
-              if product.tags contains 'New' or product.tags contains 'new'
-                assign is_new = true
-              endif
-              if product.tags contains 'Bestseller' or product.tags contains 'Trending' or product.tags contains 'trending' or product.tags contains 'bestseller'
-                assign is_trending = true
-              endif
-              if product.compare_at_price > product.price
-                assign is_sale = true
-              endif
-              assign origin = ''
-              for tag in product.tags
-                assign tag_down = tag | downcase
-                if tag_down == 'indian' or tag_down == 'vietnamese' or tag_down == 'cambodian' or tag_down == 'burmese'
-                  assign origin = tag
-                endif
-              endfor
-            -%}
-            <div class="coll-card" data-tags="{{ product.tags | join: ',' | downcase }}" onclick="window.location.href='{{ product.url }}'">
-              
-              <div class="coll-card-img-wrap">
-                {%- if is_sold_out -%}<div class="coll-soldout-overlay"></div>{%- endif -%}
-
-                {%- if is_sold_out -%}
-                  <span class="coll-badge coll-badge-soldout">Sold Out</span>
-                {%- elsif is_trending -%}
-                  <span class="coll-badge coll-badge-trending">Bestseller</span>
-                {%- elsif is_new -%}
-                  <span class="coll-badge coll-badge-new">New</span>
-                {%- elsif is_sale -%}
-                  <span class="coll-badge coll-badge-sale">Sale</span>
-                {%- endif -%}
-
-                {%- if product.featured_image -%}
-                  <img class="coll-img-primary" src="{{ product.featured_image | image_url: width: 600 }}"
-                       alt="{{ product.featured_image.alt | escape | default: product.title }}"
-                       loading="lazy" width="600" height="{{ 600 | divided_by: product.featured_image.aspect_ratio | round }}">
-                  {%- if product.images[1] != blank -%}
-                    <img class="coll-img-secondary" src="{{ product.images[1] | image_url: width: 600 }}"
-                         alt="{{ product.images[1].alt | escape | default: product.title }}"
-                         loading="lazy" width="600" height="{{ 600 | divided_by: product.images[1].aspect_ratio | round }}">
-                  {%- endif -%}
-                {%- else -%}
-                  <div class="coll-card-img-placeholder">No Image</div>
-                {%- endif -%}
-
-                <div class="coll-quick-view">Quick Shop</div>
-              </div>
-
-              <div class="coll-card-body">
-                {%- if origin != '' -%}
-                  <div class="coll-card-origin">{{ origin }}</div>
-                {%- endif -%}
-                <h3 class="coll-card-title">
-                  <a href="{{ product.url }}" onclick="event.stopPropagation();">{{ product.title }}</a>
-                </h3>
-                <div class="coll-card-stars">★★★★★</div>
-                <div class="coll-card-price">
-                  {%- if product.price_varies -%}<span class="from">from </span>{%- endif -%}
-                  {{ product.price_min | money }}
-                  {%- if is_sale -%}
-                    <span class="compare">{{ product.compare_at_price_min | money }}</span>
-                    {%- assign money_saved = product.compare_at_price_min | minus: product.price_min -%}
-                    {%- assign pct_saved = money_saved | times: 100 | divided_by: product.compare_at_price_min -%}
-                    <span class="save-badge">Save {{ pct_saved }}%</span>
-                  {%- endif -%}
-                </div>
-              </div>
-            </div>
+            {% render 'product-card', product: product, card_class: 'collection-product-card' %}
           {%- endfor -%}
         </div>
 
@@ -1024,7 +1194,7 @@
         {%- if paginate.pages > 1 -%}
           <div class="coll-pagination">
             {%- if paginate.previous -%}
-              <a href="{{ paginate.previous.url }}" class="coll-page-btn prev-next">← Prev</a>
+              <a href="{{ paginate.previous.url }}" class="coll-page-btn prev-next">Previous</a>
             {%- endif -%}
             {%- for part in paginate.parts -%}
               {%- if part.is_link -%}
@@ -1032,11 +1202,11 @@
               {%- elsif part.title == paginate.current_page -%}
                 <span class="coll-page-btn active">{{ part.title }}</span>
               {%- else -%}
-                <span class="coll-page-btn" style="border:none;cursor:default;color:#aaa;">{{ part.title }}</span>
+                <span class="coll-page-btn coll-page-btn--ellipsis">{{ part.title }}</span>
               {%- endif -%}
             {%- endfor -%}
             {%- if paginate.next -%}
-              <a href="{{ paginate.next.url }}" class="coll-page-btn prev-next">Next →</a>
+              <a href="{{ paginate.next.url }}" class="coll-page-btn prev-next">Next</a>
             {%- endif -%}
           </div>
         {%- endif -%}
@@ -1151,7 +1321,7 @@ function onTagFilterChange() {
     active.push(cb.value.toLowerCase());
   });
   
-  var cards = document.querySelectorAll('.coll-card');
+  var cards = document.querySelectorAll('#coll-grid .product-card[data-tags]');
   var matchCount = 0;
   
   cards.forEach(function(card) {

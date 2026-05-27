@@ -1,0 +1,347 @@
+:root {
+  --gold: #8C4A23;
+  --gold-lt: #C99068;
+  --gold-line: #E2D9C8;
+  --black: #F6F1E7;
+  --black-2: #FFFEFB;
+  --black-3: #EDE5D4;
+  --copper: #B58A4A;
+  --white: #1C1814;
+  --white-dim: #6B635A;
+  --accent: #8C4A23;
+  --elysian-radius-control: 6px;
+  --elysian-radius-card: 8px;
+  --elysian-radius-panel: 8px;
+  --elysian-radius-pill: 999px;
+  --elysian-border-soft: rgba(140, 74, 35, 0.16);
+  --elysian-border-strong: rgba(140, 74, 35, 0.28);
+  --elysian-shadow-soft: 0 18px 42px rgba(28, 24, 20, 0.08);
+  --elysian-shadow-hover: 0 28px 56px rgba(28, 24, 20, 0.12);
+  --elysian-surface: rgba(255, 254, 251, 0.96);
+}
+
+body {
+  background: var(--black);
+  color: var(--white);
+}
+
+header {
+  background: var(--black) !important;
+  border-bottom: 1px solid var(--gold-line) !important;
+}
+
+header .nav-logo,
+.nav-logo {
+  color: var(--gold) !important;
+}
+
+header .nav-logo span,
+.nav-logo span {
+  color: var(--gold-lt) !important;
+}
+
+header .nav-links a,
+header .nav-item-btn,
+header .nav-icons a,
+.nav-links a,
+.nav-item-btn,
+.nav-icons a {
+  color: var(--white-dim) !important;
+}
+
+header .nav-links a:hover,
+header .nav-item-btn:hover,
+header .nav-item-btn.open,
+header .nav-icons a:hover,
+.nav-links a:hover,
+.nav-item-btn:hover,
+.nav-item-btn.open,
+.nav-icons a:hover {
+  color: var(--gold) !important;
+}
+
+.cart-ct {
+  background: var(--gold) !important;
+  color: var(--black) !important;
+}
+
+.promo-bar,
+.announcement-bar,
+section[id*="announcement-bar"],
+.shopify-section-group-header-group .promo-bar,
+.shopify-section-group-header-group .announcement-bar {
+  background: var(--gold) !important;
+  color: var(--black) !important;
+  border-bottom: 0 !important;
+}
+
+.promo-msg,
+.promo-msg a,
+section[id*="announcement-bar"] *,
+.announcement-bar *,
+.announcement-bar a,
+.shopify-section-group-header-group .promo-bar *,
+.shopify-section-group-header-group .promo-bar a,
+.shopify-section-group-header-group .announcement-bar *,
+.shopify-section-group-header-group .announcement-bar a {
+  color: inherit !important;
+}
+
+.press-strip {
+  background: var(--black-2) !important;
+  border-bottom: 1px solid var(--gold-line) !important;
+}
+
+.press-label {
+  color: var(--white-dim) !important;
+}
+
+.press-logo {
+  color: var(--white) !important;
+}
+
+.press-logo:hover {
+  color: var(--gold) !important;
+}
+
+.button,
+.button.button--secondary,
+.shopify-challenge__button,
+.customer button,
+.template-404 .button,
+.template-search .button,
+.article-template .button,
+.article-template .share-button__button,
+.article-template .share-button__copy,
+.article-template .share-button__close,
+.btn-primary,
+.btn-outline,
+.quick-view,
+.bestsellers .ftab,
+.coll-filter-toggle-btn,
+.coll-page-btn {
+  border-radius: var(--elysian-radius-control) !important;
+}
+
+.product-card,
+.elysian-card,
+.review-card,
+.pillar,
+.tile,
+.look-tile,
+.template-search .card,
+.elysian-collections-page .card,
+.collection-card-wrapper .card,
+.article-template__hero-container,
+.article-template .comments,
+.article-template .comment-form,
+.customer table,
+.customer .order-details,
+.customer .addresses li,
+.shopify-policy__container {
+  border-radius: var(--elysian-radius-card) !important;
+}
+
+.product-card,
+.elysian-card,
+.review-card,
+.template-search .card,
+.elysian-collections-page .card,
+.collection-card-wrapper .card,
+.article-template__hero-container,
+.article-template .comments,
+.article-template .comment-form,
+.customer .addresses li,
+.shopify-policy__container {
+  box-shadow: var(--elysian-shadow-soft);
+}
+
+.product-card,
+.elysian-card,
+.tile,
+.look-tile,
+.collection-card-wrapper .card,
+.template-search .card,
+.elysian-collections-page .card {
+  border-color: var(--elysian-border-soft) !important;
+}
+
+.product-card:hover,
+.elysian-card:hover,
+.tile:hover,
+.look-tile:hover,
+.collection-card-wrapper .card:hover,
+.template-search .card:hover,
+.elysian-collections-page .card:hover {
+  box-shadow: var(--elysian-shadow-hover);
+}
+
+.product-card,
+.elysian-card {
+  background: linear-gradient(180deg, rgba(255, 254, 251, 0.98) 0%, rgba(246, 241, 231, 0.95) 100%);
+}
+
+.elysian-card-media,
+.product-card .elysian-card-media,
+.template-search .card__inner,
+.elysian-collections-page .card__inner {
+  overflow: hidden;
+}
+
+.elysian-prod-img {
+  position: relative;
+  overflow: hidden;
+}
+
+.elysian-prod-photo {
+  transition: transform 0.55s ease, opacity 0.55s ease;
+  backface-visibility: hidden;
+}
+
+.elysian-prod-photo--secondary {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+}
+
+.elysian-card.has-secondary-media:hover .elysian-prod-photo--secondary,
+.product-card.has-secondary-media:hover .elysian-prod-photo--secondary {
+  opacity: 1;
+}
+
+.elysian-card.has-secondary-media:hover .elysian-prod-photo:not(.elysian-prod-photo--secondary),
+.product-card.has-secondary-media:hover .elysian-prod-photo:not(.elysian-prod-photo--secondary) {
+  opacity: 0.18;
+}
+
+.quick-view {
+  left: 14px !important;
+  right: 14px !important;
+  bottom: 14px !important;
+  width: auto !important;
+  padding: 12px 14px;
+  border: 1px solid var(--elysian-border-soft);
+  border-radius: var(--elysian-radius-pill) !important;
+  background: rgba(255, 254, 251, 0.88) !important;
+  color: #1c1814 !important;
+  box-shadow: 0 14px 30px rgba(28, 24, 20, 0.12);
+  backdrop-filter: blur(10px) saturate(180%);
+  -webkit-backdrop-filter: blur(10px) saturate(180%);
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(14px);
+  transition: opacity 0.32s ease, transform 0.32s ease, background 0.2s ease, color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.bestsellers .quick-view {
+  transform: translateY(14px);
+}
+
+.elysian-card:hover .quick-view,
+.product-card:hover .quick-view,
+.bestsellers .elysian-card:hover .quick-view,
+.bestsellers .product-card:hover .quick-view {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+
+.quick-view:hover {
+  border-color: #1c1814;
+  background: #1c1814 !important;
+  color: #fffefb !important;
+  box-shadow: 0 18px 34px rgba(28, 24, 20, 0.18);
+}
+
+.prod-badge {
+  border: 1px solid var(--elysian-border-soft);
+  border-radius: var(--elysian-radius-pill) !important;
+  background: rgba(255, 254, 251, 0.94);
+  color: #1c1814;
+  box-shadow: 0 10px 20px rgba(28, 24, 20, 0.1);
+}
+
+.product-card.is-sold-out .elysian-card-media::after,
+.elysian-card.is-sold-out .elysian-card-media::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 254, 251, 0.32);
+  pointer-events: none;
+}
+
+.product-card.is-sold-out .elysian-prod-photo,
+.elysian-card.is-sold-out .elysian-prod-photo {
+  filter: saturate(0.72);
+}
+
+.prod-price {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+.prod-price .compare {
+  color: rgba(107, 99, 90, 0.72);
+  font-size: 12px;
+  font-weight: 500;
+  text-decoration: line-through;
+}
+
+.template-search .card,
+.elysian-collections-page .card,
+.collection-card-wrapper .card,
+.article-template .comments,
+.article-template .comment-form,
+.customer table,
+.customer .addresses li,
+.shopify-policy__container {
+  background: var(--elysian-surface);
+  border: 1px solid var(--elysian-border-soft);
+}
+
+.template-search .card__media,
+.elysian-collections-page .card__media,
+.article-template__hero-container {
+  border-radius: var(--elysian-radius-card) !important;
+}
+
+.template-search .facets-container,
+.article-template .share-button__fallback,
+.customer .field,
+.shopify-policy__container {
+  border-radius: var(--elysian-radius-panel) !important;
+}
+
+.customer input,
+.customer select,
+.customer textarea,
+.template-search .field__input,
+.article-template .field__input {
+  border-radius: var(--elysian-radius-control) !important;
+}
+
+@media (max-width: 749px) {
+  .product-card,
+  .elysian-card,
+  .template-search .card,
+  .elysian-collections-page .card,
+  .collection-card-wrapper .card,
+    .review-card,
+    .tile,
+    .look-tile,
+    .pillar,
+    .article-template__hero-container {
+    border-radius: var(--elysian-radius-card) !important;
+  }
+
+  .button,
+  .customer button,
+  .template-search .button,
+    .article-template .button,
+    .btn-primary,
+    .btn-outline {
+    border-radius: var(--elysian-radius-control) !important;
+  }
+}

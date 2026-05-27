@@ -2,13 +2,13 @@
 .template-page #MainContent,
 .template-blog #MainContent,
 .template-article #MainContent {
-  background: #0f0f0f;
+  background: var(--black);
 }
 
 .elysian-static-page,
 .elysian-blog-page {
-  background: #0f0f0f;
-  color: #f5f0e8;
+  background: var(--black);
+  color: var(--white);
   padding-bottom: 80px;
 }
 
@@ -18,7 +18,7 @@
   max-width: 900px;
   margin: 0 auto;
   text-align: center;
-  border-bottom: 1px solid rgba(212, 170, 90, 0.2);
+  border-bottom: 1px solid var(--gold-line);
 }
 
 .elysian-static-eyebrow,
@@ -28,7 +28,7 @@
   font-weight: 700;
   letter-spacing: 0.28em;
   text-transform: uppercase;
-  color: #d4aa5a;
+  color: var(--gold);
   margin-bottom: 14px;
   display: block;
 }
@@ -38,7 +38,7 @@
   font-family: var(--serif, 'Cormorant Garamond', Georgia, serif);
   font-size: clamp(36px, 5vw, 56px);
   font-weight: 500;
-  color: #ffffff;
+  color: var(--white);
   margin: 0 0 18px;
   line-height: 1.1;
 }
@@ -48,7 +48,7 @@
   font-family: var(--sans, 'Montserrat', sans-serif);
   font-size: 14px;
   line-height: 1.85;
-  color: rgba(245, 240, 232, 0.72);
+  color: var(--white-dim);
   max-width: 640px;
   margin: 0 auto;
 }
@@ -62,7 +62,7 @@
 .elysian-content-block {
   margin-bottom: 40px;
   padding-bottom: 40px;
-  border-bottom: 1px solid rgba(212, 170, 90, 0.12);
+  border-bottom: 1px solid var(--gold-line);
 }
 
 .elysian-content-block:last-child {
@@ -75,7 +75,7 @@
   font-family: var(--serif, 'Cormorant Garamond', Georgia, serif);
   font-size: 28px;
   font-weight: 500;
-  color: #ffffff;
+  color: var(--white);
   margin: 0 0 14px;
 }
 
@@ -84,7 +84,7 @@
   font-family: var(--sans, 'Montserrat', sans-serif);
   font-size: 14px;
   line-height: 1.85;
-  color: rgba(245, 240, 232, 0.78);
+  color: var(--white-dim);
 }
 
 .elysian-content-block .rte ul,
@@ -98,8 +98,8 @@
 }
 
 .elysian-tip-card {
-  background: #1a1a1a;
-  border: 1px solid rgba(212, 170, 90, 0.25);
+  background: var(--black-3);
+  border: 1px solid var(--gold-line);
   padding: 28px 28px 24px;
   margin-bottom: 20px;
 }
@@ -110,14 +110,14 @@
   font-weight: 700;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: #d4aa5a;
+  color: var(--gold);
   margin: 0 0 12px;
 }
 
 .elysian-tip-card p {
   font-size: 14px;
   line-height: 1.8;
-  color: rgba(245, 240, 232, 0.78);
+  color: var(--white-dim);
   margin: 0;
 }
 
@@ -128,8 +128,8 @@
 }
 
 .elysian-faq-item {
-  border: 1px solid rgba(212, 170, 90, 0.2);
-  background: #1a1a1a;
+  border: 1px solid var(--gold-line);
+  background: var(--black-3);
   margin-bottom: 12px;
 }
 
@@ -138,7 +138,7 @@
   font-size: 13px;
   font-weight: 600;
   letter-spacing: 0.04em;
-  color: #ffffff;
+  color: var(--white);
   padding: 18px 48px 18px 22px;
   cursor: pointer;
   list-style: none;
@@ -156,7 +156,7 @@
   top: 50%;
   transform: translateY(-50%);
   font-size: 18px;
-  color: #d4aa5a;
+  color: var(--gold);
   font-weight: 400;
 }
 
@@ -168,7 +168,7 @@
   padding: 0 22px 20px;
   font-size: 14px;
   line-height: 1.85;
-  color: rgba(245, 240, 232, 0.72);
+  color: var(--white-dim);
 }
 
 .elysian-faq-answer p {
@@ -188,8 +188,8 @@
 }
 
 .elysian-blog-card {
-  background: #1a1a1a;
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: var(--black-3);
+  border: 1px solid var(--gold-line);
   display: flex;
   flex-direction: column;
   overflow: hidden;
@@ -199,12 +199,12 @@
 }
 
 .elysian-blog-card:hover {
-  border-color: #ffffff;
+  border-color: var(--gold);
 }
 
 .elysian-blog-card-media {
   aspect-ratio: 4 / 3;
-  background: #252525;
+  background: var(--black-3);
   overflow: hidden;
 }
 
@@ -231,7 +231,7 @@
   font-weight: 600;
   letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: #d4aa5a;
+  color: var(--gold);
   margin-bottom: 10px;
 }
 
@@ -239,7 +239,7 @@
   font-family: var(--serif, 'Cormorant Garamond', Georgia, serif);
   font-size: 22px;
   font-weight: 500;
-  color: #ffffff;
+  color: var(--white);
   margin: 0 0 10px;
   line-height: 1.2;
 }
@@ -247,7 +247,7 @@
 .elysian-blog-card-excerpt {
   font-size: 13px;
   line-height: 1.7;
-  color: rgba(245, 240, 232, 0.6);
+  color: var(--white-dim);
   margin: 0;
   flex: 1;
 }
@@ -258,13 +258,13 @@
   font-weight: 700;
   letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: #d4aa5a;
+  color: var(--gold);
 }
 
 .elysian-blog-empty {
   text-align: center;
   padding: 48px 24px;
-  color: rgba(245, 240, 232, 0.55);
+  color: var(--white-dim);
   font-size: 14px;
 }
 
@@ -286,25 +286,25 @@
 /* Article pages (from blog) */
 .template-article .article-template__hero,
 .template-article .article-template__content {
-  background: #0f0f0f;
+  background: var(--black);
 }
 
 .template-article .article-template__title,
 .template-article .article-template__content h1,
 .template-article .article-template__content h2,
 .template-article .article-template__content h3 {
-  color: #ffffff;
+  color: var(--white);
 }
 
 .template-article .article-template__content,
 .template-article .article-template__content p,
 .template-article .article-template__content li {
-  color: rgba(245, 240, 232, 0.78);
+  color: var(--white-dim);
 }
 
 .template-article .circle-divider,
 .template-article .caption-with-letter-spacing {
-  color: #d4aa5a;
+  color: var(--gold);
 }
 
 /* About pillars */
@@ -316,13 +316,13 @@
 }
 
 .elysian-pillar {
-  background: #1a1a1a;
-  border: 1px solid rgba(212, 170, 90, 0.2);
+  background: var(--black-3);
+  border: 1px solid var(--gold-line);
   padding: 24px 22px;
 }
 
 .elysian-pillar-icon {
-  color: #d4aa5a;
+  color: var(--gold);
   font-size: 14px;
   display: block;
   margin-bottom: 10px;
@@ -334,14 +334,14 @@
   font-weight: 700;
   letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: #ffffff;
+  color: var(--white);
   margin: 0 0 8px;
 }
 
 .elysian-pillar p {
   font-size: 13px;
   line-height: 1.75;
-  color: rgba(245, 240, 232, 0.68);
+  color: var(--white-dim);
   margin: 0;
 }
 
@@ -372,30 +372,30 @@
 }
 
 .elysian-btn-primary {
-  background: #ffffff;
-  color: #0f0f0f;
-  border: 1px solid #ffffff;
+  background: var(--black-2);
+  color: var(--white);
+  border: 1px solid var(--gold-line);
 }
 
 .elysian-btn-primary:hover {
-  background: #d4aa5a;
-  border-color: #d4aa5a;
-  color: #0f0f0f;
+  background: var(--gold);
+  border-color: var(--gold);
+  color: var(--black);
 }
 
 .elysian-btn-outline {
   background: transparent;
-  color: #f5f0e8;
-  border: 1px solid rgba(212, 170, 90, 0.45);
+  color: var(--white);
+  border: 1px solid var(--gold-line);
 }
 
 .elysian-btn-outline:hover {
-  border-color: #d4aa5a;
-  color: #d4aa5a;
+  border-color: var(--gold);
+  color: var(--gold);
 }
 
 .elysian-tip-card a {
-  color: #d4aa5a;
+  color: var(--gold);
   text-decoration: underline;
   text-underline-offset: 3px;
 }
@@ -409,7 +409,7 @@
 
 .elysian-quiz-progress {
   height: 2px;
-  background: rgba(212, 170, 90, 0.2);
+  background: var(--gold-line);
   margin-bottom: 28px;
 }
 
@@ -417,7 +417,7 @@
   display: block;
   height: 100%;
   width: 33%;
-  background: #d4aa5a;
+  background: var(--gold);
   transition: width 0.35s ease;
 }
 
@@ -426,7 +426,7 @@
   font-weight: 600;
   letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: rgba(245, 240, 232, 0.5);
+  color: var(--white-dim);
   margin-bottom: 24px;
   text-align: center;
 }
@@ -435,7 +435,7 @@
   font-family: var(--serif, 'Cormorant Garamond', Georgia, serif);
   font-size: 28px;
   font-weight: 500;
-  color: #ffffff;
+  color: var(--white);
   text-align: center;
   margin: 0 0 28px;
   line-height: 1.2;
@@ -451,9 +451,9 @@
   width: 100%;
   text-align: left;
   padding: 16px 20px;
-  background: #1a1a1a;
-  border: 1px solid rgba(212, 170, 90, 0.25);
-  color: #f5f0e8;
+  background: var(--black-3);
+  border: 1px solid var(--gold-line);
+  color: var(--white);
   font-family: var(--sans, 'Montserrat', sans-serif);
   font-size: 13px;
   font-weight: 500;
@@ -463,12 +463,12 @@
 
 .elysian-quiz-option:hover,
 .elysian-quiz-option.is-selected {
-  border-color: #d4aa5a;
-  color: #d4aa5a;
+  border-color: var(--gold);
+  color: var(--gold);
 }
 
 .elysian-quiz-option.is-selected {
-  background: rgba(212, 170, 90, 0.08);
+  background: var(--black-3);
 }
 
 .elysian-quiz-result {
@@ -479,14 +479,14 @@
 .elysian-quiz-result-title {
   font-family: var(--serif, 'Cormorant Garamond', Georgia, serif);
   font-size: 32px;
-  color: #ffffff;
+  color: var(--white);
   margin: 0 0 14px;
 }
 
 .elysian-quiz-result-text {
   font-size: 14px;
   line-height: 1.8;
-  color: rgba(245, 240, 232, 0.72);
+  color: var(--white-dim);
   max-width: 480px;
   margin: 0 auto 28px;
 }
@@ -520,8 +520,8 @@
 }
 
 .elysian-contact-form-card {
-  background: #1a1a1a;
-  border: 1px solid rgba(212, 170, 90, 0.25);
+  background: var(--black-3);
+  border: 1px solid var(--gold-line);
   padding: 32px 28px;
 }
 
@@ -536,15 +536,15 @@
   font-weight: 700;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: #d4aa5a;
+  color: var(--gold);
   margin-bottom: 8px;
 }
 
 .elysian-form-input {
   width: 100%;
-  background: #0f0f0f;
-  border: 1px solid rgba(212, 170, 90, 0.3);
-  color: #ffffff;
+  background: var(--black);
+  border: 1px solid var(--gold-line);
+  color: var(--white);
   font-family: var(--sans, 'Montserrat', sans-serif);
   font-size: 14px;
   padding: 12px 14px;
@@ -554,7 +554,7 @@
 }
 
 .elysian-form-input:focus {
-  border-color: #d4aa5a;
+  border-color: var(--gold);
 }
 
 .elysian-form-textarea {
@@ -569,12 +569,12 @@
 }
 
 .elysian-form-success {
-  background: rgba(212, 170, 90, 0.12);
-  border: 1px solid rgba(212, 170, 90, 0.35);
+  background: var(--black-3);
+  border: 1px solid var(--gold-line);
   padding: 20px;
   margin-bottom: 20px;
   font-size: 14px;
-  color: #f5f0e8;
+  color: var(--white);
 }
 
 .elysian-form-errors {
@@ -583,7 +583,7 @@
   padding: 16px 18px;
   margin-bottom: 20px;
   font-size: 13px;
-  color: #f5f0e8;
+  color: var(--white);
 }
 
 .elysian-form-errors ul {
@@ -592,7 +592,7 @@
 }
 
 .elysian-form-errors a {
-  color: #d4aa5a;
+  color: var(--gold);
 }
 
 @media (max-width: 749px) {

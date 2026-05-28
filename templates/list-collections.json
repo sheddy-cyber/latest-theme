@@ -11,12 +11,36 @@
   "sections": {
     "main": {
       "type": "main-list-collections",
+      "blocks": {
+        "raw_hair": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "raw-hair"
+          }
+        },
+        "tape_in": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "tape-in-k-tip-extension",
+            "title": "Tape-In / K-Tip Extensions"
+          }
+        },
+        "cambodian": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "cambodian"
+          }
+        }
+      },
+      "block_order": [
+        "raw_hair",
+        "tape_in",
+        "cambodian"
+      ],
       "settings": {
-        "title": "Collections",
-        "sort": "alphabetical",
-        "image_ratio": "square",
-        "columns_desktop": 3,
-        "columns_mobile": "2"
+        "eyebrow": "Collections",
+        "title": "Browse the store's core collections",
+        "intro": "<p>Start with the core groups that define the store: raw hair, tape-in and K-tip extensions, and Cambodian textures.</p>"
       }
     }
   },

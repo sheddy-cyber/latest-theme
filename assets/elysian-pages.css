@@ -604,6 +604,158 @@
   color: var(--gold);
 }
 
+/* Collections landing */
+.elysian-collections-landing {
+  background:
+    radial-gradient(circle at top right, rgba(201, 144, 104, 0.14), transparent 34%),
+    linear-gradient(180deg, #fbf7ef 0%, #f5ecdf 100%);
+  color: #1c1814;
+  padding: 56px 0 84px;
+}
+
+.elysian-collections-landing__hero {
+  max-width: 860px;
+  margin: 0 auto 36px;
+  padding: 0 24px 28px;
+  text-align: center;
+  border-bottom: 1px solid var(--gold-line);
+}
+
+.elysian-collections-landing__eyebrow {
+  display: block;
+  margin-bottom: 12px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+
+.elysian-collections-landing__title {
+  margin: 0 0 16px;
+  font-family: var(--serif, 'Cormorant Garamond', Georgia, serif);
+  font-size: clamp(36px, 5vw, 58px);
+  font-weight: 500;
+  line-height: 1.06;
+  letter-spacing: -0.02em;
+  color: #1c1814;
+}
+
+.elysian-collections-landing__intro {
+  max-width: 680px;
+  margin: 0 auto;
+  font-size: 14px;
+  line-height: 1.85;
+  color: rgba(28, 24, 20, 0.72);
+}
+
+.elysian-collections-landing__intro p {
+  margin: 0;
+}
+
+.elysian-collections-landing__grid {
+  max-width: 1340px;
+  margin: 0 auto;
+  padding: 0 24px;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 24px;
+}
+
+.elysian-collections-landing__card {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border: 1px solid var(--gold-line);
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.9);
+  color: inherit;
+  text-decoration: none;
+  box-shadow: 0 20px 48px rgba(28, 24, 20, 0.06);
+  transition:
+    transform 0.25s ease,
+    border-color 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.elysian-collections-landing__card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(140, 74, 35, 0.6);
+  box-shadow: 0 28px 60px rgba(28, 24, 20, 0.1);
+}
+
+.elysian-collections-landing__media {
+  aspect-ratio: 1 / 1;
+  background: linear-gradient(145deg, #f1e5d2, #e8dcc6);
+  overflow: hidden;
+}
+
+.elysian-collections-landing__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.elysian-collections-landing__card:hover .elysian-collections-landing__media img {
+  transform: scale(1.04);
+}
+
+.elysian-collections-landing__placeholder {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.elysian-collections-landing__content {
+  padding: 22px 20px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.elysian-collections-landing__card-label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+
+.elysian-collections-landing__card-title {
+  margin: 0;
+  font-family: var(--serif, 'Cormorant Garamond', Georgia, serif);
+  font-size: clamp(24px, 2.4vw, 32px);
+  font-weight: 500;
+  line-height: 1.08;
+  color: #1c1814;
+}
+
+.elysian-collections-landing__card-copy {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.7;
+  color: rgba(28, 24, 20, 0.72);
+}
+
+.elysian-collections-landing__card-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 2px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+
+.elysian-collections-landing__card-cta::after {
+  content: '→';
+  font-size: 12px;
+  line-height: 1;
+}
+
 @media (max-width: 749px) {
   .elysian-static-hero,
   .elysian-blog-hero {
@@ -630,5 +782,24 @@
   .elysian-btn-primary,
   .elysian-btn-outline {
     width: 100%;
+  }
+
+  .elysian-collections-landing {
+    padding: 36px 0 68px;
+  }
+
+  .elysian-collections-landing__hero {
+    margin-bottom: 28px;
+    padding-bottom: 22px;
+  }
+
+  .elysian-collections-landing__grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 989px) {
+  .elysian-collections-landing__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }

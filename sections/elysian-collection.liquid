@@ -879,6 +879,16 @@
     assign sort_by = request.params.sort_by
   endif
   assign products_per_page = section.settings.products_per_page | default: 24
+  assign is_products_page = false
+  assign banner_label = 'Luxury Extensions'
+  assign banner_title = collection.title
+  assign banner_count_label = 'Luxury Textures'
+  if collection.handle == 'all'
+    assign is_products_page = true
+    assign banner_label = 'Products'
+    assign banner_title = 'Products'
+    assign banner_count_label = 'Products'
+  endif
 -%}
 
 {%- comment -%} Wrapping collection loop with standard Shopify pagination {%- endcomment -%}
@@ -892,10 +902,12 @@
       <div class="coll-banner-bg" style="background-image: url('{{ collection.image | image_url: width: 1600 }}');"></div>
     {%- endif -%}
     <div class="coll-banner-body">
-      <span class="coll-banner-label">Luxury Extensions</span>
-      <h1 class="coll-banner-title">{{ collection.title }}</h1>
+      <span class="coll-banner-label">{{ banner_label }}</span>
+      <h1 class="coll-banner-title">{{ banner_title }}</h1>
       <div class="coll-banner-desc">
-        {%- if collection.description != blank -%}
+        {%- if is_products_page -%}
+          Browse the complete Elysian catalog of raw hair, extensions, and essential pieces across every collection.
+        {%- elsif collection.description != blank -%}
           {{ collection.description }}
         {%- else -%}
           {%- liquid
@@ -930,7 +942,7 @@
           -%}
         {%- endif -%}
       </div>
-      <div class="coll-banner-count">{{ collection.products_count }} Luxury Textures</div>
+      <div class="coll-banner-count">{{ collection.products_count }} {{ banner_count_label }}</div>
     </div>
   </div>
   <div class="coll-section-rule"></div>

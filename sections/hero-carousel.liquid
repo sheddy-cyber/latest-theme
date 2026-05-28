@@ -51,7 +51,7 @@
                   {%- liquid
                     assign btn1_url = block.settings.btn1_link
                     if btn1_url == blank
-                      assign btn1_url = routes.all_products_collection_url
+                      assign btn1_url = routes.collections_url
                     endif
                   -%}
                   <a href="{{ btn1_url }}" class="btn-primary">{{ block.settings.btn1_label }}</a>
@@ -186,7 +186,7 @@
             "headline": "<p>Raw Burmese<br><em>Curly Bundles</em></p>",
             "subtext": "Rich, voluminous curl pattern. Zero shedding. Lasts 2 to 3 years with proper care.",
             "btn1_label": "Shop Burmese Curly",
-            "btn2_label": "View Full Collection"
+            "btn2_label": "See All Products"
           }
         }
       ]

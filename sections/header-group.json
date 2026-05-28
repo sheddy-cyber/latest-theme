@@ -164,8 +164,8 @@
       "settings": {
         "logo_first_word": "ELYSIAN",
         "logo_second_word": "IMPORT",
-        "shop_all_link": "",
-        "bestsellers_link": "",
+        "shop_all_link": "/collections",
+        "bestsellers_link": "/collections/all",
         "sale_link": "",
         "haircare_blog_handle": "news",
         "about_link": "",

@@ -1,139 +1,124 @@
-{{ 'component-card.css' | asset_url | stylesheet_tag }}
-{{ 'section-collection-list.css' | asset_url | stylesheet_tag }}
+{{ 'elysian-pages.css' | asset_url | stylesheet_tag }}
 
-<div class="page-width elysian-collections-page">
-  <h1 class="title title--primary inline-richtext{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}">
-    {{ section.settings.title }}
-  </h1>
-  {%- liquid
-    case section.settings.sort
-      when 'products_high', 'products_low'
-        assign collections = collections | sort: 'all_products_count'
-      when 'date', 'date_reversed'
-        assign collections = collections | sort: 'published_at'
-    endcase
+<section class="elysian-collections-landing section">
+  <div class="elysian-collections-landing__hero">
+    {%- if section.settings.eyebrow != blank -%}
+      <span class="elysian-collections-landing__eyebrow">{{ section.settings.eyebrow }}</span>
+    {%- endif -%}
+    <h1 class="elysian-collections-landing__title">{{ section.settings.title }}</h1>
+    {%- if section.settings.intro != blank -%}
+      <div class="elysian-collections-landing__intro rte">{{ section.settings.intro }}</div>
+    {%- endif -%}
+  </div>
 
-    if section.settings.sort == 'products_high' or section.settings.sort == 'date_reversed' or section.settings.sort == 'alphabetical_reversed'
-      assign collections = collections | reverse
-    endif
+  <div class="elysian-collections-landing__grid">
+    {%- for block in section.blocks -%}
+      {%- liquid
+        assign featured_collection = block.settings.collection
+        assign display_title = block.settings.title | default: featured_collection.title
+      -%}
+      {%- if featured_collection != blank -%}
+        <a href="{{ featured_collection.url }}" class="elysian-collections-landing__card{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}" {{ block.shopify_attributes }}>
+          <div class="elysian-collections-landing__media">
+            {%- if featured_collection.featured_image -%}
+              <img
+                srcset="
+                  {%- if featured_collection.featured_image.width >= 165 -%}{{ featured_collection.featured_image | image_url: width: 165 }} 165w,{%- endif -%}
+                  {%- if featured_collection.featured_image.width >= 330 -%}{{ featured_collection.featured_image | image_url: width: 330 }} 330w,{%- endif -%}
+                  {%- if featured_collection.featured_image.width >= 535 -%}{{ featured_collection.featured_image | image_url: width: 535 }} 535w,{%- endif -%}
+                  {%- if featured_collection.featured_image.width >= 750 -%}{{ featured_collection.featured_image | image_url: width: 750 }} 750w,{%- endif -%}
+                  {%- if featured_collection.featured_image.width >= 1000 -%}{{ featured_collection.featured_image | image_url: width: 1000 }} 1000w,{%- endif -%}
+                  {{ featured_collection.featured_image | image_url }} {{ featured_collection.featured_image.width }}w
+                "
+                src="{{ featured_collection.featured_image | image_url: width: 1200 }}"
+                sizes="(min-width: 990px) calc((100vw - 6rem) / 3), (min-width: 750px) calc((100vw - 5rem) / 2), calc(100vw - 3rem)"
+                alt="{{ featured_collection.featured_image.alt | default: display_title | escape }}"
+                width="{{ featured_collection.featured_image.width }}"
+                height="{{ featured_collection.featured_image.height }}"
+                loading="lazy"
+              >
+            {%- else -%}
+              {{ 'collection-apparel-1' | placeholder_svg_tag: 'elysian-collections-landing__placeholder' }}
+            {%- endif -%}
+          </div>
 
-    assign moduloResult = 28 | modulo: section.settings.columns_desktop
-    assign paginate_by = 30
-    if moduloResult == 0
-      assign paginate_by = 28
-    endif
-  -%}
-  {%- paginate collections by paginate_by -%}
-    <ul
-      class="collection-list grid grid--{{ section.settings.columns_desktop }}-col-desktop grid--{{ section.settings.columns_mobile }}-col-tablet-down"
-      role="list"
-    >
-      {%- for collection in collections -%}
-        <li
-          class="collection-list__item grid__item{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
-          {% if settings.animations_reveal_on_scroll %}
-            data-cascade
-            style="--animation-order: {{ forloop.index }};"
-          {% endif %}
-        >
-          {% render 'card-collection',
-            card_collection: collection,
-            media_aspect_ratio: section.settings.image_ratio,
-            columns: 3
-          %}
-        </li>
-      {%- endfor -%}
-    </ul>
-    {% render 'pagination', paginate: paginate %}
-  {%- endpaginate -%}
-</div>
+          <div class="elysian-collections-landing__content">
+            <span class="elysian-collections-landing__card-label">Collection</span>
+            <h2 class="elysian-collections-landing__card-title">{{ display_title | escape }}</h2>
+            {%- if block.settings.description != blank -%}
+              <p class="elysian-collections-landing__card-copy">{{ block.settings.description | escape }}</p>
+            {%- endif -%}
+            <span class="elysian-collections-landing__card-cta">Shop collection</span>
+          </div>
+        </a>
+      {%- endif -%}
+    {%- endfor -%}
+  </div>
+</section>
+
 {% schema %}
 {
-  "name": "t:sections.main-list-collections.name",
+  "name": "Collections landing",
   "class": "section",
   "settings": [
     {
       "type": "inline_richtext",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Featured collections"
+    },
+    {
+      "type": "inline_richtext",
       "id": "title",
-      "label": "t:sections.main-list-collections.settings.title.label",
-      "default": "t:sections.main-list-collections.settings.title.default"
+      "label": "Title",
+      "default": "Collections"
     },
     {
-      "type": "select",
-      "id": "sort",
-      "options": [
+      "type": "richtext",
+      "id": "intro",
+      "label": "Intro text",
+      "default": "<p>Browse our core collection groups and jump straight into the textures you want.</p>"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "featured_collection",
+      "name": "Collection card",
+      "settings": [
         {
-          "value": "alphabetical",
-          "label": "t:sections.main-list-collections.settings.sort.options__1.label"
+          "type": "collection",
+          "id": "collection",
+          "label": "Collection"
         },
         {
-          "value": "alphabetical_reversed",
-          "label": "t:sections.main-list-collections.settings.sort.options__2.label"
+          "type": "text",
+          "id": "title",
+          "label": "Display title",
+          "info": "Optional custom title for the card."
         },
         {
-          "value": "date_reversed",
-          "label": "t:sections.main-list-collections.settings.sort.options__3.label"
-        },
-        {
-          "value": "date",
-          "label": "t:sections.main-list-collections.settings.sort.options__4.label"
-        },
-        {
-          "value": "products_high",
-          "label": "t:sections.main-list-collections.settings.sort.options__5.label"
-        },
-        {
-          "value": "products_low",
-          "label": "t:sections.main-list-collections.settings.sort.options__6.label"
+          "type": "text",
+          "id": "description",
+          "label": "Description",
+          "info": "Optional supporting copy."
         }
-      ],
-      "default": "alphabetical",
-      "label": "t:sections.main-list-collections.settings.sort.label"
-    },
+      ]
+    }
+  ],
+  "presets": [
     {
-      "type": "select",
-      "id": "image_ratio",
-      "options": [
+      "name": "Collections landing",
+      "blocks": [
         {
-          "value": "adapt",
-          "label": "t:sections.main-list-collections.settings.image_ratio.options__1.label"
+          "type": "featured_collection"
         },
         {
-          "value": "portrait",
-          "label": "t:sections.main-list-collections.settings.image_ratio.options__2.label"
+          "type": "featured_collection"
         },
         {
-          "value": "square",
-          "label": "t:sections.main-list-collections.settings.image_ratio.options__3.label"
+          "type": "featured_collection"
         }
-      ],
-      "default": "adapt",
-      "label": "t:sections.main-list-collections.settings.image_ratio.label"
-    },
-    {
-      "type": "range",
-      "id": "columns_desktop",
-      "min": 1,
-      "max": 6,
-      "step": 1,
-      "default": 3,
-      "label": "t:sections.main-list-collections.settings.columns_desktop.label"
-    },
-    {
-      "type": "select",
-      "id": "columns_mobile",
-      "options": [
-        {
-          "value": "1",
-          "label": "t:sections.main-list-collections.settings.columns_mobile.options__1.label"
-        },
-        {
-          "value": "2",
-          "label": "t:sections.main-list-collections.settings.columns_mobile.options__2.label"
-        }
-      ],
-      "default": "2",
-      "label": "t:sections.main-list-collections.settings.columns_mobile.label"
+      ]
     }
   ]
 }

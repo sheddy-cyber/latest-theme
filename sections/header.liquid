@@ -67,7 +67,7 @@
                 {%- endif -%}
               {%- endfor -%}
               <li class="mega-viewall">
-                <a href="{{ section.settings.shop_all_link | default: routes.all_products_collection_url }}">
+                <a href="{{ section.settings.shop_all_link | default: routes.collections_url }}">
                   <span class="m-dot m-dot-all"></span>
                   <span class="mega-item-body">
                     <span class="mega-item-title">View All Collections</span>
@@ -118,7 +118,7 @@
             <h4 class="sub-head">Quick Finds</h4>
             <ul class="mega-quick">
               <li>
-                <a href="{{ section.settings.bestsellers_link }}">
+                <a href="{{ section.settings.bestsellers_link | default: routes.all_products_collection_url }}">
                   <span class="m-dot m-dot-gold"></span>
                   Best Sellers
                 </a>
@@ -259,7 +259,7 @@
           <a href="{{ link_url }}">{{ block.settings.title }}</a>
         {%- endif -%}
       {%- endfor -%}
-      <a href="{{ section.settings.shop_all_link | default: routes.all_products_collection_url }}">View All Collections</a>
+      <a href="{{ section.settings.shop_all_link | default: routes.collections_url }}">View All Collections</a>
       <p class="mob-nav-subhead">By Texture</p>
       {%- for block in section.blocks -%}
         {%- if block.type == 'texture_link' -%}

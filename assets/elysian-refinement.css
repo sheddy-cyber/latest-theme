@@ -340,7 +340,7 @@ section[id*="announcement-bar"] *,
 }
 
 .trust-strip {
-  padding: 12px 0 !important;
+  padding: 14px 0 !important;
 }
 
 .trust-inner {
@@ -349,33 +349,39 @@ section[id*="announcement-bar"] *,
   justify-content: center !important;
   flex-wrap: nowrap !important;
   gap: 0;
-  padding: 0 28px;
+  padding: 0 20px;
 }
 
 .trust-item {
-  flex: 0 1 auto;
+  flex: 1 1 0;
   min-width: 0;
   gap: 8px !important;
-  padding: 6px 22px !important;
+  padding: 8px 16px !important;
 }
 
 .trust-text {
   display: flex;
-  align-items: baseline;
-  gap: 5px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
   min-width: 0;
-  white-space: nowrap;
+  white-space: normal;
 }
 
 .trust-text strong {
-  display: inline !important;
+  display: block !important;
   font-size: 10px !important;
   letter-spacing: 0.08em !important;
+  line-height: 1.15;
+  white-space: nowrap;
 }
 
 .trust-text span {
+  display: block;
   font-size: 10px !important;
   letter-spacing: 0.02em !important;
+  line-height: 1.15;
+  white-space: nowrap;
 }
 
 .category-grid {
@@ -564,6 +570,55 @@ section[id*="announcement-bar"] *,
 .search__button,
 .reset__button {
   border-radius: var(--elysian-radius-control) !important;
+}
+
+header .mega,
+header .sdrop,
+.menu-drawer,
+.menu-drawer__inner-container,
+.menu-drawer__submenu,
+.predictive-search {
+  border-radius: 0 !important;
+}
+
+.elysian-static-page .elysian-tip-card,
+.elysian-static-page .elysian-pillar,
+.elysian-static-page .elysian-faq-item,
+.elysian-blog-page .elysian-blog-card,
+.elysian-static-page .elysian-contact-form-card,
+.elysian-static-page .elysian-quiz-option,
+.elysian-static-page .elysian-btn-primary,
+.elysian-static-page .elysian-btn-outline,
+.elysian-static-page .elysian-form-input,
+.elysian-cart-section .elysian-cart-line.cart-item,
+.elysian-cart-section .elysian-cart-summary,
+.elysian-cart-section .elysian-cart-btn-primary,
+.elysian-cart-section .elysian-cart-checkout,
+.elysian-cart-section .elysian-cart-note textarea,
+.elysian-pdp-info .product-form__input--pill input[type='radio'] + label,
+.elysian-pdp-info .select,
+.elysian-pdp-info .select__select,
+.elysian-pdp-info quantity-input.quantity,
+.elysian-pdp-buy .product-form__submit,
+.elysian-pdp-buy .shopify-payment-button__button {
+  border-radius: var(--elysian-radius-control) !important;
+}
+
+.elysian-blog-page .elysian-blog-card,
+.elysian-static-page .elysian-faq-item,
+.elysian-static-page .elysian-tip-card,
+.elysian-static-page .elysian-pillar,
+.elysian-static-page .elysian-contact-form-card,
+.elysian-cart-section .elysian-cart-line.cart-item,
+.elysian-cart-section .elysian-cart-summary {
+  border-radius: var(--elysian-radius-card) !important;
+}
+
+.article-template .comments,
+.article-template .comment-form,
+.customer table,
+.customer .addresses li {
+  border-radius: var(--elysian-radius-card) !important;
 }
 
 @media (min-width: 750px) and (max-width: 1100px) {

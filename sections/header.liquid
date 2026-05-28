@@ -67,7 +67,7 @@
                 {%- endif -%}
               {%- endfor -%}
               <li class="mega-viewall">
-                <a href="{{ section.settings.shop_all_link }}">
+                <a href="{{ section.settings.shop_all_link | default: routes.all_products_collection_url }}">
                   <span class="m-dot m-dot-all"></span>
                   <span class="mega-item-body">
                     <span class="mega-item-title">View All Collections</span>

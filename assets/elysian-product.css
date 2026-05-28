@@ -242,7 +242,7 @@ product-info.elysian-pdp {
   text-transform: uppercase !important;
   padding: 11px 18px !important;
   margin: 0 8px 8px 0 !important;
-  border-radius: 0 !important;
+  border-radius: var(--elysian-radius-control) !important;
   box-shadow: none !important;
 }
 
@@ -261,6 +261,7 @@ product-info.elysian-pdp {
   background: var(--black-3);
   border: 1px solid var(--gold-line);
   color: var(--white);
+  border-radius: var(--elysian-radius-control);
 }
 
 /* Quantity */
@@ -284,6 +285,8 @@ product-info.elysian-pdp {
   width: 132px;
   min-height: 44px;
   padding: 0;
+  border-radius: var(--elysian-radius-control);
+  overflow: hidden;
 }
 
 .elysian-pdp-info .quantity__button {
@@ -359,7 +362,7 @@ product-info.elysian-pdp {
   font-weight: 700 !important;
   letter-spacing: 0.2em !important;
   text-transform: uppercase !important;
-  border-radius: 0 !important;
+  border-radius: var(--elysian-radius-control) !important;
   cursor: pointer;
   transition: background 0.2s, color 0.2s, opacity 0.2s;
   text-decoration: none !important;
@@ -387,7 +390,7 @@ product-info.elysian-pdp {
 
 .elysian-pdp-buy .shopify-payment-button__button {
   min-height: 52px !important;
-  border-radius: 0 !important;
+  border-radius: var(--elysian-radius-control) !important;
   font-family: var(--sans, 'Montserrat', sans-serif) !important;
   font-size: 10px !important;
   font-weight: 700 !important;

@@ -195,6 +195,7 @@ cart-items.is-empty .elysian-cart-empty {
   background: var(--black-3);
   border: 1px solid rgba(212, 170, 90, 0.2);
   padding: 20px;
+  border-radius: var(--elysian-radius-card);
 }
 
 .elysian-cart-line__media {
@@ -208,6 +209,7 @@ cart-items.is-empty .elysian-cart-empty {
   object-fit: cover;
   background: var(--black-3);
   border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: var(--elysian-radius-control);
 }
 
 .elysian-cart-line__name {
@@ -379,6 +381,7 @@ cart-items.is-empty .elysian-cart-empty {
   background: var(--black-3);
   border: 1px solid rgba(212, 170, 90, 0.3);
   padding: 28px 24px;
+  border-radius: var(--elysian-radius-card);
 }
 
 .elysian-cart-summary.is-empty,
@@ -464,7 +467,7 @@ cart-items.is-empty .elysian-cart-empty {
   font-size: 13px;
   padding: 12px;
   resize: vertical;
-  border-radius: 0;
+  border-radius: var(--elysian-radius-control);
 }
 
 .elysian-cart-note textarea:focus {
@@ -483,7 +486,7 @@ cart-items.is-empty .elysian-cart-empty {
   font-weight: 700 !important;
   letter-spacing: 0.2em !important;
   text-transform: uppercase !important;
-  border-radius: 0 !important;
+  border-radius: var(--elysian-radius-control) !important;
   cursor: pointer;
   transition: background 0.2s, color 0.2s;
 }
@@ -535,6 +538,7 @@ cart-items.is-empty .elysian-cart-empty {
   letter-spacing: 0.18em;
   text-transform: uppercase;
   text-decoration: none;
+  border-radius: var(--elysian-radius-control);
   transition: background 0.2s, border-color 0.2s;
 }
 

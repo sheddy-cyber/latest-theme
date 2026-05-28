@@ -200,6 +200,12 @@ cart-items.is-empty .elysian-cart-empty {
 
 .elysian-cart-line__media {
   grid-row: 1 / 3;
+  position: relative;
+  align-self: start;
+}
+
+.elysian-cart-line__link {
+  display: block;
 }
 
 .elysian-cart-line__image {

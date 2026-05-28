@@ -44,7 +44,7 @@
                     >
                       <div class="elysian-cart-line__media">
                         {%- if item.image -%}
-                          <a href="{{ item.url }}" class="cart-item__link" tabindex="-1" aria-hidden="true">
+                          <a href="{{ item.url }}" class="elysian-cart-line__link" tabindex="-1" aria-hidden="true">
                             <img
                               src="{{ item.image | image_url: width: 240 }}"
                               alt="{{ item.image.alt | escape }}"

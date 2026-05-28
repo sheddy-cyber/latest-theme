@@ -173,7 +173,7 @@
             "color_class": "t-indian",
             "tag": "India",
             "title": "Raw Indian Straight",
-            "link": "shopify://products/raw-straight-bundles"
+            "link": "/products/raw-straight-bundles"
           }
         },
         "cat-2": {
@@ -183,7 +183,7 @@
             "color_class": "t-viet",
             "tag": "Vietnam",
             "title": "Raw Vietnamese Straight",
-            "link": "shopify://products/raw-vietnamese-straight"
+            "link": "/products/raw-vietnamese-straight"
           }
         },
         "cat-3": {
@@ -193,7 +193,7 @@
             "color_class": "t-curly",
             "tag": "India",
             "title": "Raw Indian Curly",
-            "link": "shopify://products/raw-waves-curls-bundles"
+            "link": "/products/raw-waves-curls-bundles"
           }
         },
         "cat-4": {
@@ -203,7 +203,7 @@
             "color_class": "t-wavy",
             "tag": "Cambodia",
             "title": "Raw Cambodian Wavy",
-            "link": "shopify://products/raw-cambodian-wavy"
+            "link": "/products/raw-cambodian-wavy"
           }
         },
         "cat-5": {
@@ -213,7 +213,7 @@
             "color_class": "t-burm",
             "tag": "Burma",
             "title": "Raw Burmese Curly",
-            "link": "shopify://products/raw-burmese-curly"
+            "link": "/products/raw-burmese-curly"
           }
         }
       },

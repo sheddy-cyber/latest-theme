@@ -19,7 +19,21 @@
           {%- assign tile_class = 'tile tile-sm' -%}
         {%- endif -%}
 
-        <a href="{{ block.settings.link }}" class="{{ tile_class }} {{ block.settings.color_class }}" {{ block.shopify_attributes }}>
+        {%- assign tile_link = block.settings.link -%}
+        {%- case block.settings.title -%}
+          {%- when 'Raw Indian Straight' -%}
+            {%- assign tile_link = routes.root_url | append: 'products/raw-straight-bundles' -%}
+          {%- when 'Raw Vietnamese Straight' -%}
+            {%- assign tile_link = routes.root_url | append: 'products/raw-vietnamese-straight' -%}
+          {%- when 'Raw Indian Curly' -%}
+            {%- assign tile_link = routes.root_url | append: 'products/raw-waves-curls-bundles' -%}
+          {%- when 'Raw Cambodian Wavy' -%}
+            {%- assign tile_link = routes.root_url | append: 'products/raw-cambodian-wavy' -%}
+          {%- when 'Raw Burmese Curly' -%}
+            {%- assign tile_link = routes.root_url | append: 'products/raw-burmese-curly' -%}
+        {%- endcase -%}
+
+        <a href="{{ tile_link }}" class="{{ tile_class }} {{ block.settings.color_class }}" {{ block.shopify_attributes }}>
           <div class="tile-bg"
             {%- if block.settings.image != blank -%}
               style="background-image: url('{{ block.settings.image | image_url: width: 1200 }}');"

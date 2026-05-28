@@ -144,6 +144,14 @@ class CartItems extends HTMLElement {
     ];
   }
 
+  renderSection(section, html) {
+    const targetElement = document.getElementById(section.id);
+    if (!targetElement) return;
+
+    const elementToReplace = targetElement.querySelector(section.selector) || targetElement;
+    elementToReplace.innerHTML = this.getSectionInnerHTML(html, section.selector);
+  }
+
   refreshCartSections() {
     if (this.tagName === 'CART-DRAWER-ITEMS') {
       return fetch(`${routes.cart_url}?section_id=cart-drawer`)
@@ -166,20 +174,20 @@ class CartItems extends HTMLElement {
 
     if (!cartSectionId) return Promise.resolve();
 
-    return fetch(`${routes.cart_url}?section_id=${cartSectionId}`)
+    return fetch(`${routes.cart_url}?section_id=${cartSectionId}`, { cache: 'no-store' })
       .then((response) => response.text())
       .then((responseText) => {
         const html = new DOMParser().parseFromString(responseText, 'text/html');
-        const sourceItems = html.querySelector('#main-cart-items .js-contents');
-        const targetItems = document.querySelector('#main-cart-items .js-contents');
+        const sourceItems = html.querySelector('#main-cart-items');
+        const targetItems = document.getElementById('main-cart-items');
         if (targetItems && sourceItems) {
-          targetItems.innerHTML = sourceItems.innerHTML;
+          targetItems.replaceWith(sourceItems);
         }
 
-        const sourceFooter = html.querySelector('#main-cart-footer .js-contents');
-        const targetFooter = document.querySelector('#main-cart-footer .js-contents');
+        const sourceFooter = html.querySelector('#main-cart-footer');
+        const targetFooter = document.getElementById('main-cart-footer');
         if (targetFooter && sourceFooter) {
-          targetFooter.innerHTML = sourceFooter.innerHTML;
+          targetFooter.replaceWith(sourceFooter);
         }
       });
   }
@@ -222,20 +230,28 @@ class CartItems extends HTMLElement {
 
         const sections = this.getSectionsToRender();
         const canUseRenderedSections =
+          this.tagName === 'CART-DRAWER-ITEMS' &&
           parsedState.sections && sections.every((section) => parsedState.sections[section.section]);
 
         if (canUseRenderedSections) {
           CartPerformance.measure(`${eventTarget}:paint-updated-sections`, () => {
             sections.forEach((section) => {
-              const elementToReplace =
-                document.getElementById(section.id).querySelector(section.selector) ||
-                document.getElementById(section.id);
-              elementToReplace.innerHTML = this.getSectionInnerHTML(
-                parsedState.sections[section.section],
-                section.selector
-              );
+              this.renderSection(section, parsedState.sections[section.section]);
             });
           });
+        }
+
+        if (!canUseRenderedSections && parsedState.sections) {
+          const bubbleSection = sections.find((section) => section.id === 'cart-icon-bubble');
+          const liveRegionSection = sections.find((section) => section.id === 'cart-live-region-text');
+
+          if (bubbleSection && parsedState.sections[bubbleSection.section]) {
+            this.renderSection(bubbleSection, parsedState.sections[bubbleSection.section]);
+          }
+
+          if (liveRegionSection && parsedState.sections[liveRegionSection.section]) {
+            this.renderSection(liveRegionSection, parsedState.sections[liveRegionSection.section]);
+          }
         }
 
         const refreshPromise = canUseRenderedSections ? Promise.resolve() : this.refreshCartSections();
@@ -254,10 +270,12 @@ class CartItems extends HTMLElement {
 
           const lineItem =
             document.getElementById(`CartItem-${line}`) || document.getElementById(`CartDrawer-Item-${line}`);
-          if (lineItem && lineItem.querySelector(`[name="${name}"]`)) {
+          const activeFieldName = name && typeof CSS !== 'undefined' && CSS.escape ? CSS.escape(name) : name;
+          const activeField = activeFieldName ? lineItem?.querySelector(`[name="${activeFieldName}"]`) : null;
+          if (lineItem && activeField) {
             cartDrawerWrapper
-              ? trapFocus(cartDrawerWrapper, lineItem.querySelector(`[name="${name}"]`))
-              : lineItem.querySelector(`[name="${name}"]`).focus();
+              ? trapFocus(cartDrawerWrapper, activeField)
+              : activeField.focus();
           } else if (parsedState.item_count === 0 && cartDrawerWrapper) {
             trapFocus(cartDrawerWrapper.querySelector('.drawer__inner-empty'), cartDrawerWrapper.querySelector('a'));
           } else if (document.querySelector('.cart-item') && cartDrawerWrapper) {

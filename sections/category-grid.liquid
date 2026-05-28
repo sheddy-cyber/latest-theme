@@ -5,7 +5,6 @@
   </div>
 
   <div class="category-grid">
-    {%- assign large_done = false -%}
     {%- for block in section.blocks -%}
       {%- if block.type == 'tile' -%}
         {%- assign is_large = false -%}
@@ -23,7 +22,7 @@
         <a href="{{ block.settings.link }}" class="{{ tile_class }} {{ block.settings.color_class }}" {{ block.shopify_attributes }}>
           <div class="tile-bg"
             {%- if block.settings.image != blank -%}
-              style="background-image: url('{{ block.settings.image | image_url: width: 1200 }}'); background-size: 100%; background-position: center center; background-repeat: no-repeat;"
+              style="background-image: url('{{ block.settings.image | image_url: width: 1200 }}');"
             {%- endif -%}
           ></div>
           <div class="tile-info">

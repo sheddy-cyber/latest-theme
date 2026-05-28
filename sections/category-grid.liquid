@@ -20,16 +20,16 @@
         {%- endif -%}
 
         {%- assign tile_link = block.settings.link -%}
-        {%- case block.settings.title -%}
-          {%- when 'Raw Indian Straight' -%}
+        {%- case forloop.index -%}
+          {%- when 1 -%}
             {%- assign tile_link = routes.root_url | append: 'products/raw-straight-bundles' -%}
-          {%- when 'Raw Vietnamese Straight' -%}
+          {%- when 2 -%}
             {%- assign tile_link = routes.root_url | append: 'products/raw-vietnamese-straight' -%}
-          {%- when 'Raw Indian Curly' -%}
+          {%- when 3 -%}
             {%- assign tile_link = routes.root_url | append: 'products/raw-waves-curls-bundles' -%}
-          {%- when 'Raw Cambodian Wavy' -%}
+          {%- when 4 -%}
             {%- assign tile_link = routes.root_url | append: 'products/raw-cambodian-wavy' -%}
-          {%- when 'Raw Burmese Curly' -%}
+          {%- when 5 -%}
             {%- assign tile_link = routes.root_url | append: 'products/raw-burmese-curly' -%}
         {%- endcase -%}
 

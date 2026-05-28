@@ -159,7 +159,7 @@
                   -%}
                   <a href="{{ link_url }}" class="look-tile" {{ block.shopify_attributes }}>
                     {%- if block.settings.image != blank -%}
-                      <div class="look-tile-img" style="background-image: url('{{ block.settings.image | img_url: '400x400' }}');"></div>
+                      <div class="look-tile-img" style="background-image: url('{{ block.settings.image | image_url: width: 400 }}');"></div>
                     {%- else -%}
                       <div class="look-tile-img {{ block.settings.gradient_class }}"></div>
                     {%- endif -%}

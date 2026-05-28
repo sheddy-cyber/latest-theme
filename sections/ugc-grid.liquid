@@ -8,14 +8,11 @@
     </div>
 
     <div class="ugc-grid">
-      {%- assign tile_gradients = 'linear-gradient(145deg,#2f2921,#3d3318),linear-gradient(145deg,#241c14,#322618),linear-gradient(145deg,#2a2419,#382e18),linear-gradient(145deg,#221a12,#2e2416),linear-gradient(145deg,#2f2921,#3a2e18)' | split: ',' -%}
-
       {%- for block in section.blocks -%}
         {%- if block.type == 'tile' -%}
-          {%- assign gradient_index = forloop.index0 | modulo: 5 -%}
           <div class="ugc-tile" {{ block.shopify_attributes }}>
             {%- if block.settings.image != blank -%}
-              <div class="ugc-tile-bg" style="background-image: url('{{ block.settings.image | img_url: '600x600', crop: 'center' }}');"></div>
+              <div class="ugc-tile-bg" style="background-image: url('{{ block.settings.image | image_url: width: 600, height: 600, crop: 'center' }}');"></div>
             {%- else -%}
               <div class="ugc-tile-bg ug{{ forloop.index }}"></div>
             {%- endif -%}

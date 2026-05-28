@@ -144,6 +144,46 @@ class CartItems extends HTMLElement {
     ];
   }
 
+  refreshCartSections() {
+    if (this.tagName === 'CART-DRAWER-ITEMS') {
+      return fetch(`${routes.cart_url}?section_id=cart-drawer`)
+        .then((response) => response.text())
+        .then((responseText) => {
+          const html = new DOMParser().parseFromString(responseText, 'text/html');
+          const selectors = ['cart-drawer-items', '.cart-drawer__footer'];
+          for (const selector of selectors) {
+            const targetElement = document.querySelector(selector);
+            const sourceElement = html.querySelector(selector);
+            if (targetElement && sourceElement) {
+              targetElement.replaceWith(sourceElement);
+            }
+          }
+        });
+    }
+
+    const cartSectionId =
+      document.getElementById('main-cart-items')?.dataset.id || document.getElementById('main-cart-footer')?.dataset.id;
+
+    if (!cartSectionId) return Promise.resolve();
+
+    return fetch(`${routes.cart_url}?section_id=${cartSectionId}`)
+      .then((response) => response.text())
+      .then((responseText) => {
+        const html = new DOMParser().parseFromString(responseText, 'text/html');
+        const sourceItems = html.querySelector('#main-cart-items .js-contents');
+        const targetItems = document.querySelector('#main-cart-items .js-contents');
+        if (targetItems && sourceItems) {
+          targetItems.innerHTML = sourceItems.innerHTML;
+        }
+
+        const sourceFooter = html.querySelector('#main-cart-footer .js-contents');
+        const targetFooter = document.querySelector('#main-cart-footer .js-contents');
+        if (targetFooter && sourceFooter) {
+          targetFooter.innerHTML = sourceFooter.innerHTML;
+        }
+      });
+  }
+
   updateQuantity(line, quantity, event, name, variantId) {
     const eventTarget = event.currentTarget instanceof CartRemoveButton ? 'clear' : 'change';
     const cartPerformanceUpdateMarker = CartPerformance.createStartingMarker(`${eventTarget}:user-action`);
@@ -163,34 +203,44 @@ class CartItems extends HTMLElement {
       })
       .then((state) => {
         const parsedState = JSON.parse(state);
+        const quantityElement =
+          document.getElementById(`Quantity-${line}`) || document.getElementById(`Drawer-quantity-${line}`);
+        const items = document.querySelectorAll('.cart-item');
 
-        CartPerformance.measure(`${eventTarget}:paint-updated-sections`, () => {
-          const quantityElement =
-            document.getElementById(`Quantity-${line}`) || document.getElementById(`Drawer-quantity-${line}`);
-          const items = document.querySelectorAll('.cart-item');
+        if (parsedState.errors) {
+          quantityElement.value = quantityElement.getAttribute('value');
+          this.updateLiveRegions(line, parsedState.errors);
+          return;
+        }
 
-          if (parsedState.errors) {
-            quantityElement.value = quantityElement.getAttribute('value');
-            this.updateLiveRegions(line, parsedState.errors);
-            return;
-          }
+        this.classList.toggle('is-empty', parsedState.item_count === 0);
+        const cartDrawerWrapper = document.querySelector('cart-drawer');
+        const cartFooter = document.getElementById('main-cart-footer');
 
-          this.classList.toggle('is-empty', parsedState.item_count === 0);
-          const cartDrawerWrapper = document.querySelector('cart-drawer');
-          const cartFooter = document.getElementById('main-cart-footer');
+        if (cartFooter) cartFooter.classList.toggle('is-empty', parsedState.item_count === 0);
+        if (cartDrawerWrapper) cartDrawerWrapper.classList.toggle('is-empty', parsedState.item_count === 0);
 
-          if (cartFooter) cartFooter.classList.toggle('is-empty', parsedState.item_count === 0);
-          if (cartDrawerWrapper) cartDrawerWrapper.classList.toggle('is-empty', parsedState.item_count === 0);
+        const sections = this.getSectionsToRender();
+        const canUseRenderedSections =
+          parsedState.sections && sections.every((section) => parsedState.sections[section.section]);
 
-          this.getSectionsToRender().forEach((section) => {
-            const elementToReplace =
-              document.getElementById(section.id).querySelector(section.selector) ||
-              document.getElementById(section.id);
-            elementToReplace.innerHTML = this.getSectionInnerHTML(
-              parsedState.sections[section.section],
-              section.selector
-            );
+        if (canUseRenderedSections) {
+          CartPerformance.measure(`${eventTarget}:paint-updated-sections`, () => {
+            sections.forEach((section) => {
+              const elementToReplace =
+                document.getElementById(section.id).querySelector(section.selector) ||
+                document.getElementById(section.id);
+              elementToReplace.innerHTML = this.getSectionInnerHTML(
+                parsedState.sections[section.section],
+                section.selector
+              );
+            });
           });
+        }
+
+        const refreshPromise = canUseRenderedSections ? Promise.resolve() : this.refreshCartSections();
+
+        return refreshPromise.then(() => {
           const updatedValue = parsedState.items[line - 1] ? parsedState.items[line - 1].quantity : undefined;
           let message = '';
           if (items.length === parsedState.items.length && updatedValue !== parseInt(quantityElement.value)) {
@@ -213,9 +263,9 @@ class CartItems extends HTMLElement {
           } else if (document.querySelector('.cart-item') && cartDrawerWrapper) {
             trapFocus(cartDrawerWrapper, document.querySelector('.cart-item__name'));
           }
-        });
 
-        publish(PUB_SUB_EVENTS.cartUpdate, { source: 'cart-items', cartData: parsedState, variantId: variantId });
+          publish(PUB_SUB_EVENTS.cartUpdate, { source: 'cart-items', cartData: parsedState, variantId: variantId });
+        });
       })
       .catch(() => {
         this.querySelectorAll('.loading__spinner').forEach((overlay) => overlay.classList.add('hidden'));

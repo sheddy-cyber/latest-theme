@@ -462,21 +462,21 @@ product-info.elysian-pdp {
   flex-direction: column;
   align-items: center;
   gap: 5px;
-  min-height: 146px;
-  padding: 18px 14px 16px;
-  background: rgba(255, 253, 248, 0.96);
-  border: 1px solid rgba(174, 106, 55, 0.18);
-  border-radius: 18px;
+  min-height: 138px;
+  padding: 16px 12px 14px;
+  background: rgba(255, 254, 250, 0.98);
+  border: 1px solid rgba(174, 106, 55, 0.24);
+  border-radius: 12px;
   color: var(--black);
   text-align: center;
-  box-shadow: 0 10px 22px rgba(28, 24, 20, 0.06);
+  box-shadow: 0 8px 18px rgba(28, 24, 20, 0.05);
   transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s, background 0.2s;
 }
 
 .elysian-pdp-bundle-card:hover {
   transform: translateY(-2px);
-  border-color: rgba(174, 106, 55, 0.4);
-  box-shadow: 0 16px 28px rgba(28, 24, 20, 0.1);
+  border-color: rgba(174, 106, 55, 0.42);
+  box-shadow: 0 14px 24px rgba(28, 24, 20, 0.08);
 }
 
 .elysian-pdp-bundle-card.is-active {
@@ -487,10 +487,10 @@ product-info.elysian-pdp {
 
 .elysian-pdp-bundle-card__badge {
   position: absolute;
-  top: -11px;
+  top: -10px;
   left: 50%;
   transform: translateX(-50%);
-  padding: 4px 12px;
+  padding: 4px 10px;
   border-radius: var(--elysian-radius-pill);
   background: var(--gold);
   color: var(--white);
@@ -503,7 +503,7 @@ product-info.elysian-pdp {
 
 .elysian-pdp-bundle-card__number {
   font-family: var(--serif, 'Cormorant Garamond', serif);
-  font-size: 30px;
+  font-size: 28px;
   line-height: 1;
   color: var(--black);
 }
@@ -514,15 +514,15 @@ product-info.elysian-pdp {
   font-weight: 600;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--white-dim);
-  min-height: 28px;
+  color: var(--black-2);
+  min-height: 26px;
   display: flex;
   align-items: center;
 }
 
 .elysian-pdp-bundle-card__price {
   font-family: var(--sans, 'Montserrat', sans-serif);
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 700;
   color: var(--black);
 }
@@ -567,15 +567,18 @@ product-info.elysian-pdp {
   text-decoration: none !important;
 }
 
-.elysian-pdp-buy .product-form__submit.button--primary,
-.elysian-pdp-buy .button.button--primary {
+.elysian-pdp-buy .product-form__submit,
+.elysian-pdp-buy .button.button--primary,
+.elysian-pdp-buy .button.button--secondary {
   background: linear-gradient(180deg, #231913 0%, #16100c 100%) !important;
   color: var(--white) !important;
   border: 1px solid rgba(174, 106, 55, 0.9) !important;
   box-shadow: 0 14px 26px rgba(0, 0, 0, 0.16);
 }
 
-.elysian-pdp-buy .product-form__submit.button--primary:hover:not(:disabled) {
+.elysian-pdp-buy .product-form__submit:hover:not(:disabled),
+.elysian-pdp-buy .button.button--primary:hover:not(:disabled),
+.elysian-pdp-buy .button.button--secondary:hover:not(:disabled) {
   background: linear-gradient(180deg, #2d2018 0%, #1c140f 100%) !important;
   transform: translateY(-1px);
   box-shadow: 0 16px 30px rgba(0, 0, 0, 0.18);

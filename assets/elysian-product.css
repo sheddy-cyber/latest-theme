@@ -491,6 +491,8 @@ product-info.elysian-pdp {
 .elysian-pdp-stylist__header {
   position: static !important;
   top: auto !important;
+  background: transparent !important;
+  border-bottom: 0 !important;
   max-width: 760px;
   margin: 0 auto 34px;
   text-align: center;
@@ -523,6 +525,10 @@ product-info.elysian-pdp {
 
 .elysian-pdp-stylist__item {
   border-bottom: 1px solid var(--gold-line);
+}
+
+.elysian-pdp-stylist__item:first-child {
+  border-top: 1px solid var(--gold-line);
 }
 
 .elysian-pdp-stylist__summary {

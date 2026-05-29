@@ -178,11 +178,9 @@
                 <span>Single Donor</span>
                 <span>Free Shipping $150+</span>
               </div>
-              {%- if product.description != blank -%}
-                <div class="elysian-pdp-desc rte" {{ block.shopify_attributes }}>
-                  {{ product.description }}
-                </div>
-              {%- endif -%}
+              <div class="elysian-pdp-desc rte" {{ block.shopify_attributes }}>
+                <p>See the stylist guide below for product details, sizing help, care tips, and common questions.</p>
+              </div>
           {%- endcase -%}
         {%- endfor -%}
       </div>
@@ -298,7 +296,7 @@
         }
       ]
     },
-    { "type": "description", "name": "Description", "limit": 1 }
+    { "type": "description", "name": "Trust strip / Summary", "limit": 1 }
   ],
   "settings": [],
   "presets": [

@@ -39,7 +39,11 @@
         "heading": "You May Also Like",
         "products_to_show": 4
       }
+    },
+    "stylist": {
+      "type": "elysian-product-stylist",
+      "settings": {}
     }
   },
-  "order": ["main", "related-products"]
+  "order": ["main", "stylist", "related-products"]
 }

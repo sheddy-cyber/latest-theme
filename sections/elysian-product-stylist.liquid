@@ -1,0 +1,84 @@
+<section class="elysian-pdp-stylist">
+  <div class="elysian-pdp-stylist__wrap">
+    <header class="elysian-pdp-stylist__header">
+      <h2 class="elysian-pdp-stylist__title">{{ section.settings.heading }}</h2>
+      <p class="elysian-pdp-stylist__intro">{{ section.settings.intro }}</p>
+    </header>
+
+    <div class="elysian-pdp-stylist__list" aria-label="Stylist guide">
+      <details class="elysian-pdp-stylist__item">
+        <summary class="elysian-pdp-stylist__summary">How many bundles do I need?</summary>
+        <div class="elysian-pdp-stylist__answer rte">
+          <p>For a natural finish, 2 bundles usually cover 12&quot;&ndash;16&quot;. For 18&quot;&ndash;22&quot;, 2 to 3 bundles is the sweet spot. For 24&quot; and above, start with 3 bundles if you want a fuller install. If you prefer extra density, add one more bundle.</p>
+        </div>
+      </details>
+
+      <details class="elysian-pdp-stylist__item">
+        <summary class="elysian-pdp-stylist__summary">Full product description</summary>
+        <div class="elysian-pdp-stylist__answer rte">
+          {%- if product.description != blank -%}
+            {{ product.description }}
+          {%- else -%}
+            <p>The full product description is not available right now. Check the product details above or contact us if you need help choosing.</p>
+          {%- endif -%}
+          <p>Raw hair naturally varies a little from donor to donor, which is part of its appeal. The result is a more authentic texture, fuller movement, and a finish that behaves like real hair should.</p>
+        </div>
+      </details>
+
+      <details class="elysian-pdp-stylist__item">
+        <summary class="elysian-pdp-stylist__summary">Length &amp; sizing guide</summary>
+        <div class="elysian-pdp-stylist__answer rte">
+          <p>Use the length selector above to choose the finish you want. Bundle lengths are measured from the weft to the tip when stretched straight, so the look will read a touch different once installed and styled. If you are between lengths, choose the longer option for a more polished result.</p>
+        </div>
+      </details>
+
+      <details class="elysian-pdp-stylist__item">
+        <summary class="elysian-pdp-stylist__summary">Care &amp; reuse</summary>
+        <div class="elysian-pdp-stylist__answer rte">
+          <p>Wash with sulfate-free shampoo, follow with a moisturizing conditioner, and detangle gently from ends to roots. Keep heat on the lower side when possible, air-dry when you can, and sleep with a silk or satin bonnet to preserve the texture. With consistent care, raw hair can be reused for multiple installs.</p>
+        </div>
+      </details>
+
+      <details class="elysian-pdp-stylist__item">
+        <summary class="elysian-pdp-stylist__summary">Shipping &amp; returns</summary>
+        <div class="elysian-pdp-stylist__answer rte">
+          <p>Shipping options and delivery estimates are shown in checkout. Orders over $150 qualify for free shipping. For returns or exchanges, review the store policies in your account or contact support with your order number if you need help.</p>
+        </div>
+      </details>
+
+      <details class="elysian-pdp-stylist__item">
+        <summary class="elysian-pdp-stylist__summary">Common questions</summary>
+        <div class="elysian-pdp-stylist__answer rte">
+          <p>Indian and Vietnamese hair typically read a little softer and silkier, while Cambodian and Burmese collections tend to feel fuller and more textured. If you are not sure which direction to go, use our <a href="/pages/hair-quiz">Hair Quiz</a> or reach out before ordering. We are happy to help you choose the right match.</p>
+        </div>
+      </details>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Elysian Product Stylist",
+  "tag": "section",
+  "class": "elysian-product-stylist-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Everything you'd ask a stylist."
+    },
+    {
+      "type": "text",
+      "id": "intro",
+      "label": "Intro",
+      "default": "Specs, install math, and care &mdash; answered in plain English."
+    }
+  ],
+  "presets": [
+    {
+      "name": "Elysian Product Stylist"
+    }
+  ]
+}
+{% endschema %}

@@ -472,6 +472,113 @@ product-info.elysian-pdp {
   color: var(--white);
 }
 
+/* Stylist accordion section */
+.elysian-product-stylist-section {
+  background: var(--black);
+}
+
+.elysian-pdp-stylist {
+  padding: 86px 24px 16px;
+  background: var(--black);
+  color: var(--white);
+}
+
+.elysian-pdp-stylist__wrap {
+  max-width: 1240px;
+  margin: 0 auto;
+}
+
+.elysian-pdp-stylist__header {
+  max-width: 920px;
+  margin: 0 auto 34px;
+  text-align: center;
+}
+
+.elysian-pdp-stylist__title {
+  margin: 0 0 14px;
+  font-family: var(--serif, 'Cormorant Garamond', serif);
+  font-size: clamp(38px, 4.6vw, 58px);
+  font-weight: 400;
+  line-height: 1.08;
+  color: var(--white);
+}
+
+.elysian-pdp-stylist__intro {
+  margin: 0;
+  font-family: var(--serif, 'Cormorant Garamond', serif);
+  font-size: clamp(20px, 2.1vw, 24px);
+  font-style: italic;
+  line-height: 1.45;
+  color: var(--white-dim);
+}
+
+.elysian-pdp-stylist__list {
+  border-top: 1px solid var(--gold-line);
+}
+
+.elysian-pdp-stylist__item {
+  border-bottom: 1px solid var(--gold-line);
+}
+
+.elysian-pdp-stylist__summary {
+  position: relative;
+  display: block;
+  cursor: pointer;
+  list-style: none;
+  padding: 30px 64px 30px 0;
+  font-family: var(--serif, 'Cormorant Garamond', serif);
+  font-size: clamp(24px, 2.45vw, 34px);
+  font-weight: 500;
+  line-height: 1.12;
+  color: var(--white);
+}
+
+.elysian-pdp-stylist__summary::-webkit-details-marker {
+  display: none;
+}
+
+.elysian-pdp-stylist__summary::after {
+  content: '+';
+  position: absolute;
+  top: 50%;
+  right: 8px;
+  transform: translateY(-50%);
+  font-family: var(--sans, 'Montserrat', sans-serif);
+  font-size: 22px;
+  font-weight: 400;
+  line-height: 1;
+  color: var(--gold);
+}
+
+.elysian-pdp-stylist__item[open] .elysian-pdp-stylist__summary::after {
+  content: '\2212';
+}
+
+.elysian-pdp-stylist__answer {
+  max-width: 980px;
+  padding: 0 64px 28px 0;
+  font-family: var(--sans, 'Montserrat', sans-serif);
+  font-size: 14px;
+  line-height: 1.85;
+  color: var(--white-dim);
+}
+
+.elysian-pdp-stylist__answer p {
+  margin: 0 0 12px;
+}
+
+.elysian-pdp-stylist__answer p:last-child {
+  margin-bottom: 0;
+}
+
+.elysian-pdp-stylist__answer a {
+  color: var(--gold);
+}
+
+.elysian-pdp-stylist__answer a:hover {
+  color: var(--gold-lt);
+}
+
 /* Kill Dawn bleed inside PDP */
 .elysian-pdp .page-width,
 .elysian-pdp .grid,
@@ -526,6 +633,10 @@ product-info.elysian-pdp {
   .elysian-pdp-related .products-grid {
     grid-template-columns: repeat(2, 1fr);
   }
+
+  .elysian-pdp-stylist {
+    padding-top: 72px;
+  }
 }
 
 @media (max-width: 768px) {
@@ -541,5 +652,31 @@ product-info.elysian-pdp {
     flex: 0 0 64px;
     width: 64px;
     height: 78px;
+  }
+
+  .elysian-pdp-stylist {
+    padding: 60px 16px 8px;
+  }
+
+  .elysian-pdp-stylist__header {
+    margin-bottom: 26px;
+  }
+
+  .elysian-pdp-stylist__title {
+    margin-bottom: 10px;
+  }
+
+  .elysian-pdp-stylist__summary {
+    padding: 22px 44px 22px 0;
+    font-size: 24px;
+  }
+
+  .elysian-pdp-stylist__summary::after {
+    right: 4px;
+    font-size: 20px;
+  }
+
+  .elysian-pdp-stylist__answer {
+    padding: 0 44px 22px 0;
   }
 }

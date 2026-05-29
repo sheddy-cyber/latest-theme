@@ -240,60 +240,38 @@ product-info.elysian-pdp {
   flex-wrap: wrap;
   align-items: center;
   gap: 12px 16px;
-  margin-bottom: 10px;
+  margin-bottom: 12px;
 }
 
 .elysian-pdp-price-inline {
   display: inline-flex;
-  align-items: baseline;
+  align-items: center;
   flex-wrap: wrap;
-  gap: 12px 14px;
+  gap: 10px 12px;
 }
 
-.elysian-pdp-price-wrap .price {
+.elysian-pdp-price-main {
   font-family: var(--sans, 'Montserrat', sans-serif);
-  font-size: clamp(30px, 3vw, 40px);
+  font-size: clamp(34px, 3.5vw, 46px);
   font-weight: 500;
-  color: var(--white) !important;
-  margin: 0;
+  line-height: 1;
+  color: var(--white);
 }
 
-.elysian-pdp-price-wrap .price *,
-.elysian-pdp-price-wrap .price .price-item {
-  color: var(--white) !important;
-}
-
-.elysian-pdp-price-wrap .price__sale {
-  display: inline-flex !important;
-  align-items: baseline;
-  gap: 10px;
-}
-
-.elysian-pdp-price-wrap .price-item--regular,
-.elysian-pdp-price-wrap .price-item--sale {
-  color: var(--white) !important;
-}
-
-.elysian-pdp-price-wrap .price__sale .price-item--regular {
-  color: var(--white-dim) !important;
-  font-size: 0.65em !important;
-}
-
-.elysian-pdp-price-wrap .price__sale .price-item--sale {
-  color: var(--white) !important;
-}
-
-.elysian-pdp-price-wrap .price-item--regular s {
-  color: var(--white-dim) !important;
+.elysian-pdp-price-compare {
+  font-family: var(--sans, 'Montserrat', sans-serif);
+  font-size: 15px;
+  line-height: 1;
+  color: var(--white-dim);
 }
 
 .elysian-pdp-save-badge {
   display: inline-flex;
   align-items: center;
   min-height: 28px;
-  padding: 0 12px;
+  padding: 0 13px;
   border-radius: var(--elysian-radius-pill);
-  background: rgba(140, 74, 35, 0.12);
+  background: rgba(174, 106, 55, 0.12);
   color: var(--gold);
   font-family: var(--sans, 'Montserrat', sans-serif);
   font-size: 11px;
@@ -446,7 +424,7 @@ product-info.elysian-pdp {
 
 /* Bundle cards */
 .elysian-pdp-bundles {
-  margin-bottom: 24px;
+  margin-bottom: 26px;
 }
 
 .elysian-pdp-bundles__head {
@@ -454,12 +432,15 @@ product-info.elysian-pdp {
   align-items: baseline;
   justify-content: space-between;
   gap: 12px;
-  margin-bottom: 12px;
+  margin-bottom: 14px;
 }
 
 .elysian-pdp-bundles__summary {
   font-family: var(--sans, 'Montserrat', sans-serif);
-  font-size: 12px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
   color: var(--white-dim);
   text-align: right;
 }
@@ -480,38 +461,39 @@ product-info.elysian-pdp {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 6px;
-  min-height: 152px;
-  padding: 18px 16px 16px;
-  background: rgba(255, 254, 251, 0.94);
-  border: 1px solid var(--gold-line);
-  border-radius: var(--elysian-radius-card);
-  color: var(--white);
+  gap: 5px;
+  min-height: 146px;
+  padding: 18px 14px 16px;
+  background: rgba(255, 253, 248, 0.96);
+  border: 1px solid rgba(174, 106, 55, 0.18);
+  border-radius: 18px;
+  color: var(--black);
   text-align: center;
-  box-shadow: 0 12px 24px rgba(28, 24, 20, 0.05);
-  transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
+  box-shadow: 0 10px 22px rgba(28, 24, 20, 0.06);
+  transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s, background 0.2s;
 }
 
 .elysian-pdp-bundle-card:hover {
   transform: translateY(-2px);
-  border-color: var(--gold-lt);
-  box-shadow: 0 18px 34px rgba(28, 24, 20, 0.08);
+  border-color: rgba(174, 106, 55, 0.4);
+  box-shadow: 0 16px 28px rgba(28, 24, 20, 0.1);
 }
 
 .elysian-pdp-bundle-card.is-active {
-  border-color: var(--gold);
-  background: #fffdf7;
+  border-color: rgba(174, 106, 55, 0.95);
+  background: #fffaf2;
+  transform: translateY(-1px);
 }
 
 .elysian-pdp-bundle-card__badge {
   position: absolute;
-  top: -10px;
+  top: -11px;
   left: 50%;
   transform: translateX(-50%);
-  padding: 3px 10px;
+  padding: 4px 12px;
   border-radius: var(--elysian-radius-pill);
   background: var(--gold);
-  color: var(--black);
+  color: var(--white);
   font-family: var(--sans, 'Montserrat', sans-serif);
   font-size: 9px;
   font-weight: 700;
@@ -521,32 +503,35 @@ product-info.elysian-pdp {
 
 .elysian-pdp-bundle-card__number {
   font-family: var(--serif, 'Cormorant Garamond', serif);
-  font-size: 34px;
+  font-size: 30px;
   line-height: 1;
-  color: var(--white);
+  color: var(--black);
 }
 
 .elysian-pdp-bundle-card__label {
   font-family: var(--sans, 'Montserrat', sans-serif);
-  font-size: 11px;
+  font-size: 10px;
   font-weight: 600;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--white-dim);
+  min-height: 28px;
+  display: flex;
+  align-items: center;
 }
 
 .elysian-pdp-bundle-card__price {
   font-family: var(--sans, 'Montserrat', sans-serif);
-  font-size: 15px;
+  font-size: 14px;
   font-weight: 700;
-  color: var(--white);
+  color: var(--black);
 }
 
 .elysian-pdp-bundle-card__save {
   min-height: 16px;
   font-family: var(--sans, 'Montserrat', sans-serif);
-  font-size: 10px;
-  letter-spacing: 0.1em;
+  font-size: 9px;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--gold);
 }
@@ -560,7 +545,7 @@ product-info.elysian-pdp {
 .elysian-pdp-buy .product-form__buttons {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 14px;
   max-width: 100%;
 }
 
@@ -570,27 +555,30 @@ product-info.elysian-pdp {
   align-items: center;
   justify-content: center;
   width: 100%;
-  min-height: 54px;
+  min-height: 60px;
   font-family: var(--sans, 'Montserrat', sans-serif) !important;
-  font-size: 10px !important;
+  font-size: 11px !important;
   font-weight: 700 !important;
-  letter-spacing: 0.2em !important;
+  letter-spacing: 0.24em !important;
   text-transform: uppercase !important;
-  border-radius: var(--elysian-radius-control) !important;
+  border-radius: 18px !important;
   cursor: pointer;
-  transition: background 0.2s, color 0.2s, opacity 0.2s;
+  transition: transform 0.2s, background 0.2s, color 0.2s, opacity 0.2s, box-shadow 0.2s;
   text-decoration: none !important;
 }
 
 .elysian-pdp-buy .product-form__submit.button--primary,
 .elysian-pdp-buy .button.button--primary {
-  background: var(--black-2) !important;
+  background: linear-gradient(180deg, #231913 0%, #16100c 100%) !important;
   color: var(--white) !important;
-  border: 1px solid var(--gold) !important;
+  border: 1px solid rgba(174, 106, 55, 0.9) !important;
+  box-shadow: 0 14px 26px rgba(0, 0, 0, 0.16);
 }
 
 .elysian-pdp-buy .product-form__submit.button--primary:hover:not(:disabled) {
-  background: var(--black-3) !important;
+  background: linear-gradient(180deg, #2d2018 0%, #1c140f 100%) !important;
+  transform: translateY(-1px);
+  box-shadow: 0 16px 30px rgba(0, 0, 0, 0.18);
 }
 
 .elysian-pdp-buy .product-form__submit:disabled {
@@ -604,7 +592,7 @@ product-info.elysian-pdp {
 
 .elysian-pdp-buy .shopify-payment-button__button {
   min-height: 52px !important;
-  border-radius: var(--elysian-radius-control) !important;
+  border-radius: 18px !important;
   font-family: var(--sans, 'Montserrat', sans-serif) !important;
   font-size: 10px !important;
   font-weight: 700 !important;

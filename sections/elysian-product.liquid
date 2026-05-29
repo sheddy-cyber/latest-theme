@@ -1,5 +1,4 @@
 {{ 'elysian-product.css' | asset_url | stylesheet_tag }}
-{{ 'component-price.css' | asset_url | stylesheet_tag }}
 
 {% unless product.has_only_default_variant %}
   {{ 'component-product-variant-picker.css' | asset_url | stylesheet_tag }}
@@ -173,8 +172,9 @@
               <div class="elysian-pdp-price-row" {{ block.shopify_attributes }}>
                 <div class="elysian-pdp-price-wrap" id="price-{{ section.id }}" role="status">
                   <div class="elysian-pdp-price-inline">
-                    {% render 'price', product: product, use_variant: true, show_badges: false, price_class: 'price--large' %}
+                    <span class="elysian-pdp-price-main">{{ selected_price | money }}</span>
                     {%- if selected_compare_price > selected_price -%}
+                      <span class="elysian-pdp-price-compare"><s>{{ selected_compare_price | money }}</s></span>
                       <span class="elysian-pdp-save-badge">Save {{ save_amount | money }}</span>
                     {%- endif -%}
                   </div>

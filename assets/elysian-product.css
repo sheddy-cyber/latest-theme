@@ -518,15 +518,11 @@ product-info.elysian-pdp {
 .elysian-pdp-stylist__list {
   max-width: 960px;
   margin: 0 auto;
-  padding-top: 12px;
+  padding-top: 18px;
 }
 
 .elysian-pdp-stylist__item {
   border-bottom: 1px solid var(--gold-line);
-}
-
-.elysian-pdp-stylist__item:first-child {
-  border-top: 1px solid var(--gold-line);
 }
 
 .elysian-pdp-stylist__summary {

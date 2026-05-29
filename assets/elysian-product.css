@@ -478,23 +478,26 @@ product-info.elysian-pdp {
 }
 
 .elysian-pdp-stylist {
-  padding: 86px 24px 16px;
+  padding: 86px 24px 88px;
   background: var(--black);
   color: var(--white);
 }
 
 .elysian-pdp-stylist__wrap {
-  max-width: 1240px;
+  max-width: 1180px;
   margin: 0 auto;
 }
 
 .elysian-pdp-stylist__header {
-  max-width: 920px;
+  position: static !important;
+  top: auto !important;
+  max-width: 760px;
   margin: 0 auto 34px;
   text-align: center;
 }
 
 .elysian-pdp-stylist__title {
+  position: static !important;
   margin: 0 0 14px;
   font-family: var(--serif, 'Cormorant Garamond', serif);
   font-size: clamp(38px, 4.6vw, 58px);
@@ -506,14 +509,16 @@ product-info.elysian-pdp {
 .elysian-pdp-stylist__intro {
   margin: 0;
   font-family: var(--serif, 'Cormorant Garamond', serif);
-  font-size: clamp(20px, 2.1vw, 24px);
+  font-size: clamp(18px, 1.9vw, 22px);
   font-style: italic;
   line-height: 1.45;
   color: var(--white-dim);
 }
 
 .elysian-pdp-stylist__list {
-  border-top: 1px solid var(--gold-line);
+  max-width: 960px;
+  margin: 0 auto;
+  padding-top: 12px;
 }
 
 .elysian-pdp-stylist__item {
@@ -525,9 +530,9 @@ product-info.elysian-pdp {
   display: block;
   cursor: pointer;
   list-style: none;
-  padding: 30px 64px 30px 0;
+  padding: 24px 56px 24px 0;
   font-family: var(--serif, 'Cormorant Garamond', serif);
-  font-size: clamp(24px, 2.45vw, 34px);
+  font-size: clamp(21px, 2vw, 28px);
   font-weight: 500;
   line-height: 1.12;
   color: var(--white);
@@ -556,9 +561,9 @@ product-info.elysian-pdp {
 
 .elysian-pdp-stylist__answer {
   max-width: 980px;
-  padding: 0 64px 28px 0;
+  padding: 0 56px 22px 0;
   font-family: var(--sans, 'Montserrat', sans-serif);
-  font-size: 14px;
+  font-size: 13px;
   line-height: 1.85;
   color: var(--white-dim);
 }
@@ -636,6 +641,11 @@ product-info.elysian-pdp {
 
   .elysian-pdp-stylist {
     padding-top: 72px;
+    padding-bottom: 72px;
+  }
+
+  .elysian-pdp-stylist__list {
+    max-width: 100%;
   }
 }
 
@@ -655,7 +665,7 @@ product-info.elysian-pdp {
   }
 
   .elysian-pdp-stylist {
-    padding: 60px 16px 8px;
+    padding: 60px 16px 64px;
   }
 
   .elysian-pdp-stylist__header {
@@ -667,16 +677,16 @@ product-info.elysian-pdp {
   }
 
   .elysian-pdp-stylist__summary {
-    padding: 22px 44px 22px 0;
-    font-size: 24px;
+    padding: 20px 38px 20px 0;
+    font-size: 21px;
   }
 
   .elysian-pdp-stylist__summary::after {
     right: 4px;
-    font-size: 20px;
+    font-size: 18px;
   }
 
   .elysian-pdp-stylist__answer {
-    padding: 0 44px 22px 0;
+    padding: 0 38px 20px 0;
   }
 }

@@ -525,6 +525,10 @@ product-info.elysian-pdp {
   border-bottom: 1px solid var(--gold-line);
 }
 
+.elysian-pdp-stylist__item:first-child {
+  border-top: 1px solid var(--gold-line);
+}
+
 .elysian-pdp-stylist__summary {
   position: relative;
   display: block;

@@ -8,6 +8,16 @@
 {% endunless %}
 
 {%- liquid
+  assign selected_variant = product.selected_or_first_available_variant
+  assign selected_price = selected_variant.price
+  assign selected_compare_price = selected_variant.compare_at_price | default: 0
+  assign save_amount = 0
+  assign save_percent = 0
+  if selected_compare_price > selected_price
+    assign save_amount = selected_compare_price | minus: selected_price
+    assign save_percent = save_amount | times: 100.0 | divided_by: selected_compare_price | round
+  endif
+
   assign origin_label = ''
   for tag in product.tags
     if tag contains 'India' or tag contains 'Burma' or tag contains 'Vietnam' or tag contains 'Cambodia'
@@ -15,6 +25,35 @@
       break
     endif
   endfor
+
+  assign product_title_down = product.title | downcase
+  assign curl_profile = '3B · 3C · Soft Corkscrew'
+  assign maintenance_label = 'Low to Medium'
+
+  if product_title_down contains 'straight'
+    assign curl_profile = 'Straight · Minimal Wave'
+    assign maintenance_label = 'Low'
+  elsif product_title_down contains 'deep curly' or product_title_down contains 'deep-curly'
+    assign curl_profile = 'Deep Curly · High Volume'
+    assign maintenance_label = 'Medium'
+  elsif product_title_down contains 'curly'
+    assign curl_profile = 'Curly · Natural Bounce'
+    assign maintenance_label = 'Medium'
+  elsif product_title_down contains 'wavy'
+    assign curl_profile = 'Wavy · Soft Body'
+    assign maintenance_label = 'Low to Medium'
+  endif
+
+  assign origin_card = origin_label
+  if origin_card != ''
+    assign origin_card = 'Single Donor · ' | append: origin_card
+  else
+    assign origin_card = 'Single Donor · Verified Origin'
+  endif
+
+  assign density_card = '100g · Full Wefts to Ends'
+  assign color_card = 'Natural 1B · Slight Variation'
+  assign lifespan_card = '2 to 3 Years'
 
   assign featured_media = product.selected_or_first_available_variant.featured_media | default: product.featured_media
   assign product_form_id = 'product-form-' | append: section.id
@@ -60,6 +99,11 @@
           {%- else -%}
             <div class="elysian-pdp-main-placeholder" id="ElysianPdpMainImg" aria-hidden="true"></div>
           {%- endif -%}
+          <div id="MainBadge-{{ section.id }}" class="elysian-pdp-main-badge-wrap">
+            {%- if selected_compare_price > selected_price -%}
+              <span class="elysian-pdp-main-badge">SAVE {{ save_percent }}%</span>
+            {%- endif -%}
+          </div>
         </div>
 
         {%- if product.media.size > 1 -%}
@@ -89,7 +133,6 @@
             {%- endfor -%}
           </div>
         {%- endif -%}
-
       </div>
 
       <div id="ProductInfo-{{ section.id }}" class="elysian-pdp-info">
@@ -101,15 +144,87 @@
           {%- case block.type -%}
             {%- when 'title' -%}
               <div class="elysian-pdp-title" {{ block.shopify_attributes }}>
-                <h1>{{ product.title | escape }}</h1>
+                <h1>
+                  {%- assign title_words = product.title | split: ' ' -%}
+                  {%- for word in title_words -%}
+                    {%- if forloop.last -%}
+                      <em>{{ word | escape }}</em>
+                    {%- else -%}
+                      {{ word | escape }}
+                    {%- endif -%}
+                    {%- unless forloop.last -%} {{ ' ' }}{%- endunless -%}
+                  {%- endfor -%}
+                </h1>
               </div>
 
+              {%- if product.metafields.reviews.rating.value != blank -%}
+                <div
+                  class="elysian-pdp-rating"
+                  aria-label="{{ 'accessibility.star_reviews_info' | t: rating_value: product.metafields.reviews.rating.value, rating_max: product.metafields.reviews.rating.value.scale_max }}"
+                >
+                  <span class="elysian-pdp-rating__stars" aria-hidden="true">★★★★★</span>
+                  <span class="elysian-pdp-rating__value" aria-hidden="true">{{ product.metafields.reviews.rating.value }}</span>
+                  <span class="elysian-pdp-rating__separator" aria-hidden="true">·</span>
+                  <span class="elysian-pdp-rating__count" aria-hidden="true">{{ product.metafields.reviews.rating_count }} verified reviews</span>
+                </div>
+              {%- endif -%}
+
             {%- when 'price' -%}
-              <div class="elysian-pdp-stars" aria-hidden="true">★★★★★</div>
-              <div class="elysian-pdp-price-wrap" id="price-{{ section.id }}" role="status" {{ block.shopify_attributes }}>
-                {% render 'price', product: product, use_variant: true, show_badges: true, price_class: 'price--large' %}
+              <div class="elysian-pdp-price-row" {{ block.shopify_attributes }}>
+                <div class="elysian-pdp-price-wrap" id="price-{{ section.id }}" role="status">
+                  <div class="elysian-pdp-price-inline">
+                    {% render 'price', product: product, use_variant: true, show_badges: false, price_class: 'price--large' %}
+                    {%- if selected_compare_price > selected_price -%}
+                      <span class="elysian-pdp-save-badge">Save {{ save_amount | money }}</span>
+                    {%- endif -%}
+                  </div>
+                </div>
               </div>
-              <div class="elysian-pdp-divider"></div>
+
+              <div id="PaymentNote-{{ section.id }}" class="elysian-pdp-payment-note">
+                <span class="elysian-pdp-payment-note__label">Flexible payment options</span>
+                {%- assign product_form_installment_id = 'product-form-installment-' | append: section.id -%}
+                {%- capture payment_terms_markup -%}
+                  {%- form 'product', product, id: product_form_installment_id, class: 'installment caption-large' -%}
+                    <input type="hidden" name="id" value="{{ selected_variant.id }}">
+                    {{ form | payment_terms }}
+                  {%- endform -%}
+                {%- endcapture -%}
+                {%- if payment_terms_markup != blank -%}
+                  <div class="elysian-pdp-payment-note__terms">{{ payment_terms_markup }}</div>
+                {%- else -%}
+                  <p class="elysian-pdp-payment-note__fallback">Checkout offers available payment methods for your order.</p>
+                {%- endif -%}
+              </div>
+
+              <div class="elysian-pdp-facts-card">
+                <div class="elysian-pdp-facts-grid">
+                  <div class="elysian-pdp-fact">
+                    <span>Origin</span>
+                    <strong>{{ origin_card }}</strong>
+                  </div>
+                  <div class="elysian-pdp-fact">
+                    <span>Curl Type</span>
+                    <strong>{{ curl_profile }}</strong>
+                  </div>
+                  <div class="elysian-pdp-fact">
+                    <span>Density</span>
+                    <strong>{{ density_card }}</strong>
+                  </div>
+                  <div class="elysian-pdp-fact">
+                    <span>Maintenance</span>
+                    <strong>{{ maintenance_label }}</strong>
+                  </div>
+                  <div class="elysian-pdp-fact">
+                    <span>Color</span>
+                    <strong>{{ color_card }}</strong>
+                  </div>
+                  <div class="elysian-pdp-fact">
+                    <span>Lifespan</span>
+                    <strong>{{ lifespan_card }}</strong>
+                  </div>
+                </div>
+              </div>
 
             {%- when 'variant_picker' -%}
               <div class="elysian-pdp-variants" {{ block.shopify_attributes }}>
@@ -119,46 +234,92 @@
             {%- when 'quantity_selector' -%}
               <div
                 id="Quantity-Form-{{ section.id }}"
-                class="elysian-pdp-qty product-form__input product-form__quantity"
+                class="elysian-pdp-bundles product-form__input product-form__quantity"
+                data-elysian-bundle-section
+                data-unit-price="{{ selected_price }}"
+                data-compare-price="{{ selected_compare_price }}"
                 {{ block.shopify_attributes }}
               >
-                <label class="form__label" for="Quantity-{{ section.id }}">
-                  {{ 'products.product.quantity.label' | t }}
-                </label>
-              <quantity-input class="quantity elysian-qty-input" data-url="{{ product.url }}" data-section="{{ section.id }}">
-                <button
-                  class="quantity__button"
-                  name="minus"
-                  type="button"
-                  aria-label="{{ 'products.product.quantity.decrease' | t: product: product.title | escape }}"
-                >
-                  <span aria-hidden="true">−</span>
-                </button>
-                <input
-                  class="quantity__input"
-                  type="number"
-                  name="quantity"
-                  id="Quantity-{{ section.id }}"
-                  data-min="{{ product.selected_or_first_available_variant.quantity_rule.min }}"
-                  min="{{ product.selected_or_first_available_variant.quantity_rule.min }}"
-                  {% if product.selected_or_first_available_variant.quantity_rule.max != null %}
-                    data-max="{{ product.selected_or_first_available_variant.quantity_rule.max }}"
-                    max="{{ product.selected_or_first_available_variant.quantity_rule.max }}"
-                  {% endif %}
-                  step="{{ product.selected_or_first_available_variant.quantity_rule.increment }}"
-                  value="{{ product.selected_or_first_available_variant.quantity_rule.min }}"
-                  form="{{ product_form_id }}"
-                  aria-label="{{ 'products.product.quantity.input_label' | t: product: product.title | escape }}"
-                >
-                <button
-                  class="quantity__button"
-                  name="plus"
-                  type="button"
-                  aria-label="{{ 'products.product.quantity.increase' | t: product: product.title | escape }}"
-                >
-                  <span aria-hidden="true">+</span>
-                </button>
-              </quantity-input>
+                <div class="elysian-pdp-bundles__head">
+                  <label class="form__label" for="Quantity-{{ section.id }}">Bundle Size</label>
+                  <span class="elysian-pdp-bundles__summary" data-bundle-summary>
+                    1 bundle · {{ selected_price | money }}
+                  </span>
+                </div>
+
+                <quantity-input class="quantity elysian-qty-input visually-hidden" data-url="{{ product.url }}" data-section="{{ section.id }}">
+                  <button
+                    class="quantity__button"
+                    name="minus"
+                    type="button"
+                    aria-label="{{ 'products.product.quantity.decrease' | t: product: product.title | escape }}"
+                  >
+                    <span aria-hidden="true">−</span>
+                  </button>
+                  <input
+                    class="quantity__input"
+                    type="number"
+                    name="quantity"
+                    id="Quantity-{{ section.id }}"
+                    data-min="{{ product.selected_or_first_available_variant.quantity_rule.min }}"
+                    min="{{ product.selected_or_first_available_variant.quantity_rule.min }}"
+                    {% if product.selected_or_first_available_variant.quantity_rule.max != null %}
+                      data-max="{{ product.selected_or_first_available_variant.quantity_rule.max }}"
+                      max="{{ product.selected_or_first_available_variant.quantity_rule.max }}"
+                    {% endif %}
+                    step="{{ product.selected_or_first_available_variant.quantity_rule.increment }}"
+                    value="{{ product.selected_or_first_available_variant.quantity_rule.min }}"
+                    form="{{ product_form_id }}"
+                    aria-label="{{ 'products.product.quantity.input_label' | t: product: product.title | escape }}"
+                  >
+                  <button
+                    class="quantity__button"
+                    name="plus"
+                    type="button"
+                    aria-label="{{ 'products.product.quantity.increase' | t: product: product.title | escape }}"
+                  >
+                    <span aria-hidden="true">+</span>
+                  </button>
+                </quantity-input>
+
+                <div class="elysian-pdp-bundles__grid" data-elysian-bundle-grid>
+                  {%- for bundle_qty in (1..4) -%}
+                    {%- assign bundle_total = selected_price | times: bundle_qty -%}
+                    {%- assign bundle_compare_total = selected_compare_price | times: bundle_qty -%}
+                    {%- assign bundle_save = 0 -%}
+                    {%- if selected_compare_price > selected_price -%}
+                      {%- assign bundle_save = bundle_compare_total | minus: bundle_total -%}
+                    {%- endif -%}
+                    <button
+                      type="button"
+                      class="elysian-pdp-bundle-card{% if bundle_qty == 1 %} is-active{% endif %}{% if bundle_qty == 3 %} is-popular{% endif %}"
+                      data-bundle-qty="{{ bundle_qty }}"
+                      aria-pressed="{% if bundle_qty == 1 %}true{% else %}false{% endif %}"
+                    >
+                      {%- if bundle_qty == 3 -%}
+                        <span class="elysian-pdp-bundle-card__badge">Most Popular</span>
+                      {%- endif -%}
+                      <span class="elysian-pdp-bundle-card__number">{{ bundle_qty }}</span>
+                      <span class="elysian-pdp-bundle-card__label">
+                        {%- if bundle_qty == 1 -%}
+                          Trial
+                        {%- elsif bundle_qty == 2 -%}
+                          Short Install
+                        {%- elsif bundle_qty == 3 -%}
+                          Full Install
+                        {%- else -%}
+                          Extra Full
+                        {%- endif -%}
+                      </span>
+                      <span class="elysian-pdp-bundle-card__price" data-bundle-price>{{ bundle_total | money }}</span>
+                      {%- if bundle_save > 0 and bundle_qty > 1 -%}
+                        <span class="elysian-pdp-bundle-card__save" data-bundle-save>Save {{ bundle_save | money }}</span>
+                      {%- else -%}
+                        <span class="elysian-pdp-bundle-card__save" data-bundle-save></span>
+                      {%- endif -%}
+                    </button>
+                  {%- endfor -%}
+                </div>
               </div>
 
             {%- when 'buy_buttons' -%}
@@ -183,10 +344,6 @@
               </div>
           {%- endcase -%}
         {%- endfor -%}
-      </div>
-    </div>
-  </div>
-</product-info>
 
 <script>
 (function () {
@@ -195,6 +352,53 @@
 
   var mainImg = document.getElementById('ElysianPdpMainImg');
   var thumbs = gallery.querySelectorAll('.elysian-pdp-thumb');
+  var bundleSection = document.querySelector('[data-elysian-bundle-section]');
+  var bundleGrid = bundleSection ? bundleSection.querySelector('[data-elysian-bundle-grid]') : null;
+  var bundleSummary = bundleSection ? bundleSection.querySelector('[data-bundle-summary]') : null;
+  var bundleQuantityInput = bundleSection ? bundleSection.querySelector('.quantity__input') : null;
+  var bundleCards = bundleSection ? bundleSection.querySelectorAll('[data-bundle-qty]') : [];
+  var bundleCurrency = (window.Shopify && window.Shopify.currency && window.Shopify.currency.active) || 'USD';
+
+  function formatMoney(cents) {
+    var amount = Number(cents || 0) / 100;
+    try {
+      return new Intl.NumberFormat('en-US', {
+        style: 'currency',
+        currency: bundleCurrency,
+      }).format(amount);
+    } catch (error) {
+      return '$' + amount.toFixed(2);
+    }
+  }
+
+  function refreshBundleCards(unitPrice, comparePrice) {
+    if (!bundleSection || !bundleGrid) return;
+
+    var currentQty = bundleQuantityInput ? Number(bundleQuantityInput.value || 1) : 1;
+    bundleSection.dataset.unitPrice = String(unitPrice || 0);
+    bundleSection.dataset.comparePrice = String(comparePrice || 0);
+
+    bundleCards.forEach(function (card) {
+      var qty = Number(card.getAttribute('data-bundle-qty')) || 1;
+      var total = unitPrice * qty;
+      var compareTotal = comparePrice * qty;
+      var save = comparePrice > unitPrice ? compareTotal - total : 0;
+      var priceNode = card.querySelector('[data-bundle-price]');
+      var saveNode = card.querySelector('[data-bundle-save]');
+
+      if (priceNode) priceNode.textContent = formatMoney(total);
+      if (saveNode) saveNode.textContent = save > 0 && qty > 1 ? 'Save ' + formatMoney(save) : '';
+
+      card.classList.toggle('is-active', qty === currentQty);
+      card.setAttribute('aria-pressed', qty === currentQty ? 'true' : 'false');
+    });
+
+    if (bundleSummary) {
+      var currentTotal = unitPrice * currentQty;
+      bundleSummary.textContent =
+        currentQty + (currentQty === 1 ? ' bundle' : ' bundles') + ' · ' + formatMoney(currentTotal);
+    }
+  }
 
   thumbs.forEach(function (thumb) {
     thumb.addEventListener('click', function () {
@@ -217,28 +421,59 @@
     });
   });
 
+  if (bundleSection && bundleQuantityInput) {
+    bundleCards.forEach(function (card) {
+      card.addEventListener('click', function () {
+        var qty = Number(card.getAttribute('data-bundle-qty')) || 1;
+        bundleQuantityInput.value = String(qty);
+        bundleQuantityInput.dispatchEvent(new Event('change', { bubbles: true }));
+        refreshBundleCards(
+          Number(bundleSection.dataset.unitPrice || 0),
+          Number(bundleSection.dataset.comparePrice || 0)
+        );
+      });
+    });
+
+    bundleQuantityInput.addEventListener('change', function () {
+      refreshBundleCards(Number(bundleSection.dataset.unitPrice || 0), Number(bundleSection.dataset.comparePrice || 0));
+    });
+
+    refreshBundleCards(Number(bundleSection.dataset.unitPrice || 0), Number(bundleSection.dataset.comparePrice || 0));
+  }
+
   if (typeof subscribe !== 'undefined' && typeof PUB_SUB_EVENTS !== 'undefined') {
     subscribe(PUB_SUB_EVENTS.variantChange, function (evt) {
       var variant = evt.data && evt.data.variant;
-      if (!variant || !variant.featured_media) return;
+      if (!variant) return;
       if (!document.querySelector('product-info.elysian-pdp')) return;
 
-      var preview = variant.featured_media.preview_image;
-      if (!preview || !mainImg || mainImg.tagName !== 'IMG') return;
+      if (variant.featured_media) {
+        var preview = variant.featured_media.preview_image;
+        if (preview && mainImg && mainImg.tagName === 'IMG') {
+          mainImg.src = preview.src;
+          if (variant.featured_media.alt) mainImg.alt = variant.featured_media.alt;
 
-      mainImg.src = preview.src;
-      if (variant.featured_media.alt) mainImg.alt = variant.featured_media.alt;
+          thumbs.forEach(function (t) {
+            var active = t.getAttribute('data-media-id') === String(variant.featured_media.id);
+            t.classList.toggle('is-active', active);
+            if (active) t.setAttribute('aria-selected', 'true');
+            else t.removeAttribute('aria-selected');
+          });
+        }
+      }
 
-      thumbs.forEach(function (t) {
-        var active = t.getAttribute('data-media-id') === String(variant.featured_media.id);
-        t.classList.toggle('is-active', active);
-        if (active) t.setAttribute('aria-selected', 'true');
-        else t.removeAttribute('aria-selected');
-      });
+      if (bundleSection) {
+        refreshBundleCards(variant.price || 0, variant.compare_at_price || 0);
+      }
     });
   }
 })();
 </script>
+
+      </div>
+    </div>
+  </div>
+</product-info>
 
 {% schema %}
 {

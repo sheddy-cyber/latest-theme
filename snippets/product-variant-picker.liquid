@@ -28,7 +28,7 @@
         endif
       -%}
       {%- if picker_type == 'swatch' -%}
-        <fieldset class="js product-form__input product-form__input--swatch">
+        <fieldset class="js product-form__input product-form__input--swatch" data-option-name="{{ option.name | handleize }}">
           <legend class="form__label">
             {{ option.name }}:
             <span data-selected-value>
@@ -43,8 +43,11 @@
           %}
         </fieldset>
       {%- elsif picker_type == 'button' -%}
-        <fieldset class="js product-form__input product-form__input--pill">
-          <legend class="form__label">{{ option.name }}</legend>
+        <fieldset class="js product-form__input product-form__input--pill" data-option-name="{{ option.name | handleize }}">
+          <legend class="form__label">
+            <span>{{ option.name }}</span>
+            <span data-selected-value>{{ option.selected_value }}</span>
+          </legend>
           {% render 'product-variant-options',
             product: product,
             option: option,
@@ -53,7 +56,7 @@
           %}
         </fieldset>
       {%- else -%}
-        <div class="product-form__input product-form__input--dropdown">
+        <div class="product-form__input product-form__input--dropdown" data-option-name="{{ option.name | handleize }}">
           <label class="form__label" for="Option-{{ section.id }}-{{ forloop.index0 }}">
             {{ option.name }}
           </label>

@@ -654,17 +654,17 @@
 }
 
 .elysian-collections-landing__grid {
-  max-width: 1340px;
+  max-width: 1120px;
   margin: 0 auto;
   padding: 0 24px;
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: 1fr;
   gap: 24px;
 }
 
 .elysian-collections-landing__card {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: minmax(260px, 36%) 1fr;
   overflow: hidden;
   border: 1px solid var(--gold-line);
   border-radius: 18px;
@@ -685,7 +685,7 @@
 }
 
 .elysian-collections-landing__media {
-  aspect-ratio: 1 / 1;
+  min-height: 280px;
   background: linear-gradient(145deg, #f1e5d2, #e8dcc6);
   overflow: hidden;
 }
@@ -708,9 +708,10 @@
 }
 
 .elysian-collections-landing__content {
-  padding: 22px 20px 24px;
+  padding: 32px;
   display: flex;
   flex-direction: column;
+  justify-content: center;
   gap: 10px;
 }
 
@@ -795,11 +796,21 @@
 
   .elysian-collections-landing__grid {
     grid-template-columns: 1fr;
+    gap: 20px;
+    padding: 0 16px;
   }
-}
 
-@media (max-width: 989px) {
-  .elysian-collections-landing__grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+  .elysian-collections-landing__card {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .elysian-collections-landing__media {
+    aspect-ratio: 1 / 1;
+    min-height: 0;
+  }
+
+  .elysian-collections-landing__content {
+    padding: 22px 20px 24px;
   }
 }
